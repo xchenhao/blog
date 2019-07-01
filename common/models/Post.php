@@ -2,6 +2,7 @@
 
 namespace common\models;
 
+use backend\utils\Helper;
 use Yii;
 use yii\helpers\Html;
 
@@ -16,6 +17,7 @@ use yii\helpers\Html;
  * @property integer $create_time
  * @property integer $update_time
  * @property integer $author_id
+ * @property string $content_md
  *
  * @property Comment[] $comments
  * @property Adminuser $author
@@ -40,7 +42,7 @@ class Post extends \yii\db\ActiveRecord
     {
         return [
             [['title', 'content', 'status', 'author_id'], 'required'],
-            [['content', 'tags'], 'string'],
+            [['content', 'tags', 'content_md'], 'string'],
             [['status', 'create_time', 'update_time', 'author_id'], 'integer'],
             [['title'], 'string', 'max' => 128],
             [['author_id'], 'exist', 'skipOnError' => true, 'targetClass' => Adminuser::className(), 'targetAttribute' => ['author_id' => 'id']],
@@ -98,14 +100,17 @@ class Post extends \yii\db\ActiveRecord
 
     public function beforeSave($insert)
     {
-        if (parent::beforeSave($insert)) {
-            if ($insert) {
-                $this->create_time = time();
-                $this->update_time = time();
-            } else {
-                $this->update_time = time();
-            }
 
+        if (parent::beforeSave($insert)) {
+            $time = $_SERVER['REQUEST_TIME'];
+            if ($insert) {
+                $this->create_time = $time;
+            }
+            $this->update_time = time();
+
+            if ($this->content_md) {
+                $this->content = Helper::parseMarkdownToHTML($this->content_md);
+            }
             return true;
         } else {
             return false;

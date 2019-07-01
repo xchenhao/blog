@@ -19,7 +19,7 @@ use common\models\Adminuser;
 
     <?= $form->field($model, 'title')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'content')->textarea(['rows' => 6]) ?>
+    <?= $form->field($model, 'content_md')->textarea(['rows' => 6]) ?>
 
     <?= $form->field($model, 'tags')->textarea(['rows' => 6]) ?>
 	

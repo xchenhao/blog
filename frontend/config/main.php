@@ -11,8 +11,8 @@ return [
     'basePath' => dirname(__DIR__),
     'bootstrap' => ['log'],
     'controllerNamespace' => 'frontend\controllers',
-		'defaultRoute'=>'post/index',
-		'language'=>'zh-CN',
+    'defaultRoute' => 'post/index',
+    'language' => 'zh-CN',
     'components' => [
         'user' => [
             'identityClass' => 'common\models\User',
@@ -23,24 +23,22 @@ return [
             'targets' => [
                 [
                     'class' => 'yii\log\FileTarget',
-                    'levels' => ['error', 'warning'],
+                    'levels' => ['error', 'warning', 'trace', 'info', 'profile'],
                 ],
             ],
         ],
         'errorHandler' => [
             'errorAction' => 'site/error',
         ],
-       
         'urlManager' => [
             'enablePrettyUrl' => true,
             'showScriptName' => false,
-        	'suffix'=>'.html',
+            'suffix' => '.html',
             'rules' => [
-            '<controller:\w+>/<id:\d+>'=>'<controller>/detail',
-            'posts'=>'post/index',
+                '<controller:\w+>/<id:\d+>' => '<controller>/detail',
+                'posts' => 'post/index',
             ],
         ],
-       
-    ],
+],
     'params' => $params,
 ];
