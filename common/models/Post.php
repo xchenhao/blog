@@ -23,8 +23,8 @@ use yii\helpers\Html;
  */
 class Post extends \yii\db\ActiveRecord
 {
-	private $_oldTags;
-	
+    private $_oldTags;
+
     /**
      * @inheritdoc
      */
@@ -44,8 +44,7 @@ class Post extends \yii\db\ActiveRecord
             [['status', 'create_time', 'update_time', 'author_id'], 'integer'],
             [['title'], 'string', 'max' => 128],
             [['author_id'], 'exist', 'skipOnError' => true, 'targetClass' => Adminuser::className(), 'targetAttribute' => ['author_id' => 'id']],
-            [['status'], 'exist', 'skipOnError' => true, 'targetClass' => Poststatus::className(), 'targetAttribute' => ['status' => 'id']],
-        ];
+            [['status'], 'exist', 'skipOnError' => true, 'targetClass' => Poststatus::className(), 'targetAttribute' => ['status' => 'id']],];
     }
 
     /**
@@ -61,7 +60,8 @@ class Post extends \yii\db\ActiveRecord
             'status' => '状态',
             'create_time' => '创建时间',
             'update_time' => '修改时间',
-            'author_id' => '作者',
+            'author_id' => '作者 ID',
+            'content_md' => 'Markdown 格式内容',
         ];
     }
 
@@ -75,10 +75,11 @@ class Post extends \yii\db\ActiveRecord
 
     public function getActiveComments()
     {
-    	return $this->hasMany(Comment::className(), ['post_id' => 'id'])
-    	->where('status=:status',[':status'=>2])->orderBy('id DESC');
+        return $this->hasMany(Comment::className(), ['post_id' => 'id'])
+            ->where('status=:status', [':status' => 2])
+            ->orderBy('id DESC');
     }
-    
+
     /**
      * @return \yii\db\ActiveQuery
      */
@@ -94,94 +95,67 @@ class Post extends \yii\db\ActiveRecord
     {
         return $this->hasOne(Poststatus::className(), ['id' => 'status']);
     }
-    
+
     public function beforeSave($insert)
     {
-    	if(parent::beforeSave($insert))
-    	{
-    		if($insert)
-    		{
-    			$this->create_time = time();
-    			$this->update_time = time();
-    		}
-    		else 
-    		{
-    			$this->update_time = time();
-    		}
-    		
-    		return true;
-    			
-    	}
-    	else 
-    	{
-    		return false;
-    	}
-    } 
-    
+        if (parent::beforeSave($insert)) {
+            if ($insert) {
+                $this->create_time = time();
+                $this->update_time = time();
+            } else {
+                $this->update_time = time();
+            }
+
+            return true;
+        } else {
+            return false;
+        }
+    }
+
     public function afterFind()
     {
-    	parent::afterFind();
-    	$this->_oldTags = $this->tags;
+        parent::afterFind();
+        $this->_oldTags = $this->tags;
     }
-    
+
     public function afterSave($insert, $changedAttributes)
     {
-    	parent::afterSave($insert, $changedAttributes);
-    	Tag::updateFrequency($this->_oldTags, $this->tags);
+        parent::afterSave($insert, $changedAttributes);
+        Tag::updateFrequency($this->_oldTags, $this->tags);
     }
-    
+
     public function afterDelete()
     {
-    	parent::afterDelete();
-    	Tag::updateFrequency($this->tags, '');
+        parent::afterDelete();
+        Tag::updateFrequency($this->tags, '');
     }
-    
+
     public function getUrl()
     {
-    	return Yii::$app->urlManager->createUrl(
-    			['post/detail','id'=>$this->id,'title'=>$this->title]);
+        return Yii::$app->urlManager->createUrl(['post/detail', 'id' => $this->id, 'title' => $this->title]);
     }
-    
-    public function getBeginning($length=288)
+
+    public function getBeginning($length = 288)
     {
-    	$tmpStr = strip_tags($this->content);
-    	$tmpLen = mb_strlen($tmpStr);
-    	 
-    	$tmpStr = mb_substr($tmpStr,0,$length,'utf-8');
-    	return $tmpStr.($tmpLen>$length?'...':'');
+        $tmpStr = strip_tags($this->content);
+        $tmpLen = mb_strlen($tmpStr);
+
+        $tmpStr = mb_substr($tmpStr, 0, $length, 'utf-8');
+        return $tmpStr . ($tmpLen > $length ? '...' : '');
     }
-    
-    public function  getTagLinks()
+
+    public function getTagLinks()
     {
-    	$links=array();
-    	foreach(Tag::string2array($this->tags) as $tag)
-    	{
-    		$links[]=Html::a(Html::encode($tag),array('post/index','PostSearch[tags]'=>$tag));
-    	}
-    	return $links;
+        $links = array();
+        foreach (Tag::string2array($this->tags) as $tag) {
+            $links[] = Html::a(Html::encode($tag), array('post/index', 'PostSearch[tags]' => $tag));
+        }
+        return $links;
     }
 
     public function getCommentCount()
     {
-    	return Comment::find()->where(['post_id'=>$this->id,'status'=>2])->count();
+        return Comment::find()->where(['post_id' => $this->id, 'status' => 2])->count();
     }
-    
-    
-        
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
+
 }
