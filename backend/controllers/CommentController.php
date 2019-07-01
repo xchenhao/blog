@@ -19,14 +19,7 @@ class CommentController extends Controller
      */
     public function behaviors()
     {
-        return [
-            'verbs' => [
-                'class' => VerbFilter::className(),
-                'actions' => [
-                    'delete' => ['POST'],
-                ],
-            ],
-        ];
+        return ['verbs' => ['class' => VerbFilter::className(), 'actions' => ['delete' => ['POST'],],],];
     }
 
     /**
@@ -38,10 +31,7 @@ class CommentController extends Controller
         $searchModel = new CommentSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
-        return $this->render('index', [
-            'searchModel' => $searchModel,
-            'dataProvider' => $dataProvider,
-        ]);
+        return $this->render('index', ['searchModel' => $searchModel, 'dataProvider' => $dataProvider,]);
     }
 
     /**
@@ -51,9 +41,7 @@ class CommentController extends Controller
      */
     public function actionView($id)
     {
-        return $this->render('view', [
-            'model' => $this->findModel($id),
-        ]);
+        return $this->render('view', ['model' => $this->findModel($id),]);
     }
 
     /**
@@ -68,9 +56,7 @@ class CommentController extends Controller
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
-            return $this->render('create', [
-                'model' => $model,
-            ]);
+            return $this->render('create', ['model' => $model,]);
         }
     }
 
@@ -87,9 +73,7 @@ class CommentController extends Controller
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
-            return $this->render('update', [
-                'model' => $model,
-            ]);
+            return $this->render('update', ['model' => $model,]);
         }
     }
 
@@ -121,23 +105,14 @@ class CommentController extends Controller
             throw new NotFoundHttpException('The requested page does not exist.');
         }
     }
-    
+
     public function actionApprove($id)
     {
-    	$model = $this->findModel($id);
-    	if($model->approve())  //审核
-    	{
-    		return $this->redirect(['index']);
-    	}
+        $model = $this->findModel($id);
+        if ($model->approve())  //审核
+        {
+            return $this->redirect(['index']);
+        }
     }
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
+
 }

@@ -28,7 +28,7 @@ AppAsset::register($this);
 <div class="wrap">
     <?php
     NavBar::begin([
-        'brandLabel' => '魏曦教你学Yii2.0',
+        'brandLabel' => '不可思议的博客',
     	'brandOptions'=> ['style'=>'color:yellow;font-size:23px'],
         'brandUrl' => Yii::$app->homeUrl,
         'options' => [
@@ -71,7 +71,7 @@ AppAsset::register($this);
 
 <footer class="footer">
     <div class="container">
-        <p class="pull-left">&copy; 魏曦教你学Yii2.0 <?= date('Y') ?></p>
+        <p class="pull-left">&copy; 不可思议 <?= date('Y') ?></p>
 
         <p class="pull-right"><?= Yii::powered() ?></p>
     </div>

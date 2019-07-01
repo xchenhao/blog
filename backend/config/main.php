@@ -19,8 +19,8 @@ return [
             'enableAutoLogin' => true,
         ],
     	'session'=>[
-    			'name'=>'PHPBACKSESSION',
-    			'savePath'=>sys_get_temp_dir(),
+    			'name' => 'PHPBACKSESSION',
+    			'savePath' => sys_get_temp_dir(),
     	],
     	'request'=>[
     			'cookieValidationKey'=>'sdfjjksloeedf78789judf',
@@ -38,7 +38,6 @@ return [
         'errorHandler' => [
             'errorAction' => 'site/error',
         ],
-        
         'urlManager' => [
             'enablePrettyUrl' => true,
             'showScriptName' => false,
@@ -49,7 +48,6 @@ return [
             	'<controller:\w+>/<id:\d+>/<action:(create|update|delete)>'=>'<controller>/<action>',
             ],
         ],
-        
     ],
     'params' => $params,
 ];
