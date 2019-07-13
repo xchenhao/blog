@@ -2,3 +2,5 @@
 /.idea
 /vendor
 !/vendor/.gitkeep
+
+common/config/main-local.php
