@@ -6,7 +6,7 @@ $params = array_merge(
     require(__DIR__ . '/params-local.php')
 );
 
-return [
+$config = [
     'id' => 'app-frontend',
     'basePath' => dirname(__DIR__),
     'bootstrap' => ['log'],
@@ -31,14 +31,18 @@ return [
             'errorAction' => 'site/error',
         ],
         'urlManager' => [
+            // false => gii 有效？ true 无效（WHY）// https://www.yiichina.com/question/1073
             'enablePrettyUrl' => true,
             'showScriptName' => false,
             'suffix' => '.html',
             'rules' => [
                 '<controller:\w+>/<id:\d+>' => '<controller>/detail',
+                '<controller:\w+>/<action:\w+>' => '<controller>/<action>',
                 'posts' => 'post/index',
             ],
         ],
-],
+    ],
     'params' => $params,
 ];
+
+return $config;

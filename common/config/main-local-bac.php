@@ -16,5 +16,12 @@ return [
             // for the mailer to send real emails.
             'useFileTransport' => true,
         ],
+        'db_bbs' => [
+            'class' => 'yii\db\Connection',
+            'dsn' => 'mysql:host=localhost;dbname=bbs',
+            'username' => 'root',
+            'password' => '123456',
+            'charset' => 'utf8',
+        ],
     ],
 ];
