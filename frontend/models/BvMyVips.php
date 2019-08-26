@@ -10,7 +10,7 @@ use Yii;
  * @property int $uid 用户 ID
  * @property int $vip VIP 类型
  * @property int $create_time 创建时间
- * @property int $modifed_time 修改时间
+ * @property int $modified_time 修改时间
  */
 class BvMyVips extends \yii\db\ActiveRecord
 {
@@ -36,8 +36,8 @@ class BvMyVips extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['uid', 'create_time', 'modifed_time'], 'required'],
-            [['uid', 'vip', 'create_time', 'modifed_time'], 'integer'],
+            [['uid'], 'required'],
+            [['uid', 'vip', 'create_time', 'modified_time'], 'integer'],
             [['uid'], 'unique'],
         ];
     }
@@ -54,4 +54,18 @@ class BvMyVips extends \yii\db\ActiveRecord
             'modifed_time' => '修改时间',
         ];
     }
+
+    public function beforeSave($insert)
+    {
+        if (!parent::beforeSave($insert)) {
+            return false;
+        }
+        $time = $_SERVER['REQUEST_TIME'];
+        if ($this->isNewRecord) {
+            $this->create_time = $time;
+        }
+        $this->modified_time = $time;
+        return true;
+    }
+
 }

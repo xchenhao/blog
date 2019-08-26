@@ -17,6 +17,10 @@ use Yii;
  */
 class BvMyOrders extends \yii\db\ActiveRecord
 {
+    public const STATUS_CANCEL = -1;
+    public const STATUS_CREATE = 0;
+    public const STATUS_SUCCESS = 1;
+
     /**
      * {@inheritdoc}
      */
@@ -39,8 +43,8 @@ class BvMyOrders extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['id', 'post_id', 'uid', 'create_time', 'modified_time'], 'required'],
-            [['id', 'post_id', 'uid', 'create_time', 'modified_time', 'status'], 'integer'],
+            [['post_id', 'uid'], 'required'],
+            [['id', 'post_id', 'uid', 'create_time', 'modified_time', 'status', 'price'], 'integer'],
             [['transaction_id'], 'string', 'max' => 32],
             [['id'], 'unique'],
         ];
@@ -52,13 +56,28 @@ class BvMyOrders extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id' => '主键',
+            'id' => '主键',  // 用户 ID
             'post_id' => '帖子 ID',
             'uid' => '用户 ID',
+            'price' => '价格',  // 单位：分
             'create_time' => '创建时间',
             'modified_time' => '修改时间',
             'transaction_id' => '外部交易 ID',
             'status' => '交易状态',
         ];
     }
+
+    public function beforeSave($insert)
+    {
+        if (!parent::beforeSave($insert)) {
+            return false;
+        }
+        $time = $_SERVER['REQUEST_TIME'];
+        if ($this->isNewRecord) {
+            $this->create_time = $time;
+        }
+        $this->modified_time = $time;
+        return true;
+    }
+
 }
