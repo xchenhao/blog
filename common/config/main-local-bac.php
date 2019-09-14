@@ -1,13 +1,11 @@
 <?php
+
+$dbs = require __DIR__ . '/db.php';
+
 return [
     'components' => [
-        'db' => [
-            'class' => 'yii\db\Connection',
-            'dsn' => 'mysql:host=localhost;dbname=yii2blog',
-            'username' => 'root',
-            'password' => '123456',
-            'charset' => 'utf8',
-        ],
+        'db' => $dbs['db'],
+        'db_bbs' => $dbs['db_bbs'],
         'mailer' => [
             'class' => 'yii\swiftmailer\Mailer',
             'viewPath' => '@common/mail',
@@ -15,13 +13,6 @@ return [
             // 'useFileTransport' to false and configure a transport
             // for the mailer to send real emails.
             'useFileTransport' => true,
-        ],
-        'db_bbs' => [
-            'class' => 'yii\db\Connection',
-            'dsn' => 'mysql:host=localhost;dbname=bbs',
-            'username' => 'root',
-            'password' => '123456',
-            'charset' => 'utf8',
         ],
     ],
 ];

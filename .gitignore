@@ -6,3 +6,4 @@
 console/runtime/*
 
 common/config/main-local.php
+common/config/db.php
