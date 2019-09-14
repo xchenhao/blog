@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 
+<!--header-->
 <head>
     <meta charset="UTF-8">
     <title>首页—不可思议的博客</title>
@@ -12,9 +13,11 @@
     <script type="text/javascript" src="/theme/news/js/jquery-1.8.3.min.js"></script>
     <script type="text/javascript" src="/theme/news/js/rd.js"></script>
 </head>
+<!--header-->
 
 <body>
 
+<!--navbar-->
 <style>
     .head_banner .bn_bt {
         width: auto
@@ -32,9 +35,6 @@
     .slider {
         left: inherit
     }
-</style>
-
-<style>
     body {
         overflow-x: hidden;
     }
@@ -218,6 +218,7 @@
         });
     });
 </script>
+<!--navbar-->
 
 <div class="bdwd main clearfix">
     <div class="pjax-wrapper">
@@ -570,6 +571,7 @@
 
 </div>
 
+<!--footer-->
 <div class="about">
     <?php
         $links = [
@@ -605,8 +607,7 @@
         <?php endforeach ?>
 </div>
 
-<div class="copyright">Copyright &copy; 2017-2020 不可思议的博客
-</div>
+<div class="copyright">Copyright &copy; 2017-2020 不可思议的博客</div>
 
 <div style="width:300px;margin:0 auto; padding: 0;" class="copyright">
     <a target="_blank" href="#" style="display:inline-block;text-decoration:none;height:20px;line-height:20px;">
@@ -616,5 +617,6 @@
     </a>
 </div>
 <div id="bg_overlay" style="display:none;"></div>
+<!-- footer -->
 </body>
 </html>

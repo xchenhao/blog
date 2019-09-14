@@ -36,9 +36,13 @@ $config = [
             'showScriptName' => false,
             //'suffix' => '.html',
             'rules' => [
+
                 '<controller:\w+>/<id:\d+>' => '<controller>/detail',
                 '<controller:\w+>/<action:\w+>' => '<controller>/<action>',
                 'posts' => 'post/index',
+                'article' => 'post/article',
+                'cover' => 'post/cover',
+                'list' => 'post/list',
             ],
         ],
     ],

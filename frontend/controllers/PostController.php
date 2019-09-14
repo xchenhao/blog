@@ -22,6 +22,7 @@ class PostController extends Controller
 {
     public $added = 0; //0代表还没有新回复
 
+    public $layout = false;
     /**
      * @inheritdoc
      */
@@ -37,9 +38,18 @@ class PostController extends Controller
             'access' => [
                 'class' => AccessControl::class,
                 'rules' => [
-                    ['actions' => ['index'], 'allow' => true, 'roles' => ['?'],],
-                    ['actions' => ['index', 'detail'], 'allow' => true, 'roles' => ['@'],],],
+                    [
+                        'actions' => ['index', 'detail', 'article', 'cover', 'list'],
+                        'allow' => true,
+                        'roles' => ['?'],
+                    ],
+                    [
+                        'actions' => ['index', 'detail', 'article', 'cover', 'list'],
+                        'allow' => true,
+                        'roles' => ['@'],
+                    ],
                 ],
+            ],
 //            'pageCache' => [
 //                'class' => 'yii\filters\PageCache',
 //                'only' => ['index'],
@@ -78,12 +88,33 @@ class PostController extends Controller
         $searchModel = new PostSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
-        $this->layout = false;
+       // $this->layout = false;
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
             'tags' => $tags,
             'recentComments' => $recentComments,
+        ]);
+    }
+
+    public function actionArticle()
+    {
+        return $this->render('article', [
+
+        ]);
+    }
+
+    public function actionCover()
+    {
+        return $this->render('cover', [
+
+        ]);
+    }
+
+    public function actionList()
+    {
+        return $this->render('list', [
+
         ]);
     }
 
