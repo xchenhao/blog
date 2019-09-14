@@ -31,7 +31,7 @@ return [
             'targets' => [
                 [
                     'class' => 'yii\log\FileTarget',
-                    'levels' => ['error', 'warning'],
+                    'levels' => ['error', 'warning', 'trace', 'profile', 'info'],
                 ],
             ],
         ],
@@ -41,7 +41,7 @@ return [
         'urlManager' => [
             'enablePrettyUrl' => true,
             'showScriptName' => false,
-        	'suffix'=>'.html',
+        	//'suffix'=>'.html',
             'rules' => [
             	'<controller:(post|comment)>s'=>'<controller>/index',
             	'<controller:\w+>/<id:\d+>'=>'<controller>/view',

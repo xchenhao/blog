@@ -2,7 +2,7 @@
 
 namespace common\models;
 
-use backend\utils\Helper;
+use backend\component\util\Helper;
 use Yii;
 use yii\helpers\Html;
 

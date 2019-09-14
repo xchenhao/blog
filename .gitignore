@@ -2,7 +2,7 @@
 /.idea
 /vendor
 !/vendor/.gitkeep
-/node_modules
+/backend/web/node_modules
 
 console/runtime/*
 

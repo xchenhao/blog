@@ -496,3 +496,23 @@ ADD CONSTRAINT `FK_post_status` FOREIGN KEY (`status`) REFERENCES `poststatus` (
 ALTER TABLE `post`
 ADD COLUMN `content_md` text CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT 'Markdown 格式文本' AFTER `author_id`,
 COMMENT = '文章表';
+
+CREATE TABLE `article` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT COMMENT '主键',
+  `title` varchar(128) COLLATE utf8_unicode_ci NOT NULL COMMENT '标题',
+  `intro` varchar(255) CHARACTER SET utf8 NOT NULL DEFAULT '' COMMENT '简介',
+  `cover` varchar(255) CHARACTER SET utf8 NOT NULL DEFAULT '' COMMENT '封面地址',
+  `content` text COLLATE utf8_unicode_ci NOT NULL COMMENT '内容',
+  `tags` varchar(128) COLLATE utf8_unicode_ci NOT NULL DEFAULT '' COMMENT '标签',
+  `author` varchar(32) CHARACTER SET utf8 NOT NULL DEFAULT '' COMMENT '作者',
+  `status` tinyint(4) NOT NULL DEFAULT '0' COMMENT '状态',
+  `attr` int(11) unsigned NOT NULL DEFAULT '0' COMMENT '属性',
+  `category_id` int(11) unsigned NOT NULL DEFAULT '0' COMMENT '分类 ID',
+  `content_md` text CHARACTER SET utf8 NOT NULL COMMENT 'Markdown 格式文本',
+  `create_time` int(11) NOT NULL COMMENT '创建时间',
+  `modified_time` int(11) NOT NULL COMMENT '更新时间',
+  PRIMARY KEY (`id`),
+  KEY `IDX_STATUS` (`status`) USING BTREE,
+  KEY `IDX_CATEGORY_ID` (`category_id`) USING BTREE,
+  KEY `IDX_ATTR` (`attr`) USING BTREE
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='文章表';
