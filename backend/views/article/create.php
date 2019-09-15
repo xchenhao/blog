@@ -2,10 +2,10 @@
 
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
-use app\models\Article;
+use common\models\Article;
 
 /* @var $this yii\web\View */
-/* @var $model app\models\Article */
+/* @var $model common\models\Article */
 /* @var $form yii\widgets\ActiveForm */
 
 $this->title = '创建文章';

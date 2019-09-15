@@ -4,7 +4,7 @@ namespace backend\controllers;
 
 use backend\component\util\Helper;
 use Yii;
-use app\models\Article;
+use common\models\Article;
 use yii\data\ActiveDataProvider;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;

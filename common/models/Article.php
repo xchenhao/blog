@@ -1,8 +1,7 @@
 <?php
 
-namespace app\models;
+namespace common\models;
 
-use backend\component\util\Helper;
 use Yii;
 
 /**
