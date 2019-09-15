@@ -21,6 +21,10 @@ use Yii;
  * @property string $content_md Markdown 格式文本
  * @property int $create_time 创建时间
  * @property int $modified_time 更新时间
+ *
+ * // magic field
+ * @property bool isMarkDownEditor
+ * @property bool isRichTextEditor
  */
 class Article extends \yii\db\ActiveRecord
 {
@@ -30,6 +34,11 @@ class Article extends \yii\db\ActiveRecord
     const STATUS_UNCHECKED = 0;
     // 审核通过发表
     const STATUS_PASS = 1;
+
+    // Markdown 编辑器
+    const ATTR_MARKDOWN_EDITOR = 0;
+    // 富文本编辑器
+    const ATTR_RICHTEXT_EDITOR = 0b01;
 
     /**
      * {@inheritdoc}
@@ -45,7 +54,7 @@ class Article extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['title', 'content', 'content_md'], 'required'],
+            [['title', 'content'], 'required'],
             [['content', 'content_md'], 'string'],
             [['status', 'attr', 'category_id', 'create_time', 'modified_time'], 'integer'],
             [['title', 'tags'], 'string', 'max' => 128],
@@ -95,6 +104,26 @@ class Article extends \yii\db\ActiveRecord
         }
 
         return true;
+    }
+
+    public static function isMarkDownEditor(int $attr): bool
+    {
+        return !self::isRichTextEditor($attr);
+    }
+
+    public static function isRichTextEditor(int $attr): bool
+    {
+        return $attr & self::ATTR_RICHTEXT_EDITOR !== 0;
+    }
+
+    public function getIsMarkDownEditor()
+    {
+        return self::isMarkDownEditor($this->attr);
+    }
+
+    public function getIsRichTextEditor()
+    {
+        return self::isRichTextEditor($this->attr);
     }
 
 }

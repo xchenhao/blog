@@ -2,6 +2,7 @@
 
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
+use app\models\Article;
 
 /* @var $this yii\web\View */
 /* @var $model app\models\Article */
@@ -29,10 +30,17 @@ $this->params['breadcrumbs'][] = $this->title;
         <?= $form->field($model, 'tags')->textInput(['maxlength' => true]) ?>
         <?= $form->field($model, 'author')->textInput(['maxlength' => true]) ?>
         <?= $form->field($model, 'category_id')->textInput() ?>
+        <?= $form->field($model, 'attr')->hiddenInput() ?>
 
+        <?php if ($model->isRichTextEditor): ?>
+            <textarea name="Article[content]"></textarea>
+            <input type="hidden" name="Article[content_md]" />
+        <?php else: ?>
         <div id="markdown-box">
             <textarea style="display:none;" name="Article[content_md]"></textarea>
+            <input type="hidden" name="Article[content]" />
         </div>
+        <?php endif ?>
 
         <div class="form-group">
             <?= Html::submitButton('保存', ['class' => 'btn btn-success']) ?>
@@ -41,17 +49,24 @@ $this->params['breadcrumbs'][] = $this->title;
         <?php ActiveForm::end(); ?>
     </div>
 </div>
-<script src="https://cdn.bootcss.com/jquery/1.11.2/jquery.min.js"></script>
-<link rel="stylesheet" href="/node_modules/editor.md/css/editormd.css" />
-<script src="/node_modules/editor.md/editormd.js"></script>
-<script type="text/javascript">
-    var testEditor;
-    $(function() {
-        testEditor = editormd("markdown-box", {
-            width   : "90%",
-            height  : 640,
-            syncScrolling : "single",
-            path    : "/node_modules/editor.md/lib/"
+<?php if ($model->isRichTextEditor): ?>
+    <script src="//cdn.ckeditor.com/4.12.1/full/ckeditor.js"></script>
+    <script>
+        CKEDITOR.replace( 'Article[content]' );
+    </script>
+<?php else: ?>
+    <script src="https://cdn.bootcss.com/jquery/1.11.2/jquery.min.js"></script>
+    <link rel="stylesheet" href="/node_modules/editor.md/css/editormd.css" />
+    <script src="/node_modules/editor.md/editormd.js"></script>
+    <script type="text/javascript">
+        var testEditor;
+        $(function() {
+            testEditor = editormd("markdown-box", {
+                width   : "90%",
+                height  : 640,
+                syncScrolling : "single",
+                path    : "/node_modules/editor.md/lib/"
+            })
         })
-    })
-</script>
+    </script>
+<?php endif ?>

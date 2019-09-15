@@ -61,17 +61,25 @@ class ArticleController extends Controller
     /**
      * Creates a new Article model.
      * If creation is successful, the browser will be redirected to the 'view' page.
+     * @param int $editor
      * @return mixed
      */
-    public function actionCreate()
+    public function actionCreate(int $editor = Article::ATTR_MARKDOWN_EDITOR)
     {
         $model = new Article();
         if (Yii::$app->request->isPost) {
             $data = Yii::$app->request->post();
-            $data['Article']['content'] = Helper::parseMarkdownToHTML($data['Article']['content_md']);
+            if (Article::isMarkDownEditor($data['Article']['attr'])) {
+                $data['Article']['content'] = Helper::parseMarkdownToHTML($data['Article']['content_md']);
+            } else {
+                $data['Article']['content_md'] = '';
+            }
+
             if ($model->load($data) && $model->save()) {
                 return $this->redirect(['view', 'id' => $model->id]);
             }
+        } else {
+            $model->attr |= $editor;
         }
 
         return $this->render('create', [
@@ -92,7 +100,11 @@ class ArticleController extends Controller
 
         if (Yii::$app->request->isPost) {
             $data = Yii::$app->request->post();
-            $data['Article']['content'] = Helper::parseMarkdownToHTML($data['Article']['content_md']);
+            if (Article::isMarkDownEditor($data['Article']['attr'])) {
+                $data['Article']['content'] = Helper::parseMarkdownToHTML($data['Article']['content_md']);
+            } else {
+                $data['Article']['content_md'] = '';
+            }
 
             if ($model->load($data) && $model->save()) {
                 return $this->redirect(['view', 'id' => $model->id]);
