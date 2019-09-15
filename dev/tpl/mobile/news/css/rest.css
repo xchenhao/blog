@@ -1,0 +1,63 @@
+﻿/* CSS Document */
+html {
+	width: 100%;
+	height: 100%; font-size:12px;
+}
+body {
+	width: 100%;
+	height: 100%;
+	padding: 0;
+	margin: 0;
+	background-color: #fff; font-family:"微软雅黑","Hiragino Sans GB";
+}
+ul, li {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+h1, h2, h3, h4, h5, p {
+	margin: 0; font-size:100%; font-weight:normal;
+}
+img {
+	border: 0;
+}
+input,img{
+	vertical-align: middle;
+}
+* {
+	-webkit-tap-highlight-color: rgba(0,0,0,0);
+}
+.none {
+	display: none;
+}
+a {
+	text-decoration: none;
+	color: #494949;
+	-webkit-tap-highlight-color: rgba(0,0,0,0);
+}
+.clearfix:after {
+	content: " ";
+	display: block;
+	clear: both;
+	height: 0;
+}
+.clearfix {
+	zoom: 1;
+}
+
+.line_nn{border-bottom:1px solid #e0e0e0;position:relative;height:8px;width:100%;}
+.tri_rig1{position:absolute;width:0; height:0; border-width:6px; border-color:transparent transparent #e0e0e0 transparent; border-style:dashed dashed solid dashed; overflow:hidden; bottom:0px; left:20px;}
+.tri_rig2{position:absolute;width:0; height:0; border-width:6px; border-color:transparent transparent #fff transparent; border-style:dashed dashed solid dashed; overflow:hidden; bottom:-1px; left:20px;}
+
+.line_mm{border-color:#c4c4c4;}
+.line_mm .tri_rig1{ border-color:transparent transparent #c4c4c4 transparent;}
+.l_bg .line_mm .tri_rig2{ border-color:transparent transparent #e4e7eb transparent;}
+
+
+p{word-wrap:break-word;word-break:break-all;}
+
+.back-to .back-top {background: url("../img/back_top.png") no-repeat scroll 0 0 transparent;background-size:41px 41px!important;display: block;float: right;height:41px;outline: 0 none;width: 41px;border:1px solid #cccccc;border-radius: 4px;opacity: 0.8;}
+.back-to .back-top:hover {background-position: 0 0;opacity: 0.6;}
+.welcom{ background:('../img/bg_image.png');}
+
+.

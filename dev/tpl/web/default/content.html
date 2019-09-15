@@ -1,0 +1,83 @@
+<include file="./template/web/default/header.html"/>
+		<link rel="stylesheet" type="text/css" href="{{__TEMPLATE__}}/css/page.css"/>
+
+			<if value="$catData['thumb']">
+				<img src="{{__ROOT__}}/{{$catData['thumb']}}" style="display: block;margin: 0 auto;"/>
+				<else/>
+				<img src="{{__ROOT__}}/resource/images/nopic.jpg" style="display: block;margin: 0 auto;"/>
+			</if>
+
+		<!--大区域-->
+		<div class="main">
+			<!--左侧-->
+			<div class="left">
+				<!--面包屑导航-->
+				<p class="position">
+					<span>当前位置：</span>
+					<a href="{{__ROOT__}}">首页</a>
+					»
+					<a href="{{__ROOT__}}/c_{{$catData['cid']}}.html">{{$catData['catname']}}</a>
+					»
+					<span>浏览本文</span>
+				</p>
+				
+				<h1>{{$arcData['title']}}</h1>
+				<p class="info">文章出处：{{$arcData['source']}}&nbsp;&nbsp;&nbsp;&nbsp;点击量：{{$arcData['click']}}</p>
+				<div class="content">{{$arcData['content']}}</div>
+				<!--上一篇下一篇-->
+				<div class="np">
+					<p class="n">上一篇：<pre/></p>
+					<p class="p">下一篇：<next/></p>
+				</div>
+			</div>
+			<!--左侧结束-->
+
+
+			
+			<!--右侧-->
+			<div class="right">
+				<h3>课程安排</h3>
+				<dl>
+					<category cid="8">
+						<dt><a href="{{__ROOT__}}/c_{{$field['cid']}}.html">{{$field['catname']}}</a></dt>
+						<category pid="8" rows="5">
+							<dd><a href="{{__ROOT__}}/c_{{$field['cid']}}.html">{{$field['catname']}}</a></dd>
+						</category>
+					</category>
+				</dl>
+
+				<dl>
+					<category cid="16">
+						<dt><a href="{{__ROOT__}}/c_{{$field['cid']}}.html">{{$field['catname']}}</a></dt>
+						<category pid="16" rows="5">
+							<dd><a href="{{__ROOT__}}/c_{{$field['cid']}}.html">{{$field['catname']}}</a></dd>
+						</category>
+					</category>
+				</dl>
+
+				<dl>
+					<category cid="26">
+						<dt><a href="{{__ROOT__}}/c_{{$field['cid']}}.html">{{$field['catname']}}</a></dt>
+						<category pid="26" rows="5">
+							<dd><a href="{{__ROOT__}}/c_{{$field['cid']}}.html">{{$field['catname']}}</a></dd>
+						</category>
+					</category>
+				</dl>
+
+				<dl>
+					<category cid="28">
+						<dt><a href="{{__ROOT__}}/c_{{$field['cid']}}.html">{{$field['catname']}}</a></dt>
+						<category pid="28" rows="5">
+							<dd><a href="{{__ROOT__}}/c_{{$field['cid']}}.html">{{$field['catname']}}</a></dd>
+						</category>
+					</category>
+				</dl>
+			</div>
+			<!--右侧结束-->
+
+
+		</div>
+		<!--大区域结束-->
+
+
+<include file="./template/web/default/footer.html"/>

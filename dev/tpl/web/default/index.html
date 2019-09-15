@@ -1,0 +1,97 @@
+<include file="./template/web/default/header.html"/>
+<link rel="stylesheet" type="text/css" href="{{__TEMPLATE__}}/css/index.css"/>
+<script src="{{__TEMPLATE__}}/js/index.js" type="text/javascript" charset="utf-8"></script>
+
+		<!--轮播图-->
+		<!--注意：直接向下面的div中遍历输出a标签即可，小圆点会根据a标签的数量自动创建，边界条件会自动判断。-->
+		<div id="flash">
+			<slide>
+				<a href="{{$field['url']}}"><img src="{{$field['thumb']}}" style="width: 960px;height: 400px;"/></a>
+			</slide>
+			<ul></ul>
+		</div>
+		<!--轮播图结束-->
+
+
+		<!--大区域-->
+		<div class="main">
+
+			<div class="left">
+				<h3>课程安排</h3>
+				<category pid="0" rows="5">
+					<dl>
+						<dt><a href="{{__ROOT__}}/c_{{$field['cid']}}.html">{{$field['catname']}}</a></dt>
+						<category pid="{$field['cid']}" rows="5">
+								<dd><a href="{{__ROOT__}}/c_{{$field['cid']}}.html">{{$field['catname']}}</a></dd>
+						</category>
+					</dl>
+				</category>
+			</div>
+
+
+			<!--右侧-->
+			<div class="right">
+				<!--标题-->
+				<!--这里存在bug：不能写成category cid="17" pid="0" rows="1" 会出错，Common.php写的有问题-->
+				<!--问题2：上述注释不能放在下述扩展标签的附近，否则导致排版出错（因为上述注释中包含扩展标签的内容） -->
+				<category pid="0">
+					<div class="title">
+						<p>
+							<span>{{$field['catname']}}</span>
+							<img src="{{__TEMPLATE__}}/images/sd02.jpg" />
+						</p>
+						<a href="{{$field['url']}}"><img src="{{__TEMPLATE__}}/images/more01.gif"/></a>
+					</div>
+					<!--标题结束-->
+					<!--产品列表-->
+					<!--未知原因：商品换行后不靠左而是靠右，因此加入display:flex及flex-wrap:wrap解决-->
+					<ul class="product_list" style="display:flex;flex-wrap:wrap">
+						<arc cid="$field['cid']" rows="5">
+							<li>
+								<a href="{{$field['url']}}" class="pic"><img src="{{$field['thumb']}}" /></a>
+								<a href="{{$field['url']}}" class="product_title">{{$field['title']}}</a>
+								<p>{{$field['description']}}</p>
+							</li>
+						</arc>
+					</ul>
+					<!--产品列表结束-->
+				</category>
+
+			</div>
+			<!--右侧结束-->
+		</div>
+		<!--大区域结束-->
+		<!--车间-->
+
+		<!--这个轮播图非常聪明，只需要向ul里遍历li数据即可。其他的事情js帮你搞定-->
+		<div id="factory">
+			<div class="line"></div>
+			<img src="{{__TEMPLATE__}}/images/sltil.jpg" class="title" />
+			<img src="{{__TEMPLATE__}}/images/ico_l01.jpg" class="icon1" />
+			<img src="{{__TEMPLATE__}}/images/ico_r01.jpg" class="icon2" />
+			<div class="center">
+				<ul>
+					<arc cid="28">
+						<li onclick="location.href='{{$field['url']}}'">
+							<img src="{{$field['thumb']}}" />
+							<a href="{{$field['url']}}">{{$field['title']}}</a>
+						</li>
+					</arc>
+				</ul>
+			</div>
+		</div>
+		<!--车间结束-->
+		<img src="{{__TEMPLATE__}}/images/ge02.jpg" id="shadow" />
+
+
+		<!--友情链接-->
+		<p id="link">友情链接</p>
+		<div id="webs">
+			<tag rows="10" action="links.lists">
+				<a href="{{$field['url']}}">{{$field['lname']}}</a>
+			</tag>
+		</div>
+		<!--友情链接结束-->
+
+
+<include file="./template/web/default/footer.html"/>

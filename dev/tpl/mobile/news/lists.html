@@ -1,0 +1,236 @@
+﻿<!DOCTYPE html>
+<html>
+
+<extend file="./template/mobile/news/header.html"/>
+<block name="title">新闻时事_{{v('config.webname')}}_移动版</block>
+
+<link rel="stylesheet" href="{{__TEMPLATE__}}/css/hotqa.css"/>
+<script type='text/javascript' src='{{__TEMPLATE__}}/js/main-1.1.js'></script>
+<style>
+	.lanmu_about{color:#000000;}
+	.list_header{padding:8px 10px 2px;height: 54px;line-height: 32px;overflow:hidden;text-align: center;margin:0 auto;color:#232323;font-size:18px;border-bottom: 1px solid #c8c8c8;}
+	.h_back{top:15px;padding:4px 12px;cursor:pointer;}
+	.listhd_prompt{color:#7f7f7f;font-size:12px;line-height: 14px;text-align: center;}
+	.pdtp10{padding-top:10px;}
+	.news_titmt{display:block;}
+	.lh40{line-height: 40px;}
+</style>
+
+<body>
+<div class="header-v4">
+	<!-- logo -->
+	<div class="header-container">
+		<h1 class="logo">
+			<a href="/" class="login" title="pengpai"></a>
+			<span class="logon-shuline"></span>
+			<span class="toptit-cont" id="toptit" style="color: rgb(0, 0, 0);">{{$model['catname']}}</span>
+		</h1>
+	</div>
+
+	<!-- hanbao 默认状态-->
+	<div class="burger-p" id="burger">
+		<div class="burger opaque"><div></div><div></div><div></div></div>
+	</div>
+	<!-- 分类按钮 -->
+	<div class="fl-icon-panel">
+	</div>
+	<div class="fl-icon"></div>
+
+</div>
+
+<include file="./template/mobile/news/navbar-hide.html"/>
+
+<!-----------------------以下是原来的部分1------------------------------->
+
+<script type="text/javascript">
+	$(document).ready(function(){
+		$(".list_lanmu").click(function(){
+			if($(".lanmu_q").css("display")=="none"){
+				$(".list_lanmu").addClass("bt_cur");
+				$(".lanmu_q").css('display','block');
+			}else{
+				$(".list_lanmu").removeClass("bt_cur");
+				$(".lanmu_q").css('display','none');
+			}
+		});
+
+		$(".lanmu_shouqi").click(function(){
+			$(".list_lanmu").removeClass("bt_cur");
+			$(".lanmu_q").css('display','none');
+		});
+
+		var tbd=$("#lanmu_tb").filter(function(index) {return $("#lanmu_tb",this).css("display")!="none";});
+		var tbdf=$("#lanmu_tb:eq(0)");
+		var tbdl=$(".lanmu_tblast");	//var tbdl=$("#lanmu_tb").last();
+		$(".lanmu_p").click(function(){
+			if(tbd.prev("#lanmu_tb").length>0){
+				tbd.css('display','none');
+				tbd.prev("#lanmu_tb").css('display','');
+				tbd=tbd.prev("#lanmu_tb");
+			}else{
+				tbd.css('display','none');
+				tbdl.css('display','');
+				tbd=tbdl;
+			}
+		});
+
+		$(".lanmu_n").click(function(){
+			if(tbd.next("#lanmu_tb").length>0){
+				tbd.css('display','none');
+				tbd.next("#lanmu_tb").css('display','');
+				tbd=tbd.next("#lanmu_tb");
+			}else{
+				tbd.css('display','none');
+				tbdf.css('display','');
+				tbd=tbdf;
+			}
+		});
+
+		$(".list_lm a").click(function(){
+			$(this).addClass("on");
+			$(this).siblings().removeClass("on");
+			var sliderId=$(this).index();
+			$("#slider"+sliderId).css("display","block");
+			$("#slider"+sliderId).siblings(".sliderchl").css("display","none");
+		});
+
+
+	});
+</script>
+
+<div class="app_fixed" style="display:none" id="head_ask_app_down">
+	<!--<div class="app_down4" id="head_ask_app_down">-->
+		<!--<a href="/">-->
+			<!--<img src="/img/logo.png" class="logimg">-->
+			<!--<b class="first">你有权知道更多</b><br><b>下载澎湃新闻客户端</b>-->
+		<!--</a>-->
+		<!--<img src="/img/down_close42.png" alt="关闭" class="closeimg" onclick="closAllPageDownfixed()">-->
+	<!--</div>-->
+</div>
+<div class="bg-opacity30"></div>
+<div id="v3cont_id">
+	<!-- 栏目冠名 s -->
+	<div class="lm-guanming">
+		<em></em>
+		<ul class="guanming-tit">
+			<li>{{$model['catname']}}</li>
+		</ul>
+	</div>
+	<div class="list_hp">
+        <arc cid="$model['cid']" rows="10">
+            <div class="t_news">
+                <div class="img_t"><a href="{{$field['url']}}"><img width="100%" src="{{$field['thumb']}}" alt=""></a></div>
+                <div class="txt_t">
+                    <div class="news_tit02"><p><a href="{{$field['url']}}">{{$field['title']}}</a></p></div>
+                    <p class="news_info">
+						<a href="list.php?tid=2">中国政库</a>
+						<span class="news_time bgimg_time">{{$field['created_at']}}</span>
+						<span class="news_time bgimg_comm"><span id = "sourceId::{{$field['aid']}}" class = "cy_cmt_count" ></span></span>
+					</p>
+                </div>
+            </div>
+        </arc>
+
+		<script id="cy_cmt_num" src="https://changyan.sohu.com/upload/plugins/plugins.list.count.js?clientId=cyt8rNSI2">
+		</script>
+		<div class="newspath" id="last1" lastTime="1471150427373" pageIndex="1" style="display:none;"></div>
+
+		<p id="loadnextpage">{{$arcModel->links()}}</p>
+	</div>
+
+	<div class="back-to" id="toolBackTop"><a title="返回顶部"  href="#top" class="back-top" id="backtotop"><!--返回顶部--></a></div>
+	<input type="hidden" id="timestamp" value="1471178128602">
+
+</div>
+<script>
+	wheight = $('body').height();
+	$('#v3cont_id').height(wheight);
+</script>
+
+<include file="./template/mobile/news/footer.html"/>
+
+<script type="text/javascript">
+	var getPics;
+	function getImg(){
+		for(var i=0;i<document.images.length;i++){
+			if(document.images[i].complete==false || document.images[i].readyState!='complete'){
+				//document.images[i].src=document.images[i].getAttribute('src')+"#";
+				var src = document.images[i].getAttribute('src');
+				document.images[i].setAttribute('src','');
+				document.images[i].setAttribute('src',src);
+			}
+		}
+	}
+	getImg();
+
+	var hostUrl = window.location.host;
+	var nextpageUrl = "/plus/index_mobile.php";
+
+	var g_pageidx = 1;
+	function loadnextpage(){
+		if($("#more_bt").attr("data-disabled")=="false"){
+			return;
+		}
+		$("#more_bt").attr("data-disabled","false");
+		var lastTime = $("#loadnextpage").prev(".newspath").attr("lastTime");
+		g_pageidx = parseInt($("#loadnextpage").prev(".newspath").attr("pageIndex"));
+		var n_pageidx = g_pageidx + 1;
+		$("#more_bt").html("加载中...");
+		$.ajax({
+			type	:	"get",
+			url  	:	nextpageUrl,
+			data	:	"typeid=1&topCids=&page=" + n_pageidx + "&lastTime=" + lastTime + "&mrd=" + Math.random(),
+			timeout :	30000,
+			dataType	:	"html",
+			success:function(dataHtml){
+				$("#more_bt").attr("data-disabled","true");
+				if(dataHtml.indexOf("t_news")>-1){
+					$("#loadnextpage").before(dataHtml);
+					$("#more_bt").html("加载更多…");
+					ppstore.setItem("localListKeys",$(".list_hp").html());
+					getImg();
+				} else if(dataHtml.indexOf("newspath")>-1 && dataHtml.indexOf("t_news")<0) {
+					$("#more_bt").html("已经到底");
+				} else {
+					$("#more_bt").html("加载出错，请重新点击加载");
+				}
+			},
+			error:function(XMLHttpRequest, textStatus, errorThrown){
+				$("#more_bt").attr("data-disabled","true");
+				$("#more_bt").html("加载失败，请重新点击加载");
+			}
+		});
+
+	}
+
+
+	var bt = $('#toolBackTop');
+	$(window).scroll(function() {
+		//$("#more_bt").attr("data-disabled","true");
+		bt.show();
+		var st = $(window).scrollTop() || document.documentElement.scrollTop || document.body.scrollTop;
+		//ppstore.setItem("listscrollTop",st);
+		if(st > 100){
+			bt.show();
+		}else{
+			bt.hide();
+		}
+
+	});
+
+
+	$(document).ready(function(){
+
+		window.onscroll = function () {
+			$("#more_bt").attr("data-disabled","true");
+			var sts = document.documentElement.scrollTop || document.body.scrollTop;
+			ppstore.setItem("listscrollTop",sts);
+		}
+
+		getPics = setInterval("getImg()",2000);
+
+	});
+
+</script>
+</body>
+</html>

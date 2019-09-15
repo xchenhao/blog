@@ -1,0 +1,85 @@
+<include file="./template/web/default/header.html"/>
+<link rel="stylesheet" type="text/css" href="{{__TEMPLATE__}}/css/list_article.css"/>
+		
+		<img src="{{__TEMPLATE__}}/images/20160722165047_65119.jpg" style="display: block;margin: 0 auto;"/>
+		
+		<!--大区域-->
+		<div class="main">
+			<!--左侧-->
+			<div class="left">
+				<!--面包屑导航-->
+				<p class="position">
+					<span>当前位置：</span>
+					<a href="{{__ROOT__}}">首页</a>
+					»
+					<span>栏目页列表</span>
+				</p>
+				
+				<ul>
+					<arc rows="5">
+						<li>
+							<a href="{{$field['url']}}" class="title">{{$field['title']}}</a>
+							<span class="time">[ {{$field['created_at']}} ]</span>
+							<p class="desc">{{$field['description']}}</p>
+						</li>
+					</arc>
+				</ul>
+				<!--分页-->
+				<div class="pagelist">
+					{{$arcModel->links()}}
+				</div>
+
+				<!--分页结束-->
+			</div>
+			<!--左侧结束-->
+
+
+			<!--右侧-->
+			<div class="right">
+				<h3>课程安排</h3>
+				<dl>
+					<category cid="8">
+						<dt><a href="{{__ROOT__}}/c_{{$field['cid']}}.html">{{$field['catname']}}</a></dt>
+						<category pid="8" rows="5">
+							<dd><a href="{{__ROOT__}}/c_{{$field['cid']}}.html">{{$field['catname']}}</a></dd>
+						</category>
+					</category>
+				</dl>
+
+				<dl>
+					<category cid="16">
+						<dt><a href="{{__ROOT__}}/c_{{$field['cid']}}.html">{{$field['catname']}}</a></dt>
+						<category pid="16" rows="5">
+							<dd><a href="{{__ROOT__}}/c_{{$field['cid']}}.html">{{$field['catname']}}</a></dd>
+						</category>
+					</category>
+				</dl>
+
+				<dl>
+					<category cid="26">
+						<dt><a href="{{__ROOT__}}/c_{{$field['cid']}}.html">{{$field['catname']}}</a></dt>
+						<category pid="26" rows="5">
+							<dd><a href="{{__ROOT__}}/c_{{$field['cid']}}.html">{{$field['catname']}}</a></dd>
+						</category>
+					</category>
+				</dl>
+
+				<dl>
+					<category cid="28">
+						<dt><a href="{{__ROOT__}}/c_{{$field['cid']}}.html">{{$field['catname']}}</a></dt>
+						<category pid="28" rows="5">
+							<dd><a href="{{__ROOT__}}/c_{{$field['cid']}}.html">{{$field['catname']}}</a></dd>
+						</category>
+					</category>
+				</dl>
+			</div>
+			<!--右侧结束-->
+
+
+
+		</div>
+		<!--大区域结束-->
+
+
+
+<include file="./template/web/default/footer.html"/>

@@ -1,0 +1,141 @@
+<style>
+    .head_banner .bn_bt {
+        width: auto
+    }
+
+    .head_banner a.bn_a {
+        width: auto;
+        height: auto;
+    }
+
+    .lilt_pt {
+        left: 32px;
+    }
+
+    .slider {
+        left: inherit
+    }
+</style>
+
+<!--顶部广告-->
+<!--<div class="head_ad" id="head_ad">-->
+    <!--<img src="{{__TEMPLATE__}}/img/ad1.png" alt="">-->
+<!--</div>-->
+<!--结束：顶部广告-->
+<style>
+    body{
+        overflow-x: hidden;
+    }
+    #aboutMe{
+        position: relative;
+        z-index:20000;
+    }
+    #aboutMe .scanCode{
+        width: 250px;
+        height: 250px;
+        position: absolute;
+        /*left:-250px;*/
+        opacity: 0;
+        left:30px;
+        top:-30px;
+        border-radius: 20px;
+        box-shadow: 2px 2px 10px 0px dimgrey;
+        transition: all 0.5s linear;
+    }
+    #aboutMe .scanCode img{
+        width: 100%;
+        height: 100%;
+    }
+    #aboutMe .scanCode .tip{
+        position: absolute;
+        left: 0;
+        bottom: -26px;
+        background: palegreen;
+        font-weight: 700;
+        color: red;
+        font-family: "Microsoft YaHei";
+        padding: 5px;
+        border-bottom-left-radius: 10px;
+        border-bottom-right-radius: 10px;
+        transform: rotate(-90);
+        border: 2px solid palegoldenrod;
+        border-top: none;
+        box-shadow: 0px 2px 10px 0px dimgrey;
+    }
+    #aboutMe:hover .scanCode{
+        left:-250px;
+        opacity: 1;
+    }
+</style>
+
+<div class="head hdbk">
+    <div id="head">
+        <div class="head_rt"><span class="verticalAlign"></span>
+            <div class="head_info clearfix">
+
+<?php
+use houdunwang\middleware\Middleware;
+Middleware::set('wechatconfig');
+?>
+                <a href="http://chen.bjsoso.cn" id="aboutMe" target="_blank">
+                    关于我
+                    <div class="scanCode">
+                        <img src="{{c('wechat.scanCode')}}">
+                        <span class="tip">扫一扫·关注我</span>
+                    </div>
+
+                </a>
+
+                <div class="hdif_s clearfix">
+                    <form action="{{__ROOT__}}" method="get">
+                        <input type="hidden" name="m" value="search"/>
+                        <input type="hidden" name="a" value="controller/entry/search"/>
+                        <input type="submit" value="" class="hds_bt" id="search_key"/>
+                        <input type="text" class="hds_inp" maxlength="20" required id="hds_inp" style="height: 26px" name="keyword" value="{{$_GET['keyword']}}"/>
+                    </form>
+                    <div class="hdifani" id="hdshowsearch"></div>
+                </div>
+            </div>
+        </div>
+        <div class="head_bd">
+            <span class="verticalAlign"></span>
+            <div class="head_logo">
+                <span class="verticalAlign"></span>
+                <a href="/" title="{{v('config.webname')}}">
+                    <img src="{{v('config.logo')}}">
+                </a>
+            </div>
+            <div class="head_banner">
+                <div class="bn_bt">
+                    <a class="bn_a" id="select" href="/">推荐</a>
+                </div>
+                <category rows="5" pid="0">
+                    <div class="bn_bt">
+                        <a href="{{$field['url']}}" class="bn_a ">{{$field['catname']}}</a>
+                        <div style="display:none;" class="slider" id="slider1">
+                            <div class="lilt_pt"><img width="16" height="12" src="{{__TEMPLATE__}}/img/prompt_top.png">
+                            </div>
+                            <ul class="clearfix">
+                                <category pid="{$field['cid']}">
+                                    <li><a href="{{$field['url']}}">{{$field['catname']}}</a></li>
+                                </category>
+                            </ul>
+                        </div>
+                    </div>
+                </category>
+
+            </div>
+            <!--//head_banner-->
+
+        </div>
+    </div>
+</div>
+<script>
+    $(function () {
+        $(".head_banner .bn_bt ul.clearfix").each(function () {
+            if ($(this).find("li").length == 0) {
+                $(this).parent().remove();
+            }
+        });
+    });
+</script>

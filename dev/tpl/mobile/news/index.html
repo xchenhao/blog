@@ -1,0 +1,264 @@
+﻿<!DOCTYPE html>
+<html>
+
+<extend file="./template/mobile/news/header.html"/>
+<block name="title">{{v('config.webname')}}-移动版</block>
+
+<body>
+<!--11-->
+
+<div class="header-v4">
+    <!-- logo -->
+    <div class="header-container">
+        <h1 class="logo">
+            <a href="{{__ROOT__}}" class="login" title="pengpai"></a>
+            <if value="Request::get('page') gt 1">
+                <span class="logon-shuline"></span>
+                <span class="toptit-cont" id="toptit" style="color: rgb(0, 0, 0);">热门文章</span>
+            </if>
+        </h1>
+    </div>
+
+    <!-- hanbao 默认状态-->
+    <div class="burger-p" id="burger">
+        <div class="burger opaque">
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
+    </div>
+    <!-- 分类按钮 -->
+    <div class="fl-icon-panel">
+    </div>
+    <div class="fl-icon"></div>
+
+</div>
+
+<include file="./template/mobile/news/navbar-hide.html"/>
+
+<!-----------------------以下是原来的部分1------------------------------->
+<!--导航条-->
+<div class="channeltab-panel">
+    <div class="channel_tab" id="chnfloat">
+        <category pid="0" rows="5">
+            <a href="{{$field['url']}}" class="on">{{$field['catname']}}<em class="line-bg"></em></a>
+        </category>
+    </div>
+</div>
+<!--结束：导航条-->
+<script type="text/javascript">
+    $(document).ready(function () {
+        $(".list_lanmu").click(function () {
+            if ($(".lanmu_q").css("display") == "none") {
+                $(".list_lanmu").addClass("bt_cur");
+                $(".lanmu_q").css('display', 'block');
+            } else {
+                $(".list_lanmu").removeClass("bt_cur");
+                $(".lanmu_q").css('display', 'none');
+            }
+        });
+
+        $(".lanmu_shouqi").click(function () {
+            $(".list_lanmu").removeClass("bt_cur");
+            $(".lanmu_q").css('display', 'none');
+        });
+
+        var tbd = $("#lanmu_tb").filter(function (index) {
+            return $("#lanmu_tb", this).css("display") != "none";
+        });
+        var tbdf = $("#lanmu_tb:eq(0)");
+        var tbdl = $(".lanmu_tblast");	//var tbdl=$("#lanmu_tb").last();
+        $(".lanmu_p").click(function () {
+            if (tbd.prev("#lanmu_tb").length > 0) {
+                tbd.css('display', 'none');
+                tbd.prev("#lanmu_tb").css('display', '');
+                tbd = tbd.prev("#lanmu_tb");
+            } else {
+                tbd.css('display', 'none');
+                tbdl.css('display', '');
+                tbd = tbdl;
+            }
+        });
+
+        $(".lanmu_n").click(function () {
+            if (tbd.next("#lanmu_tb").length > 0) {
+                tbd.css('display', 'none');
+                tbd.next("#lanmu_tb").css('display', '');
+                tbd = tbd.next("#lanmu_tb");
+            } else {
+                tbd.css('display', 'none');
+                tbdf.css('display', '');
+                tbd = tbdf;
+            }
+        });
+
+        $(".list_lm a").click(function () {
+            $(this).addClass("on");
+            $(this).siblings().removeClass("on");
+            var sliderId = $(this).index();
+            $("#slider" + sliderId).css("display", "block");
+            $("#slider" + sliderId).siblings(".sliderchl").css("display", "none");
+        });
+
+
+    });
+</script>
+
+<div class="app_fixed" style="display:none" id="head_ask_app_down">
+    <!--<div class="app_down4" id="head_ask_app_down">-->
+        <!--<a href="">-->
+            <!--<img src="/img/logo.png" class="logimg">-->
+            <!--<b class="first">你有权知道更多</b><br><b>下载澎湃新闻客户端</b>-->
+        <!--</a>-->
+        <!--<img src="/img/down_close42.png" alt="关闭" class="closeimg" onclick="closAllPageDownfixed()">-->
+    <!--</div>-->
+</div>
+<input type="hidden" value="index" id="isdiscont"/>
+<div class="bg-opacity30"></div>
+<div id="v3cont_id">
+    <!--首页头条  start-->
+    <div class="toutiao" <if value="Request::get('page') gt 1">hidden</if>>
+        <arc hot="1" rows="1">
+            <a href="{{$field['url']}}" style="display: block; min-height: 120px;position: relative;">
+                <img width="100%" style="max-height: 250px" src="{{$field['thumb']}}" alt="{{$field['title']}}">
+            </a>
+            <div class="toutiao_txt">
+                <p class="news_tit01"><a href="{{$field['url']}}">{{$field['title']}}</a></p>
+                <p class="news_info">
+                    <a href="{{$field['caturl']}}">{{$field['catname']}}</a>
+                    <span class="news_time bgimg_time">{{$field['created_at']}}</span>
+                    <span class="news_time bgimg_comm"><span id = "sourceId::{{$field['aid']}}" class = "cy_cmt_count" ></span></span>
+                    <span class="t_label"><img src={{__TEMPLATE__}}/img/ydw_tj.png></span>
+                </p>
+            </div>
+        </arc>
+    </div>
+    <!--首页头条  end-->
+
+<script type="text/javascript">
+    window.changyan.api.config({
+        appid: 'cyt8rNSI2',
+        conf: 'prod_90e87bc6f74b46bcdf9234cd3ab6fa0f'
+    });
+</script>
+
+
+    <div class="list_hp">
+        <!--首页头条新闻的其他四条 start-->
+        <arc hot="1" rows="10">
+            <div class="t_news">
+                <div class="img_t">
+                    <a href="{{$field['url']}}" style="display: block;">
+                        <img width="100%" style="height: 50px" src="{{$field['thumb']}}" alt="">
+                    </a>
+                </div>
+                <div class="txt_t">
+                    <div class="news_tit02">
+                        <p><a href="{{$field['url']}}">{{$field['title']}}</a></p>
+                    </div>
+                    <p class="news_info">
+                        <a href="{{$field['caturl']}}">{{$field['catname']}}</a>
+                        <span class="news_time bgimg_time">{{$field['created_at']}}</span>
+                        <span class="news_time bgimg_comm"><span id = "sourceId::{{$field['aid']}}" class = "cy_cmt_count" ></span></span>
+                    </p>
+                </div>
+            </div>
+        </arc>
+
+        <style>
+            <if value="Request::get('page') == 1|| !Request::get('page')">
+                .t_news:first-of-type{display: none}
+            </if>
+        </style>
+
+        <div class="newspath" id="last1" lastTime="1471139652519" pageIndex="1" style="display:none;"></div>
+        <p id="loadnextpage">{{$arcModel->links()}}</p>
+
+    </div>
+
+    <div class="back-to" id="toolBackTop"><a title="返回顶部" href="#top" class="back-top" id="backtotop"><!--返回顶部--></a>
+    </div>
+    <input type="hidden" id="timestamp" value="1471144017551">
+
+
+<script id="cy_cmt_num" src="https://changyan.sohu.com/upload/plugins/plugins.list.count.js?clientId=cyt8rNSI2">
+</script>
+
+    <script type="text/javascript">
+        getImg();
+        var hostUrl = window.location.host;
+        var nextpageUrl = "/plus/index_mobile.php";
+        var g_pageidx = 1;
+        function loadnextpage() {
+            if ($("#more_bt").attr("data-disabled") == "false") {
+                return;
+            }
+            $("#more_bt").attr("data-disabled", "false");
+            var lastTime = $("#loadnextpage").prev(".newspath").attr("lastTime");
+            g_pageidx = parseInt($("#loadnextpage").prev(".newspath").attr("pageIndex"));
+            var n_pageidx = g_pageidx + 1;
+            $("#more_bt").html("加载中...");
+            $.ajax({
+                type: "get",
+                url: nextpageUrl,
+                data: "page=" + n_pageidx + "&lastTime=" + lastTime + "&mrd=" + Math.random(),
+                timeout: 30000,
+                dataType: "html",
+                success: function (dataHtml) {
+                    $("#more_bt").attr("data-disabled", "true");
+                    if (dataHtml.indexOf("t_news") > -1) {
+                        $("#loadnextpage").before(dataHtml);
+                        $("#more_bt").html("加载更多…");
+                        ppstore.setItem("localIndexKeys", $(".list_hp").html());
+                    } else if (dataHtml.indexOf("newspath") > -1 && dataHtml.indexOf("t_news") < 0) {
+                        $("#more_bt").html("已经到底");
+                    } else {
+                        $("#more_bt").html("加载出错，请重新点击加载");
+                    }
+
+                },
+                error: function (XMLHttpRequest, textStatus, errorThrown) {
+                    $("#more_bt").attr("data-disabled", "true");
+                    $("#more_bt").html("加载失败，请重新点击加载");
+                }
+            });
+
+            getImg();
+        }
+
+        var btt = $('#toolBackTop');
+        $(window).scroll(function () {
+            btt.show();
+            var stt = $(window).scrollTop() || document.documentElement.scrollTop || document.body.scrollTop;
+            if (stt > 100) {
+                btt.show();
+            } else {
+                btt.hide();
+            }
+            if (stt > 54) {
+                $("#chnfloat").addClass("chnfloat");
+            } else {
+                $("#chnfloat").removeClass("chnfloat");
+            }
+
+        });
+
+        $(document).ready(function () {
+            window.onscroll = function () {
+                $("#more_bt").attr("data-disabled", "true");
+                var sts = document.documentElement.scrollTop || document.body.scrollTop;
+                ppstore.setItem("indexscrollTop", sts);
+            }
+
+            getPics = setInterval("getImg()", 2000);
+
+        });
+
+    </script>
+</div>
+
+</div>
+
+<include file="./template/mobile/news/footer.html"/>
+</body>
+</html>

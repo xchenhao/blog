@@ -1,0 +1,174 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<block name="title">{{$model['catname']}}_{{v('config.webname')}}</block>
+<extend file="./template/web/news/header.html"/>
+
+<body>
+<include file="./template/web/news/navbar.html"/>
+
+<div class="bdwd main clearfix">
+    <div class="pjax-wrapper">
+        <div class="pjax-content">
+            <div class="prev-content">
+                <div class="pjax-loading" style="height: 305px;">
+                    <div class="loading-view"></div>
+                </div>
+            </div>
+            <div id="main_lt" class="main_lt">
+                <div class="ask_banner">
+                    <div class="ask_sort clearfix">
+
+                    </div>
+
+                </div>
+
+                <div class="askcontent" style="min-height: inherit">
+
+                    <ul class="ask_user_area clearfix" id="ask_ulist">
+                        <arc rows="6" cid="$model['cid']">
+                            <li class="topic">
+                                <div class="ask_user_body">
+                                    <img src="{{$field['thumb']}}" class="cover_pic"/>
+                                    <div class="ask_user_bgimg"><a href="{{$field['url']}}" class="userhome" target="_blank"></a>
+                                        <div class="ask_user_abstxt">
+                                            <a href="{{$field['url']}}" target="_blank">
+                                                <div class="ask_user_profile">{{$field['title']}}</div>
+                                            </a>
+                                            <div class="ask_user_share">
+                                                <span>分享到</span>
+                                                <a class="sina"
+                                                   href="javascript:askToSina('81',{{$field["title"]}},{{$field["url"]}},{{__ROOT_}});"></a>
+                                                <a class="zone"
+                                                   href="javascript:askToZone('81',{{$field["title"]}},{{$field["url"]}},{{__ROOT_}});"></a>
+                                                <a class="tx"
+                                                   href="javascript:askToTencent('81',{{$field["title"]}},{{$field["url"]}},{{__ROOT_}});"></a>
+                                                <a class="rr"
+                                                   href="javascript:askTodouban('81',{{$field["title"]}},{{$field["url"]}},{{__ROOT_}});"></a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="ask_user_trbs2">
+                                    <a href="{{$field['url']}}" target="_blank" class="u_sname">作者：{{$field['author']}}</a>
+                                    <span>{{$field['created_at']}}</span>
+                                </div>
+                            </li>
+                        </arc>
+                    </ul>
+
+                    <!--<div id="addButton" class="add_more" style="display:block;">-->
+                        <!--<a id="next" href="/plus/index_pic.php?typeid=24&page=2"></a>-->
+                    <!--</div>-->
+
+
+                </div>
+{{$arcModel->links()}}
+                <div class="ask_banner" id="ask_banner">
+                    <div class="ask_sort clearfix">
+
+                    </div>
+                </div>
+
+
+            </div>
+            <div class="next-content">
+                <div class="pjax-loading" style="height: 305px;">
+                    <div class="loading-view"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="main_rt">
+
+        <!--右侧广告:上-->
+        <!--<div class="rt_ad" style="height:200px; width:200px;">-->
+        <!--<img src="{{__TEMPLATE__}}/img/ad2.png" alt="">-->
+        <!--</div>-->
+        <!--结束：右侧广告:上-->
+
+        <!--25950-->
+        <div class="rthotnews_tt">子栏目</div>
+        <div class="hotnews_time" id="hotnews">
+            <category pid="{$model['cid']}" rows="2">
+                <a href="javascript:;">{{mb_substr($field['catname'],0,5,'utf-8')}}</a>
+            </category>
+            <script>
+                $('#hotnews a').first().addClass('on');
+            </script>
+        </div>
+
+        <category pid="{$model['cid']}" rows="2">
+            <ul class="list_hot" id="listhot{{$field['num']-1}}" style="display: none">
+                <arc rows="10" cid="$field['cid']">
+                    <li style="border-top:0;">
+                        <span class="num_hot{{$field['num']}}"></span>
+                        <a target="_blank" href="{{$field['url']}}">{{$field['title']}}</a>
+                    </li>
+                </arc>
+            </ul>
+        </category>
+
+        <script>
+            $('#listhot0').css('display','block');
+        </script>
+
+        <div class="rtapp_down">
+            <h2>热门</h2>
+            <arc rows="1" click="1" cid="$model['cid']">
+                <a href="{{$field['url']}}">
+                    <img style="width:100%;display:block;margin:10px auto;text-align:center;" src="{{$field['thumb']}}" border="0">
+                </a>
+            </arc>
+        </div>
+
+        <div class="rthotnews_tt">精选</div>
+
+        <ul class="topic_hot" id="topichot0">
+            <div id='tag6223bd6bf9c0a92f2cad7842d3b79226'>
+                <arc featured="1" pid="$model['cid']" rows="8">
+                    <li style="border-top:0;">
+                        <span class="num_hot{{$field['num']}}"></span>
+                        <p style="float:right;width:180px;"><a href="{{$field['url']}}" target="_blank">{{$field['title']}}</a>
+                        </p>
+                    </li>
+                </arc>
+            </div>
+
+
+            <li class="list_more"></li>
+        </ul>
+
+
+        <style>
+            .adc6op0 {
+                right: 50%;
+                top: 72px;
+                margin-right: -596px;
+                position: fixed;
+                z-index: 100;
+            }
+
+            .adc6op1 {
+                right: 20px;
+                top: 0;
+                position: absolute;
+                z-index: 100;
+            }
+        </style>
+
+        <!--右侧广告：下-->
+        <!--<div class="rt_ad2" style="margin-top:50px;height:200px; width:200px;">-->
+        <!--<img src="{{__TEMPLATE__}}/img/ad2.png" alt="">-->
+        <!--</div>-->
+        <!--结束：右侧广告：下-->
+
+        <!--25950-->
+    </div>
+    <div id="toTop" class="back-top"></div>
+</div>
+
+<include  file="./template/web/news/footer.html"/>
+
+</body>
+</html>

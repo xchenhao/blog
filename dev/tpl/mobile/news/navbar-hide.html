@@ -1,0 +1,54 @@
+<!-- open -->
+<div class="sy-downward">
+    <div class="upv30-icon"></div>
+    <div class="sy-downward-cont">
+        <div class="user-view-info">
+            <div id="_no_login">
+                <ul class="sections-list-big">
+                    <li>
+                        <a onclick="lgwdsshow()" href="javascript:void(0)" class="">
+                            <i></i><span>登录</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{url('search.entry.search')}}" class="serch">
+                            <i></i><span>搜索</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="cont-list">
+            <div class="scrolly">
+                <!--隐藏的导航条-->
+                <div class="sections-panel">
+                    <ul class="sections-nav">
+                        <category rows="5" pid="0">
+                            <li>{{$field['catname']}}<em class="tabline-lf"></em></li>
+                        </category>
+                        <script>
+                            $('.sections-nav li').eq(0).addClass('cur-state');
+                        </script>
+                    </ul>
+                </div>
+                <!--隐藏的导航条：点击显示导航条的具体子栏目-->
+                <category rows="5" pid="0">
+                    <ul class="sections-list">
+                        <category pid="{$field['cid']}">
+                            <li><a href="{{$field['url']}}">{{$field['catname']}}</a></li>
+                        </category>
+                    </ul>
+                </category>
+                <style>
+                    .sections-list{
+                        display: none;
+                    }
+                    .sections-list:first-of-type{
+                        display: block;
+                    }
+                </style>
+            </div>
+        </div>
+    </div>
+    <!-- end -->
+</div>

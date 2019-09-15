@@ -1,0 +1,245 @@
+﻿<!DOCTYPE html>
+<html>
+<include file="./template/mobile/news/header.html"/>
+<blade name="title">{{$arcData['title']}}_{{v('config.webname')}}--移动版</blade>
+
+<link href="{{__TEMPLATE__}}/css/main.css" rel="stylesheet" type="text/css">
+<link href="{{__TEMPLATE__}}/css/rest.css" rel="stylesheet" type="text/css">
+<link rel="stylesheet" href="{{__TEMPLATE__}}/css/newsinfo.css"/>
+<link rel="stylesheet" href="{{__TEMPLATE__}}/css/hotqa.css"/>
+
+<script type="text/javascript" src="{{__TEMPLATE__}}/js/main-1.1.js"></script>
+<script type="text/javascript" src="{{__TEMPLATE__}}/js/main-1.2.js"></script>
+
+<body>
+<div class="header-v4">
+    <!-- logo -->
+    <div class="header-container">
+        <h1 class="logo">
+            <a href="{{__ROOT__}}" class="login" title="pengpai"></a>
+            <span class="logon-shuline"></span>
+            <span class="toptit-cont" id="toptit" style="color: rgb(0, 0, 0);">{{$catData['catname']}}</span>
+        </h1>
+    </div>
+
+    <!-- hanbao 默认状态-->
+    <div class="burger-p" id="burger">
+        <div class="burger opaque">
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
+    </div>
+    <!-- 分类按钮 -->
+    <div class="fl-icon-panel">
+    </div>
+    <div class="fl-icon"></div>
+
+</div>
+
+<include file="./template/mobile/news/navbar-hide.html"/>
+
+<!-- share box -->
+<div class="v3-shareBox">
+    <h2>分享</h2>
+    <div class="share-list">
+        <!--<img src="{{__TEMPLATE__}}/img/detail-share.png" alt="" />-->
+        <ul>
+            <li><a class="wb"
+                   href="javascript:ToSina('副部级干部辞职到扶贫重点村工作，坦言要回报养育自己的农村','http://pp.dededemo.com//uploads/allimg/160813/1.jpg',1);"
+                   id="news_weibo"></a></li>
+            <li><a class="tx"
+                   href="javascript:ToTencent('副部级干部辞职到扶贫重点村工作，坦言要回报养育自己的农村','http://pp.dededemo.com//uploads/allimg/160813/1.jpg',1);"
+                   id="news_qq"></a></li>
+            <li><a class="db"
+                   href="javascript:Torenren('副部级干部辞职到扶贫重点村工作，坦言要回报养育自己的农村','http://pp.dededemo.com//uploads/allimg/160813/1.jpg','李家台村是陕西省定扶贫重点村，368户村民中，贫困户有91户，占到近25%。一位从北京来的副部级央企干部，就这么成为了村子里的第一书记。',1);"
+                   id="news_renren"></a></li>
+            <li class="nol"><a class="kj"
+                               href="javascript:ToQzone('副部级干部辞职到扶贫重点村工作，坦言要回报养育自己的农村','http://pp.dededemo.com//uploads/allimg/160813/1.jpg',1,'李家台村是陕西省定扶贫重点村，368户村民中，贫困户有91户，占到近25%。一位从北京来的副部级央企干部，就这么成为了村子里的第一书记。');"
+                               id="news_qzone"></a></li>
+        </ul>
+    </div>
+    <span class="closeS"></span>
+</div>
+<!-----------------------以下是原来的部分1------------------------------->
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $(".list_lanmu").click(function () {
+            if ($(".lanmu_q").css("display") == "none") {
+                $(".list_lanmu").addClass("bt_cur");
+                $(".lanmu_q").css('display', 'block');
+            } else {
+                $(".list_lanmu").removeClass("bt_cur");
+                $(".lanmu_q").css('display', 'none');
+            }
+        });
+
+        $(".lanmu_shouqi").click(function () {
+            $(".list_lanmu").removeClass("bt_cur");
+            $(".lanmu_q").css('display', 'none');
+        });
+
+        var tbd = $("#lanmu_tb").filter(function (index) {
+            return $("#lanmu_tb", this).css("display") != "none";
+        });
+        var tbdf = $("#lanmu_tb:eq(0)");
+        var tbdl = $(".lanmu_tblast");	//var tbdl=$("#lanmu_tb").last();
+        $(".lanmu_p").click(function () {
+            if (tbd.prev("#lanmu_tb").length > 0) {
+                tbd.css('display', 'none');
+                tbd.prev("#lanmu_tb").css('display', '');
+                tbd = tbd.prev("#lanmu_tb");
+            } else {
+                tbd.css('display', 'none');
+                tbdl.css('display', '');
+                tbd = tbdl;
+            }
+        });
+
+        $(".lanmu_n").click(function () {
+            if (tbd.next("#lanmu_tb").length > 0) {
+                tbd.css('display', 'none');
+                tbd.next("#lanmu_tb").css('display', '');
+                tbd = tbd.next("#lanmu_tb");
+            } else {
+                tbd.css('display', 'none');
+                tbdf.css('display', '');
+                tbd = tbdf;
+            }
+        });
+
+        $(".list_lm a").click(function () {
+            $(this).addClass("on");
+            $(this).siblings().removeClass("on");
+            var sliderId = $(this).index();
+            $("#slider" + sliderId).css("display", "block");
+            $("#slider" + sliderId).siblings(".sliderchl").css("display", "none");
+        });
+
+
+    });
+</script>
+
+<div class="app_fixed" style="display:none" id="head_ask_app_down">
+    <!--<div class="app_down4" id="head_ask_app_down">-->
+    <!--<a href="">-->
+    <!--<img src="/img/logo.png" class="logimg">-->
+    <!--<b class="first">你有权知道更多</b><br><b>下载澎湃新闻客户端</b>-->
+    <!--</a>-->
+    <!--<img src="/img/down_close42.png" alt="关闭" class="closeimg" onclick="closAllPageDownfixed()">-->
+    <!--</div>-->
+</div>
+<div class="bg-opacity30"></div>
+<div id="v3cont_id">
+
+    <!-- 详情页-冠名 -->
+    <p class="detail-gm">
+        <span class="gg-gmcont"><a href="list.php?tid=2">中国政库</a></span>
+    </p>
+    <input type="hidden" id="loginstatus" value="false">
+    <div class="news_content">
+        <h1 class="t_newsinfo">{{$arcData['title']}}</h1>
+        <p class="about_news">{{$arcData['author']}}<span class="FTS-opt" id="FTS-opt"></span></p>
+        <p class="about_news" style="padding-bottom:15px;">{{$arcData['created_at']}}</p>
+        <div class="news_part">
+            {{$arcData['content']}}
+        </div>
+        <div class="bottom_word_relation">
+        </div>
+        <div class="news_bl">未经授权不得转载。</div>
+        <!-- 分享or点赞 -->
+        <div class="fxOrdz">
+            <a onclick="showShareBox()" href="javascript:void(0);" class="fx"><em></em>分享</a>
+        </div>
+
+        <!--<div class="app_down3" id="news_app_down02">-->
+            <!--<a href="">-->
+                <!--<img src="/img/logo.png" class="logimg">-->
+                <!--<span>你有权知道更多<br>下载澎湃新闻客户端</span>-->
+                <!--<img src="/img/down_logo70.png" alt="下载" class="downimg">-->
+            <!--</a>-->
+        <!--</div>-->
+    </div>
+
+    <!-- 栏目条 -->
+    <div class="zt-head">
+        <h2>继续阅读
+        </h2>
+    </div>
+    <ul class="tu-list2">
+        <!-- 继续阅读 -->
+        <div id='tage76ec69bb47683ec91ccfa366d0f83a1'>
+            <arc cid="$catData['cid']" rows="2" click="1">
+                <li>
+                    <a href="{{$field['url']}}" class="img"><img src="{{$field['thumb']}}" height="150px"/></a>
+                    <a href="{{$field['url']}}" class="tit" style="height: 45px;word-break: break-all;overflow: hidden">{{$field['title']}}</a>
+                </li>
+            </arc>
+        </div>
+
+    </ul>
+
+
+    <div class="back-to" id="toolBackTop"><a title="返回顶部" id="backtotop" href="#top" class="back-top"><!--返回顶部--></a>
+    </div>
+
+</div>
+<include file="./template/mobile/news/footer.html"/>
+
+</body>
+<script src="{{__TEMPLATE__}}/js/jweixin-1.0.0.js"></script>
+<!--http://m.thepaper.cn/newsDetail_forward_1513693-->
+<script>
+    function showShareBox() {
+        $('.bg-opacity30').show();
+        $(".header-v4").slideDown("150");
+        $('.v3-shareBox').slideDown("150");
+
+    }
+
+    wx.config({
+        debug: false,
+        appId: 'wx01de5b3f160dad7d',
+        timestamp: '1471178920',
+        nonceStr: '7826162d-e590-4916-8558-0778c5797106',
+        signature: '202b9d1d216f99cf674da76341521180af3c7c7f',
+        jsApiList: [
+            'checkJsApi',
+            'onMenuShareTimeline',
+            'onMenuShareAppMessage',
+            'onMenuShareQQ',
+            'onMenuShareWeibo',
+            'onMenuShareQZone'
+        ]
+    });
+    wx.ready(function () {
+        wx.onMenuShareAppMessage({
+            title: '副部级干部辞职到扶贫重点村工作，坦言要回报养育自己的农村_我的网站',
+            desc: "李家台村是陕西省定扶贫重点村，368户村民中，贫困户有91户，占到近25%。一位从北京来的副部级央企干部，就这么成为了村子里的第一书记。",
+            link: 'http://pp.dededemo.com/m/view.php?aid=255',
+            imgUrl: 'http://pp.dededemo.com//uploads/allimg/160813/1.jpg',
+            trigger: function (res) {
+            },
+            success: function (res) {
+            },
+            cancel: function (res) {
+            },
+            fail: function (res) {
+            }
+        });
+        wx.onMenuShareTimeline({
+            title: '副部级干部辞职到扶贫重点村工作，坦言要回报养育自己的农村_我的网站', // 分享标题
+            desc: "李家台村是陕西省定扶贫重点村，368户村民中，贫困户有91户，占到近25%。一位从北京来的副部级央企干部，就这么成为了村子里的第一书记。",
+            link: 'http://pp.dededemo.com/m/view.php?aid=255', // 分享链接
+            imgUrl: 'http://pp.dededemo.com//uploads/allimg/160813/1.jpg', // 分享图标
+            success: function () {
+                // 用户确认分享后执行的回调函数
+            },
+            cancel: function () {
+                // 用户取消分享后执行的回调函数
+            }
+        });
+    });
+</script>
+</html>

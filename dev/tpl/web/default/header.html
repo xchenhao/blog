@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>首页</title>
+    <script src="{{__TEMPLATE__}}/js/jquery-1.11.3.min.js" type="text/javascript" charset="utf-8"></script>
+</head>
+<body>
+
+<!--头部-->
+<div id="head">
+    <img src="{{__TEMPLATE__}}/images/logo.jpg" class="logo" />
+    <ul class="ad">
+        <li>书城</li>
+        <li style="color: #ee782f;">读书学习</li>
+    </ul>
+    <div class="right">
+        <span>意见建议</span>
+        <p>admin@123.com</p>
+    </div>
+</div>
+<!--头部结束-->
+<!--导航条-->
+<div id="menu">
+    <div class="center">
+        <a href="../" <if value="!Request::get('cid')">class="cur"</if>>书城首页</a>
+        <category rows="5" pid="0">
+            <a href="{{$field['url']}}" <if value="$field['cid']==Request::get('cid')">class="cur"</if>>{{$field['catname']}}</a>
+        </category>
+
+    </div>
+</div>
+<!--导航条结束-->
+
+<!--搜索区域-->
+<div id="search">
+    <span>热门关键词：</span>
+    <tag action="search.lists" rows="8">
+        <a href="{{__WEB__}}?m=search&a=controller/entry/search&keyword={{$field['keyword']}}">{{$field['keyword']}}</a>
+    </tag>
+
+
+    <form action="" method="get">
+        <input type="hidden" name="m" value="search"/>
+        <input type="hidden" name="a" value="controller/entry/search"/>
+        <input type="text" placeholder="请输入搜索关键词" class="keyword" name="keyword" value="{{$_GET['keyword']}}"/>
+        <input type="submit" value="" class="sub" />
+    </form>
+</div>
+<!--搜索区域结束-->

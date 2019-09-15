@@ -1,0 +1,437 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta name="viewport"
+          content="width=device-width, initial-scale=0.8, minimum-scale=0.8, maximum-scale=3.0, user-scalable=yes">
+    <meta http-equiv="content-language" content="zh-CN"/>
+    <title>{{$model['catname']}}_{{v('config.webname')}}</title>
+    <meta name="keywords" content=""/>
+    <meta name="description" content=""/>
+    <meta http-equiv="mobile-agent" content="format=xhtml;url=/m/list.php?tid=1">
+    <script type="text/javascript">if (window.location.toString().indexOf('pref=padindex') != -1) {
+    } else {
+        if (/AppleWebKit.*Mobile/i.test(navigator.userAgent) || (/MIDP|SymbianOS|NOKIA|SAMSUNG|LG|NEC|TCL|Alcatel|BIRD|DBTEL|Dopod|PHILIPS|HAIER|LENOVO|MOT-|Nokia|SonyEricsson|SIE-|Amoi|ZTE/.test(navigator.userAgent))) {
+            if (window.location.href.indexOf("?mobile") < 0) {
+                try {
+                    if (/Android|Windows Phone|webOS|iPhone|iPod|BlackBerry/i.test(navigator.userAgent)) {
+                        window.location.href = "/m/list.php?tid=1";
+                    } else if (/iPad/i.test(navigator.userAgent)) {
+                    } else {
+                    }
+                } catch (e) {
+                }
+            }
+        }
+    }</script>
+    <link rel="shortcut icon" href="/dedemao/img/thepaper.ico" mce_href="/dedemao/img/thepaper.ico" type="image/x-icon">
+    <link rel="icon" href="/dedemao/img/thepaper.ico" mce_href="/dedemao/img/thepaper.ico" type="image/x-icon">
+    <link rel="stylesheet" type="text/css" href="{{__TEMPLATE__}}/css/css.css"/>
+    <link rel="stylesheet" type="text/css" href="{{__TEMPLATE__}}/css/style.css"/>
+    <link rel="stylesheet" type="text/css" href="{{__TEMPLATE__}}/css/pagination.css"/>
+    <script type="text/javascript" src="{{__TEMPLATE__}}/js/jquery-1.8.3.min.js"></script>
+    <!--<script type="text/javascript" src="{{__TEMPLATE__}}/js/jquery.infinitescroll.js"></script>-->
+    <!--<script type="text/javascript" src="{{__TEMPLATE__}}/js/jquery.leanmodal.min.js"></script>-->
+    <!--<script type="text/javascript" src="{{__TEMPLATE__}}/js/jquery.masonry.js"></script>-->
+    <!--<script type="text/javascript" src="{{__TEMPLATE__}}/js/main-3.0.js"></script>-->
+    <!--<script type="text/javascript" src="{{__TEMPLATE__}}/js/login.js"></script>-->
+    <script>
+        var _hmt = _hmt || [];
+        (function () {
+            var hm = document.createElement("script");
+            hm.src = "//hm.baidu.com/hm.js?94a1e06bbce219d29285cee2e37d1d26";
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(hm, s);
+        })();
+    </script>
+</head>
+<body>
+<style>
+    .head_banner .bn_bt {
+        width: auto
+    }
+
+    .head_banner a.bn_a {
+        width: auto;
+        height: auto;
+    }
+
+    .lilt_pt {
+        left: 32px;
+    }
+
+    .slider {
+        left: inherit
+    }
+</style>
+<div class="head_ad" id="head_ad">
+    <img src="{{__TEMPLATE__}}/img/ad1.png" alt="">
+</div>
+<div class="head hdbk">
+    <div id="head">
+        <div class="head_rt"><span class="verticalAlign"></span>
+            <div class="head_info clearfix">
+                <a href="/a/about/contribute/">报料</a>
+                <div class="hdif_s clearfix">
+                    <form action="" method="get">
+                        <input type="hidden" name="m" value="search"/>
+                        <input type="hidden" name="a" value="controller/entry/search"/>
+                        <input type="submit" value="" class="hds_bt" id="search_key"/>
+                        <input type="text" class="hds_inp" maxlength="20" id="hds_inp" style="height: 30px" name="keyword" value="{{$_GET['keyword']}}"/>
+                    </form>
+                    <div class="hdifani" id="hdshowsearch"></div>
+                </div>
+            </div>
+        </div>
+        <div class="head_bd">
+            <span class="verticalAlign"></span>
+            <div class="head_logo"><span class="verticalAlign"></span><a href="/" title="澎湃新闻"><img
+                    src="{{__TEMPLATE__}}/img/news.png"></a></div>
+            <div class="head_banner">
+
+
+                <div class="bn_bt">
+                    <a class="bn_a on" id="select">推荐</a>
+                </div>
+
+                <category rows="5" pid="0">
+                    <div class="bn_bt">
+                        <a href="{{$field['url']}}" class="bn_a ">{{$field['catname']}}</a>
+                        <div style="display:none;" class="slider" id="slider1">
+                            <div class="lilt_pt"><img width="16" height="12" src="{{__TEMPLATE__}}/img/prompt_top.png">
+                            </div>
+                            <ul class="clearfix">
+                                <category pid="{$field['cid']}">
+                                    <li><a href="{{$field['url']}}">{{$field['catname']}}</a></li>
+                                </category>
+                            </ul>
+                        </div>
+                    </div>
+                </category>
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    $(function () {
+        $(".head_banner .bn_bt ul.clearfix").each(function () {
+            if ($(this).find("li").length == 0) {
+                $(this).parent().remove();
+            }
+        });
+    });
+</script>
+<div class="bdwd main clearfix">
+    <div class="main_lt">
+        <div class="list_head">
+            <!--<div class="list_logo"><a href="list_25462"><img src="{{__TEMPLATE__}}/img/61.png" alt="中国政库"></a></div>-->
+            <div class="list_name">
+                <a style="color: #00a5e8;">搜索结果</a>
+            </div>
+            <div class="list_abstract">&nbsp;</div>
+
+        </div>
+
+        <div class="main_ltad">
+            <script type="text/javascript" src="{{__TEMPLATE__}}/js/de78abf8ad5b45b8b48db6f8c181f145.js"></script>
+        </div>
+
+        <div class="news_slide">
+            <div class="newsslidebd" id="newsslidebd">
+                <span id="news_masonry"></span>
+                <span id="news_list"></span>
+            </div>
+        </div>
+        <script>
+            var vieType = wwwstore.getItem("vieType");
+            if (vieType != null && vieType != "" && vieType == "scroll") {
+                $("#newsslidebd").addClass("newslist");
+            }
+        </script>
+
+
+
+        <style>
+            .news_li{
+                position:absolute;
+                height: 300px;
+            }
+            .news_li:nth-of-type(3n+1){
+                left:0;
+            }
+            .news_li:nth-of-type(3n+2){
+                left:313px;
+            }
+            .news_li:nth-of-type(3n+3){
+                left:626px;
+            }
+
+            .news_li:nth-of-type(3n+3){
+                left:626px;
+            }
+        </style>
+
+
+        <div id="mainContent">
+            <div class="newsbox" id="masonryContent" style="position: relative; width: 939px; height: 1150px;">
+                <arc rows="9">
+                    <div class="news_li" id="cont271">
+                        <div class="news_tu">
+                            <a href="{{$field['url']}}" class="tiptitleImg" target="_blank">
+                                <img src="{{$field['thumb']}}">
+                            </a>
+                        </div>
+                        <h2><a href="{{$field['url']}}" target="_blank">{{str_replace($keyword,"<span style='color: red'>{$keyword}</span>",$field['title'])}}</a></h2>
+                        <p>{{str_replace($keyword,"<span style='color: red'>{$keyword}</span>",$field['description'])}}</p>
+                        <div class="pdtt_trbs">
+                            <a href="{{__ROOT__}}./c_{{$model['cid']}}.html" target="_blank">{{$model['catname']}}</a><span>{{$field['created_at']}}</span>
+                            <span class="trbszan">111</span>
+                        </div>
+                    </div>
+                </arc>
+
+                <div class="news_li hidden" id="last1" lasttime="1500531475" pageindex="1" style="display: none !important; position: absolute; left: 0px; top: 1996px;"></div>
+            </div>
+        </div>
+        {{$arcModel->links()}}
+        <script>
+            for(var i=0;i<$('.news_li').length; i++){
+                var t = parseInt(i/3);
+                $('.news_li').eq(i).css('top',t*384+'px');
+            }
+        </script>
+
+
+
+        <div id="addButton" class="add_more" style="display:block;">
+            <a id="next" href="/plus/index_scroll.php"></a>
+        </div>
+
+    </div>
+
+
+
+    <div class="main_rt">
+        <div class="rt_ad" style="height:200px; width:200px;">
+            <img src="{{__TEMPLATE__}}/img/ad2.png" alt="">
+        </div>
+        <!--25950-->
+        <div class="rthotnews_tt">热搜</div>
+        <div class="hotnews_time" id="hotnews">
+            <a class="on" href="javascript:;">关键词</a>
+            <a href="javascript:;">点击排行</a>
+            <a href="javascript:;">热门文章</a>
+        </div>
+
+        <ul class="list_hot" id="listhot0">
+            <tag action="search.lists" rows="5">
+                <li style="border-top:0;">
+                    <!--<span class="num_hot{{$field['num']}}"></span>-->
+                    <a target="_blank" href="{{$field['url']}}">{{$field['keyword']}}</a>
+                </li>
+            </tag>
+        </ul>
+
+        <ul class="list_hot" id="listhot1" style="display:none;">
+            <arc rows="5" click="1">
+                <li style="border-top:0;">
+                    <span class="num_hot{{$field['num']}}"></span>
+                    <a target="_blank" href="{{$field['url']}}">{{$field['title']}}</a>
+                </li>
+            </arc>
+        </ul>
+
+        <ul class="list_hot" id="listhot2" style="display:none;">
+            <arc hot="1" rows="10">
+                <li style="border-top:0;">
+                    <span class="num_hot{{$field['num']}}"></span>
+                    <a target="_blank" href="{{$field['url']}}">{{$field['title']}}</a>
+                </li>
+            </arc>
+        </ul>
+
+
+        <div class="rtapp_down">
+            <h2>精选文章</h2>
+            <arc rows="1" featured="1">
+                <a href="{{$field['url']}}"><img style="width:180px;height:200px;display:block;margin:10px auto;text-align:center;" src="{{$field['thumb']}}" border="0"></a>
+            </arc>
+        </div>
+
+
+        <div class="rthotnews_tt">推荐文章</div>
+
+        <ul class="topic_hot" id="topichot0">
+            <div id='tag6223bd6bf9c0a92f2cad7842d3b79226'>
+                <arc rows="10" recommend="1">
+                    <li style="border-top:0;">
+                        <span class="num_hot{{$field['num']}}"></span>
+                        <p style="float:right;width:180px;"><a href="{{$field['url']}}" target="_blank">{{$field['title']}}</a>
+                        </p>
+                    </li>
+                </arc>
+            </div>
+
+
+            <li class="list_more"></li>
+        </ul>
+
+
+        <style>
+            .adc6op0 {
+                right: 50%;
+                top: 72px;
+                margin-right: -596px;
+                position: fixed;
+                z-index: 100;
+            }
+
+            .adc6op1 {
+                right: 20px;
+                top: 0;
+                position: absolute;
+                z-index: 100;
+            }
+        </style>
+        <div class="rt_ad2" style="margin-top:50px;height:200px; width:200px;">
+            <img src="{{__TEMPLATE__}}/img/ad2.png" alt="">
+        </div>
+        <!--25950-->
+    </div>
+
+    <div id="toTop" class="back-top" onclick="window.scrollTo(0,0);return false;"></div>
+</div>
+
+
+<div class="about">
+    <a href="http://chen.bjsoso.cn" target="_blank" style="color: red">我的作品</a>
+    <tag rows="10" action="links.lists">
+        <a href="{{$field['url']}}">{{$field['lname']}}</a>
+    </tag>
+</div>
+<div class="copyright">Copyright &copy; 2002-2011{{v('config.webname')}}</div>
+
+<div style="width:300px;margin:0 auto; padding: 0;" class="copyright">
+    <a target="_blank" href="#" style="display:inline-block;text-decoration:none;height:20px;line-height:20px;">
+        <img src="{{__TEMPLATE__}}/img/ghs.png" style="float:left;"/>
+        <p style="float:left;height:20px;line-height:20px;margin: 0px 0px 0px 5px; color:#FFFFFF;">{{v('config.icp')}}
+        </p>
+    </a>
+</div>
+<div id="bg_overlay" style="display:none;"></div>
+
+<script type="text/javascript" src="{{__TEMPLATE__}}/js/rd.js"></script>
+
+<script type="text/javascript">
+    function onload() {
+        var vieType = wwwstore.getItem("vieType");
+        var tempUrl;
+        if (vieType != null && vieType != "") {
+            if (vieType == "scroll") {
+                tempUrl = "/plus/index_scroll.php";
+            }
+            else if (vieType == "masonry") {
+                tempUrl = "/plus/index_masonry.php";
+            }
+        }
+        else {
+            tempUrl = "/plus/index_masonry.php";
+        }
+        $.ajax({
+            url: tempUrl,
+            data: "typeid=1",
+            cache: false,
+            success: function (html) {
+                $("#mainContent").append(html);
+            }
+        });
+    }
+    onload();
+
+    $('#news_list').click(function () {
+        if (document.getElementById("listContent") != null) {
+            return;
+        }
+        wwwstore.setItem("vieType", "scroll");
+        $(window).unbind('.infscr');
+        $("#masonryContent").masonry('destroy');
+        $("#newsslidebd").addClass("newslist");
+        $.ajax({
+            url: "/plus/index_scroll.php",
+            data: "typeid=1",
+            cache: false,
+            success: function (html) {
+                $('#mainContent').empty();
+                $("#mainContent").append(html);
+
+            }
+        });
+    });
+
+    $('#news_masonry').click(function () {
+        if (document.getElementById("masonryContent") != null) {
+            return;
+        }
+        wwwstore.setItem("vieType", "masonry");
+        $(window).unbind('.infscr');
+        $("#newsslidebd").removeClass("newslist");
+        $.ajax({
+            url: "/plus/index_masonry.php",
+            data: "typeid=1",
+            cache: false,
+            success: function (html) {
+                $('#mainContent').empty();
+                $("#mainContent").append(html);
+            }
+        });
+    });
+
+
+    function getItemElement(newElements) {
+        var elems = [];
+        for (var i = 0; i < newElements.length; i++) {
+            var elem = document.createElement('div');
+            elem = newElements[i];
+            //elem.className = newElements[i].className;
+            //elem.id = newElements[i].id;
+            //elem.appendChild(newElements[i]);
+            elems.push(elem);
+        }
+
+        return elems;
+    }
+
+    function morenews() {
+        var vieType = wwwstore.getItem("vieType");
+        var tempUrl;
+        if (vieType != null && vieType != "") {
+            if (vieType == "scroll") {
+                tempUrl = "/plus/index_scroll.php";
+            }
+            else if (vieType == "masonry") {
+                tempUrl = "/plus/index_masonry.php";
+            }
+        }
+        else {
+            tempUrl = "/plus/index_masonry.php";
+        }
+        $.ajax({
+            url: tempUrl,
+            data: "typeid=1",
+            cache: false,
+            success: function (html) {
+                $("#mainContent").append(html);
+            }
+        });
+    }
+
+</script>
+
+</body>
+</html>
