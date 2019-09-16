@@ -7,6 +7,7 @@ return [
         'username' => 'root',
         'password' => '123456',
         'charset' => 'utf8',
+        'tablePrefix' => '',
     ],
     'db_bbs' => [
         'class' => 'yii\db\Connection',
@@ -14,5 +15,6 @@ return [
         'username' => 'root',
         'password' => '123456',
         'charset' => 'utf8',
+        'tablePrefix' => '',
     ],
 ];

@@ -516,3 +516,16 @@ CREATE TABLE `article` (
   KEY `IDX_CATEGORY_ID` (`category_id`) USING BTREE,
   KEY `IDX_ATTR` (`attr`) USING BTREE
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='文章表';
+
+CREATE TABLE `category` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT COMMENT '主键',
+  `name` varchar(32) NOT NULL COMMENT '名称',
+  `parent_id` int(11) unsigned NOT NULL DEFAULT '0' COMMENT '父级分类 ID',
+  `sort` smallint(5) unsigned NOT NULL DEFAULT '0' COMMENT '排序',
+  `status` tinyint(4) unsigned NOT NULL DEFAULT '0' COMMENT '状态',
+  `create_time` int(10) unsigned NOT NULL COMMENT '创建时间',
+  `modified_time` int(10) unsigned NOT NULL COMMENT '修改时间',
+  PRIMARY KEY (`id`),
+  KEY `IDX_PARENT_ID` (`parent_id`) USING BTREE,
+  KEY `IDX_STATUS_SORT` (`status`,`sort`) USING BTREE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='分类表';
