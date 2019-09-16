@@ -3,6 +3,7 @@
 namespace backend\controllers;
 
 use backend\component\util\Helper;
+use common\models\ArticleSearch;
 use Yii;
 use common\models\Article;
 use yii\data\ActiveDataProvider;
@@ -36,12 +37,12 @@ class ArticleController extends Controller
      */
     public function actionIndex()
     {
-        $dataProvider = new ActiveDataProvider([
-            'query' => Article::find(),
-        ]);
+        $searchModel = new ArticleSearch();
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
             'dataProvider' => $dataProvider,
+            'searchModel' => $searchModel,
         ]);
     }
 

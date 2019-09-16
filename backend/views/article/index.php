@@ -21,14 +21,33 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
+        'filterModel' => $searchModel,
         'columns' => [
-            ['class' => 'yii\grid\SerialColumn'],
-
-            'id',
-            'title',
-            'intro',
-            'cover',
-            'content:ntext',
+//            ['class' => 'yii\grid\SerialColumn'],
+            [
+                'attribute'=>'id',
+                'contentOptions'=>['width'=>'30px'],
+            ],
+            [
+                'attribute' => 'title',
+                'value' => function ($model) {
+                    return strip_tags(mb_substr($model->title, 0, 30));
+                }
+            ],
+            [
+                'attribute' => 'intro',
+                'value' => function ($model) {
+                    return strip_tags(mb_substr($model->intro, 0, 15));
+                },
+            ],
+            [
+                'attribute' => 'cover',
+                'format' => 'raw',
+                'value' => function ($model) {
+                    return Html::img($model->cover, ['style' => 'height: 100px;', 'referrerpolicy' => 'no-referrer']);
+                },
+            ],
+//            'content:ntext',
             //'tags',
             //'author',
             //'status',
