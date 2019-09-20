@@ -17,6 +17,14 @@ use Yii;
  */
 class Category extends \yii\db\ActiveRecord
 {
+    const STATUS_ONLINE = 1;
+    const STATUS_OFFLINE = 0;
+
+    public static $status = [
+        self::STATUS_OFFLINE => '下线',
+        self::STATUS_ONLINE => '上线',
+    ];
+
     /**
      * @inheritdoc
      */
@@ -90,9 +98,9 @@ class Category extends \yii\db\ActiveRecord
             }
             $output[] = [
                 'id' => $item['id'],
-                'name' => $item['name'],
+                'name' => str_repeat(' ', $level * 9) . '┗' . str_repeat('---', $level) . $item['name'],
                 'level' => $level,
-                'margin' => str_repeat('---', $level),
+                //'margin' => str_repeat('---', $level),
                 'parent_id' => $item['parent_id'],
                 'attr' => 0,
             ];
