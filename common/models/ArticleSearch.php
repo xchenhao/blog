@@ -7,7 +7,6 @@ use yii\data\ActiveDataProvider;
 
 class ArticleSearch extends Article
 {
-
     /**
      * @inheritdoc
      */
@@ -18,7 +17,6 @@ class ArticleSearch extends Article
             [['title', 'content', 'author', 'intro'], 'safe'],
         ];
     }
-
 
     /**
      * Creates data provider instance with search query applied
@@ -33,10 +31,10 @@ class ArticleSearch extends Article
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
-            'pagination' => ['pageSize'=>10],
+            'pagination' => ['pageSize' => 5],
             'sort'=>[
                 'defaultOrder'=>[
-                    'id'=>SORT_DESC,
+                    'id' => SORT_DESC,
                 ],
                 //'attributes'=>['id','title'],
             ],

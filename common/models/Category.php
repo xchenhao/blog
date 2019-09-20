@@ -63,8 +63,39 @@ class Category extends \yii\db\ActiveRecord
         if ($insert) {
             $this->create_time = $time;
         }
-
         return true;
+    }
+
+    public static function getTree()
+    {
+        $categorys = Category::find()->asArray()->all();
+        $output = [];
+        foreach ($categorys as $item) {
+            $sub = self::getSub($item['id'], $categorys);
+            $output[] = [
+                'id' => $item['id'],
+                'name' => $item['name'],
+                'parent_id' => $item['parent_id'],
+                'sub' => $sub,
+            ];
+        }
+        return $output;
+    }
+
+    public static function getSub($parent_id, $array)
+    {
+        $return = [];
+        foreach ($array as $item) {
+            if ($item['parent_id'] == $parent_id) {
+                $return[] = [
+                    'id' => $item['id'],
+                    'name' => $item['name'],
+                    'parent_id' => $item['parent_id'],
+                    'sub' => self::getSub($item['id'], $array),
+                ];
+            }
+        }
+        return $return;
     }
 
 }
