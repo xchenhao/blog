@@ -35,8 +35,10 @@ class CategoryController extends Controller
      */
     public function actionIndex()
     {
-        $cat = Category::getTree();
-        print_r($cat);
+        $this->layout =false;
+        $cat = Category::getAllTreeAndPassiveCurrent(2);
+        return $this->renderContent(json_encode($cat));
+//        print_r($cat);
 
 
 //        $searchModel = new CategorySearch();

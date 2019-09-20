@@ -66,36 +66,87 @@ class Category extends \yii\db\ActiveRecord
         return true;
     }
 
-    public static function getTree()
+    public static function getAllCategory(int $parent_id = -1): array
     {
-        $categorys = Category::find()->asArray()->all();
-        $output = [];
-        foreach ($categorys as $item) {
-            $sub = self::getSub($item['id'], $categorys);
+        $query = Category::find();
+        if ($parent_id > 0) {
+            $query->andWhere(['parent_id' => $parent_id]);
+        }
+        return $query->asArray()->orderBy('sort ASC')->all();
+    }
+
+    public static function getAllTree()
+    {
+        $list = self::getAllCategory();
+        return self::getTree($list, 0, 0);
+    }
+
+    private static function getTree(array $list, int $parent_id = 0, int $level = 0)
+    {
+        static $output = [];
+        foreach ($list as $item) {
+            if ($item['parent_id'] != $parent_id) {
+                continue;
+            }
             $output[] = [
                 'id' => $item['id'],
                 'name' => $item['name'],
+                'level' => $level,
+                'margin' => str_repeat('---', $level),
                 'parent_id' => $item['parent_id'],
-                'sub' => $sub,
+                'attr' => 0,
             ];
+            self::getTree($list, $item['id'], $level + 1);
         }
         return $output;
     }
 
-    public static function getSub($parent_id, $array)
+    public static function getAllTreeAndPassiveCurrent($category_id)
     {
-        $return = [];
-        foreach ($array as $item) {
-            if ($item['parent_id'] == $parent_id) {
-                $return[] = [
-                    'id' => $item['id'],
-                    'name' => $item['name'],
-                    'parent_id' => $item['parent_id'],
-                    'sub' => self::getSub($item['id'], $array),
-                ];
+        $list = self::getAllTree();
+        foreach ($list as $k => $item) {
+            if ($item['id'] != $category_id) {
+                continue;
             }
+            $list[$k]['attr'] = -1;
         }
-        return $return;
+        return self::passiveChildAttr($list, $category_id);
     }
+
+    private static function passiveChildAttr($list, $parent_id = 0)
+    {
+        foreach ($list as $k => $item) {
+            if ($item['parent_id'] != $parent_id) {
+                continue;
+            }
+            $list[$k]['attr'] = -1;
+            $list = self::passiveChildAttr($list, $item['id']);
+        }
+        return $list;
+    }
+
+// 树形结构
+//    public static function getAllTree(): array
+//    {
+//        return self::getTree(self::getAllCategory(), 0, 0);
+//    }
+//
+//    public static function getTree(array $list, int $parent_id = 0, int $level = 0): array
+//    {
+//        $output = [];
+//        foreach ($list as $item) {
+//            if ($item['parent_id'] != $parent_id) {
+//                continue;
+//            }
+//            $output[] = [
+//                'id' => $item['id'],
+//                'name' => $item['name'],
+//                'level' => $level,
+//                'parent_id' => $item['parent_id'],
+//                'sub' => self::getTree($list, $item['id'], $level + 1),
+//            ];
+//        }
+//        return $output;
+//    }
 
 }
