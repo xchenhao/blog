@@ -3,6 +3,7 @@
 namespace frontend\controllers;
 
 use common\models\Article;
+use common\models\Category;
 use Yii;
 use common\models\Post;
 use common\models\PostSearch;
@@ -38,12 +39,12 @@ class ArticleController extends Controller
                 'class' => AccessControl::class,
                 'rules' => [
                     [
-                        'actions' => ['detail', 'article', 'cover', 'list', 'view'],
+                        'actions' => ['test', 'index', 'detail', 'article', 'cover', 'list', 'view'],
                         'allow' => true,
                         'roles' => ['?'],
                     ],
                     [
-                        'actions' => ['detail', 'article', 'cover', 'list', 'view'],
+                        'actions' => ['test', 'index', 'detail', 'article', 'cover', 'list', 'view'],
                         'allow' => true,
                         'roles' => ['@'],
                     ],
@@ -52,17 +53,37 @@ class ArticleController extends Controller
         ];
     }
 
+    public function actionIndex()
+    {
+        $this->layout = 'article';
+        return $this->render('index', [
+
+        ]);
+    }
+
+    public function actionTest()
+    {
+        $this->view->title = 'myblog';
+        $this->layout = 'article';
+        return $this->render('test', []);
+    }
+
     public function actionView(int $id)
     {
         $model = Article::find()->where(['id' => $id])->one();
+        $category = Category::getAllTree(0, 2);
         return $this->render('view', [
             'model' => $model,
+            'category' => $category,
         ]);
     }
 
     public function actionArticle()
     {
-        return $this->render('article', []);
+        $category = Category::getAllTree(0, 2);
+        return $this->render('article', [
+            'category' => $category,
+        ]);
     }
 
     public function actionCover()

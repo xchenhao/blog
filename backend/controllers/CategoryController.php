@@ -35,11 +35,6 @@ class CategoryController extends Controller
      */
     public function actionIndex()
     {
-//        $this->layout =false;
-//        $cat = Category::getAllTreeAndPassiveCurrent(2);
-//        return $this->renderContent(json_encode($cat));
-//        print_r($cat);
-
         $searchModel = new CategorySearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 

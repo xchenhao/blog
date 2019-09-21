@@ -74,7 +74,7 @@ class Category extends \yii\db\ActiveRecord
         return true;
     }
 
-    public static function getAllCategory(int $parent_id = -1): array
+    private static function getAllCategory(int $parent_id = -1): array
     {
         $query = Category::find();
         if ($parent_id > 0) {
@@ -83,13 +83,26 @@ class Category extends \yii\db\ActiveRecord
         return $query->asArray()->orderBy('sort ASC')->all();
     }
 
-    public static function getAllTree()
+    /**
+     * 获取一维的树形结构（树形权体现在显示的名称上）
+     *
+     * @return array
+     */
+    public static function getAllTreeList()
     {
         $list = self::getAllCategory();
-        return self::getTree($list, 0, 0);
+        return self::getTreeList($list, 0, 0);
     }
 
-    private static function getTree(array $list, int $parent_id = 0, int $level = 0)
+    /**
+     * 获取一维的树形结构（树形权体现在显示的名称上）
+     *
+     * @param array $list
+     * @param int $parent_id
+     * @param int $level
+     * @return array
+     */
+    private static function getTreeList(array $list, int $parent_id = 0, int $level = 0)
     {
         static $output = [];
         foreach ($list as $item) {
@@ -104,14 +117,14 @@ class Category extends \yii\db\ActiveRecord
                 'parent_id' => $item['parent_id'],
                 'attr' => 0,
             ];
-            self::getTree($list, $item['id'], $level + 1);
+            self::getTreeList($list, $item['id'], $level + 1);
         }
         return $output;
     }
 
     public static function getAllTreeAndPassiveCurrent($category_id)
     {
-        $list = self::getAllTree();
+        $list = self::getAllTreeList();
         foreach ($list as $k => $item) {
             if ($item['id'] != $category_id) {
                 continue;
@@ -133,28 +146,46 @@ class Category extends \yii\db\ActiveRecord
         return $list;
     }
 
-// 树形结构
-//    public static function getAllTree(): array
-//    {
-//        return self::getTree(self::getAllCategory(), 0, 0);
-//    }
-//
-//    public static function getTree(array $list, int $parent_id = 0, int $level = 0): array
-//    {
-//        $output = [];
-//        foreach ($list as $item) {
-//            if ($item['parent_id'] != $parent_id) {
-//                continue;
-//            }
-//            $output[] = [
-//                'id' => $item['id'],
-//                'name' => $item['name'],
-//                'level' => $level,
-//                'parent_id' => $item['parent_id'],
-//                'sub' => self::getTree($list, $item['id'], $level + 1),
-//            ];
-//        }
-//        return $output;
-//    }
+    /**
+     * 获取的树形结构
+     *
+     * @param int $parent_id 父级分类 ID
+     * @param int $max_level 获取的深度（层级）
+     * @return array
+     */
+    public static function getAllTree(int $parent_id = 0, int $max_level = -1): array
+    {
+        return self::getTree(self::getAllCategory(), $parent_id, 0, $max_level);
+    }
+
+    /**
+     * 获取的树形结构
+     *
+     * @param array $list 列表数据
+     * @param int $parent_id 父级分类 ID
+     * @param int $level 当前层级
+     * @param int $max_level 获取的深度（层级）
+     * @return array
+     */
+    private static function getTree(array $list, int $parent_id = 0, int $level = 0, int $max_level = -1): array
+    {
+        if ($max_level > 0 && $level > $max_level) {
+            return [];
+        }
+        $output = [];
+        foreach ($list as $item) {
+            if ($item['parent_id'] != $parent_id) {
+                continue;
+            }
+            $output[] = [
+                'id' => $item['id'],
+                'name' => $item['name'],
+                'level' => $level,
+                'parent_id' => $item['parent_id'],
+                'sub' => self::getTree($list, $item['id'], $level + 1, $max_level),
+            ];
+        }
+        return $output;
+    }
 
 }

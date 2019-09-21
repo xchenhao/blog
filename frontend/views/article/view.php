@@ -133,80 +133,80 @@
                     <a class="bn_a" id="select" href="/">推荐</a>
                 </div>
                 <?php
-                $category = [
-                    [
-                        'name' => '新闻',
-                        'cid' => 2,
-                        'sub' => [
-                            [
-                                'name' => '法治中国',
-                                'cid' => 10,
-                            ],
-                            [
-                                'name' => '直击现场',
-                                'cid' => 11,
-                            ],
-                            [
-                                'name' => '绿政公署',
-                                'cid' => 12,
-                            ]
-                        ],
-                    ],
-                    [
-                        'name' => '读书',
-                        'cid' => 3,
-                        'sub' => [
-                            [
-                                'name' => '上海书评',
-                                'cid' => 13,
-                            ],
-                        ],
-                    ],
-                    [
-                        'name' => '生活',
-                        'cid' => 4,
-                        'sub' => [
-                            [
-                                'name' => '身体',
-                                'cid' => 14,
-                            ],
-                            [
-                                'name' => '生活方式',
-                                'cid' => 15,
-                            ],
-                        ],
-                    ],
-                    [
-                        'name' => '财经',
-                        'cid' => 5,
-                        'sub' => [
-                            [
-                                'name' => '财经上下游',
-                                'cid' => 16,
-                            ],
-                            [
-                                'name' => '科技湃',
-                                'cid' => 17,
-                            ],
-                        ],
-                    ],
-                    [
-                        'name' => '观点',
-                        'cid' => 6,
-                        'sub' => [],
-                    ]
-                ];
+//                $category = [
+//                    [
+//                        'name' => '新闻',
+//                        'cid' => 2,
+//                        'sub' => [
+//                            [
+//                                'name' => '法治中国',
+//                                'cid' => 10,
+//                            ],
+//                            [
+//                                'name' => '直击现场',
+//                                'cid' => 11,
+//                            ],
+//                            [
+//                                'name' => '绿政公署',
+//                                'cid' => 12,
+//                            ]
+//                        ],
+//                    ],
+//                    [
+//                        'name' => '读书',
+//                        'cid' => 3,
+//                        'sub' => [
+//                            [
+//                                'name' => '上海书评',
+//                                'cid' => 13,
+//                            ],
+//                        ],
+//                    ],
+//                    [
+//                        'name' => '生活',
+//                        'cid' => 4,
+//                        'sub' => [
+//                            [
+//                                'name' => '身体',
+//                                'cid' => 14,
+//                            ],
+//                            [
+//                                'name' => '生活方式',
+//                                'cid' => 15,
+//                            ],
+//                        ],
+//                    ],
+//                    [
+//                        'name' => '财经',
+//                        'cid' => 5,
+//                        'sub' => [
+//                            [
+//                                'name' => '财经上下游',
+//                                'cid' => 16,
+//                            ],
+//                            [
+//                                'name' => '科技湃',
+//                                'cid' => 17,
+//                            ],
+//                        ],
+//                    ],
+//                    [
+//                        'name' => '观点',
+//                        'cid' => 6,
+//                        'sub' => [],
+//                    ]
+//                ];
                 ?>
 
                 <?php foreach ($category as $cat):?>
                     <div class="bn_bt">
-                        <a href="/category/<?= $cat['cid'] ?>" class="bn_a "><?= $cat['name'] ?></a>
+                        <a href="/category/<?= $cat['id'] ?>" class="bn_a "><?= $cat['name'] ?></a>
                         <div style="display:none;" class="slider" id="slider1">
                             <div class="lilt_pt"><img width="16" height="12" src="/theme/news/img/prompt_top.png">
                             </div>
                             <ul class="clearfix">
                                 <?php foreach ($cat['sub'] as $subcat): ?>
-                                    <li><a href="/category/<?= $subcat['cid'] ?>"><?= $subcat['name'] ?></a></li>
+                                    <li><a href="/category/<?= $subcat['id'] ?>"><?= $subcat['name'] ?></a></li>
                                 <?php endforeach ?>
                             </ul>
                         </div>

@@ -16,7 +16,7 @@ use common\models\Category;
     <?= $form->field($model, 'name')->textInput(['maxlength' => true, 'required' => true]) ?>
 
     <?php
-        $categorys = Category::getAllTree();
+        $categorys = Category::getAllTreeList();
         $options = array_column($categorys, 'name', 'id');
     ?>
     <?= $form->field($model,'parent_id')->dropDownList($options, ['prompt'=>'请选择分类', 'required' => true]
