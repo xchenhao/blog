@@ -1,4 +1,3 @@
-<!--footer-->
 <!--<footer style="position: fixed; bottom: 0;">-->
     <div class="about">
         <?php
@@ -46,4 +45,3 @@
     </div>
     <div id="bg_overlay" style="display:none;"></div>
 <!--</footer>-->
-<!-- footer -->

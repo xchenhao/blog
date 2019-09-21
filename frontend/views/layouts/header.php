@@ -4,7 +4,6 @@ use yii\helpers\Html;
 /* @var $this \yii\web\View */
 ?>
 
-<!--header-->
 <head>
     <meta charset="<?= Yii::$app->charset ?>">
     <title><?= Html::encode($this->title) ?></title>
@@ -17,4 +16,3 @@ use yii\helpers\Html;
     <script type="text/javascript" src="/theme/news/js/rd.js"></script>
     <?php $this->head() ?>
 </head>
-<!--header-->

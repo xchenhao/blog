@@ -39,12 +39,12 @@ class ArticleController extends Controller
                 'class' => AccessControl::class,
                 'rules' => [
                     [
-                        'actions' => ['test', 'index', 'detail', 'article', 'cover', 'list', 'view'],
+                        'actions' => ['index', 'detail', 'article', 'cover', 'list', 'view'],
                         'allow' => true,
                         'roles' => ['?'],
                     ],
                     [
-                        'actions' => ['test', 'index', 'detail', 'article', 'cover', 'list', 'view'],
+                        'actions' => ['index', 'detail', 'article', 'cover', 'list', 'view'],
                         'allow' => true,
                         'roles' => ['@'],
                     ],
@@ -61,15 +61,9 @@ class ArticleController extends Controller
         ]);
     }
 
-    public function actionTest()
-    {
-        $this->view->title = 'myblog';
-        $this->layout = 'article';
-        return $this->render('test', []);
-    }
-
     public function actionView(int $id)
     {
+        $this->layout = 'article';
         $model = Article::find()->where(['id' => $id])->one();
         $category = Category::getAllTree(0, 2);
         return $this->render('view', [
@@ -88,6 +82,7 @@ class ArticleController extends Controller
 
     public function actionCover()
     {
+        $this->layout = 'article';
         return $this->render('cover', [
 
         ]);
@@ -95,6 +90,7 @@ class ArticleController extends Controller
 
     public function actionList()
     {
+        $this->layout = 'article';
         return $this->render('list', [
 
         ]);

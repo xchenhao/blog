@@ -1,4 +1,3 @@
-<!--navbar-->
 <style>
     .head_banner .bn_bt {
         width: auto
@@ -81,4 +80,3 @@
         });
     });
 </script>
-<!--navbar-->
