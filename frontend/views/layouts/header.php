@@ -41,5 +41,34 @@ use yii\helpers\Html;
             })
         })
     </script>
+    <style>
+        #masonryContent {
+            position: relative;
+            width: 939px;
+            height: 1600px;
+            /*height: 740px;*/
+            /*overflow: hidden;*/
+        }
+        #masonryContent .news_li {
+            position: absolute;
+            height: 325px;
+        }
+
+        #masonryContent .news_li:nth-of-type(3n+1) {
+            left: 0;
+        }
+
+        #masonryContent .news_li:nth-of-type(3n+2) {
+            left: 313px;
+        }
+
+        #masonryContent .news_li:nth-of-type(3n+3) {
+            left: 626px;
+        }
+
+        #masonryContent .news_li:nth-of-type(3n+3) {
+            left: 626px;
+        }
+    </style>
     <?php $this->head() ?>
 </head>

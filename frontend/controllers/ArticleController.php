@@ -74,17 +74,37 @@ class ArticleController extends Controller
         ]);
     }
 
-    public function actionCover()
-    {
-        return $this->render('cover', [
-
-        ]);
-    }
-
+    /**
+     * 文章列表
+     *
+     * @param int $category_id
+     * @return string
+     */
     public function actionList(int $category_id)
     {
-        return $this->render('list', [
+        $category = Category::findOne(['id' => $category_id]);
+        $view_tpl = $category->isCoverAttr ? 'cover' : 'list';
 
+        $cats = Category::getAllTreeList($category_id);
+        $cat_ids = array_column($cats, 'id');
+        $cat_ids = array_map('intval', $cat_ids);
+        $cat_ids[] = $category_id;
+
+        $articles = Article::find()
+            ->where(['category_id' => $cat_ids])
+            ->orderBy('view_count DESC')
+            ->asArray()->all();
+        $category_names = array_column($cats, 'name', 'id');
+        $category_names[$category_id] = $category->name;
+        $articles = array_map(function ($item) use ($category_names) {
+            $item['category_name'] = $category_names[$item['category_id']] ?? '';
+            $item['create_time'] = date('Y-m-d H:i:s', $item['create_time']);
+
+            return $item;
+        }, $articles);
+
+        return $this->render($view_tpl, [
+            'articles' => $articles,
         ]);
     }
 

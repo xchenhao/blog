@@ -15,6 +15,9 @@ use Yii;
  * @property integer $attr
  * @property integer $create_time
  * @property integer $modified_time
+ *
+ * // magic field
+ * @property bool isCoverAttr
  */
 class Category extends \yii\db\ActiveRecord
 {
@@ -96,12 +99,15 @@ class Category extends \yii\db\ActiveRecord
     /**
      * 获取一维的树形结构（树形权体现在显示的名称上）
      *
+     * @param int $parent_id
+     * @param int $max_level
+     *
      * @return array
      */
-    public static function getAllTreeList()
+    public static function getAllTreeList(int $parent_id = 0, $max_level = 0): array
     {
         $list = self::getAllCategory();
-        return self::getTreeList($list, 0, 0);
+        return self::getTreeList($list, $parent_id, $max_level);
     }
 
     /**
@@ -121,10 +127,11 @@ class Category extends \yii\db\ActiveRecord
             }
             $output[] = [
                 'id' => $item['id'],
-                'name' => str_repeat(' ', $level * 9) . '┗' . str_repeat('---', $level) . $item['name'],
+                'name' => $item['name'],
                 'level' => $level,
                 //'margin' => str_repeat('---', $level),
                 'parent_id' => $item['parent_id'],
+                '_name' => str_repeat(' ', $level * 9) . '┗' . str_repeat('---', $level) . $item['name'],
                 'attr' => 0,
             ];
             self::getTreeList($list, $item['id'], $level + 1);
@@ -209,6 +216,16 @@ class Category extends \yii\db\ActiveRecord
         return Category::find()->select('name')
             ->where(['id' => $category_ids])
             ->indexBy('id')->column();
+    }
+
+    public static function isCoverAttr(int $attr): bool
+    {
+        return 0 !== (self::ATTR_COVER & $attr);
+    }
+
+    public function getIsCoverAttr(): bool
+    {
+        return self::isCoverAttr($this->attr);
     }
 
 }
