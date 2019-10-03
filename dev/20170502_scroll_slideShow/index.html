@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>无缝滚动</title>
+</head>
+<link rel="stylesheet" type="text/css" href="css/scroll.css">
+<script type="text/javascript" src="js/jquery-1.7.2.min.js"></script>
+<script type="text/javascript" src="js/scroll.js"></script>
+<body>
+	<div id="displayBox"><!--显示框-->
+		<div id="scrollBox"><!--显示框>滚动的箱子-->
+			<img src="images/1.jpg">
+			<img src="images/2.jpg">
+			<img src="images/3.jpg">
+			<img src="images/4.jpg">
+			<img src="images/5.jpg">
+			<img src="images/1.jpg"><!--复制的第一张-->
+		</div>
+
+		<ul id="scrollBtn"><!--显示框>小圆点按钮-->
+			<li class="cur"></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+		</ul>
+
+		<a href="javascript:" class="arrowBtn left iconfont">&#xe620;</a><!--显示框>左右前后退按钮-->
+		<a href="javascript:" class="arrowBtn right iconfont">&#xe624;</a>
+	</div>
+</body>
+
+</html>
