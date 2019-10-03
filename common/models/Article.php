@@ -41,8 +41,13 @@ class Article extends \yii\db\ActiveRecord
     const ATTR_MARKDOWN_EDITOR = 0;
     // 富文本编辑器
     const ATTR_RICHTEXT_EDITOR = 0b01;
+    // 版头图
+    const ATTR_BANNER = 0b10;
 
-    const COUNT_TOP_VIEW_ARTICLE = 9;
+    // 首页播放量最高的文章数量
+    const HOMEPAGE_COUNT_TOP_VIEW_ARTICLE = 9;
+    // 版头图数量
+    const BANNER_COUNT = 3;
 
     /**
      * {@inheritdoc}
@@ -138,7 +143,7 @@ class Article extends \yii\db\ActiveRecord
      * @param int $count
      * @return array
      */
-    public static function getTopViewArticles(int $count = self::COUNT_TOP_VIEW_ARTICLE): array
+    public static function getTopViewArticles(int $count = self::HOMEPAGE_COUNT_TOP_VIEW_ARTICLE): array
     {
         if ($count <= 0) {
             return [];
@@ -146,6 +151,37 @@ class Article extends \yii\db\ActiveRecord
         $list = self::find()
             ->select('id, category_id, title, intro, cover, create_time')
             ->where(['status' => self::STATUS_PASS])
+            ->andWhere('attr & :banner = 0', [':banner' => self::ATTR_BANNER])
+            ->orderBy('view_count DESC')
+            ->limit($count)
+            ->asArray()
+            ->all();
+
+        $category_ids = array_column($list, 'category_id');
+        $category_names = Category::getNames($category_ids);
+
+        return array_map(function ($item) use ($category_names) {
+            $item['category_name'] = $category_names[$item['category_id']] ?? '';
+            $item['create_time'] = date('Y-m-d H:i:s', $item['create_time']);
+            return $item;
+        }, $list);
+    }
+
+    /**
+     * 获取版头图
+     *
+     * @param int $count
+     * @return array
+     */
+    public static function getBanners(int $count): array
+    {
+        if ($count <= 0) {
+            return [];
+        }
+        $list = self::find()
+            ->select('id, category_id, title, intro, cover, create_time')
+            ->where(['status' => self::STATUS_PASS])
+            ->andWhere('attr & :banner = 1', [':banner' => self::ATTR_BANNER])
             ->orderBy('view_count DESC')
             ->limit($count)
             ->asArray()
