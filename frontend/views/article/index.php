@@ -7,9 +7,7 @@
                 </div>
             </div>
             <div id="main_lt" class="main_lt">
-                <!--首页大图-->
                 <div class="pdtt01">
-
                 <div class="pdtt_lt">
                     <a href="" class="tiptitleImg" target="_blank">
                         <img src="http://hdcms.com/attachment/2017/07/27/7721501147561.jpg" alt="{{$field['title']}}">
@@ -26,9 +24,9 @@
                         <div class="trbstxt">热门</div>
                     </div>
                 </div>
-                    <!--结束：首页大图-->
-            </div>
 
+
+            </div>
 
             <div class="main_ltad"></div>
 
@@ -40,27 +38,31 @@
             </div>
 
             <div id="mainContent">
-                <div class="newsbox" id="masonryContent" style="position: relative; width: 939px; height: 740px;">
-
+                <div class="newsbox" id="masonryContent">
                     <style>
-                        .news_li {
+                        #masonryContent {
+                            position: relative;
+                            width: 939px;
+                            height: 740px;
+                        }
+                        #masonryContent .news_li {
                             position: absolute;
                             height: 300px;
                         }
 
-                        .news_li:nth-of-type(3n+1) {
+                        #masonryContent .news_li:nth-of-type(3n+1) {
                             left: 0;
                         }
 
-                        .news_li:nth-of-type(3n+2) {
+                        #masonryContent .news_li:nth-of-type(3n+2) {
                             left: 313px;
                         }
 
-                        .news_li:nth-of-type(3n+3) {
+                        #masonryContent .news_li:nth-of-type(3n+3) {
                             left: 626px;
                         }
 
-                        .news_li:nth-of-type(3n+3) {
+                        #masonryContent .news_li:nth-of-type(3n+3) {
                             left: 626px;
                         }
                     </style>
@@ -86,12 +88,6 @@
                         </div>
                     <?php endforeach ?>
 
-                    <script>
-                        for (var i = 0; i < $('.news_li').length; i++) {
-                            var t = parseInt(i / 3);
-                            $('.news_li').eq(i).css('top', t * 384 + 'px');
-                        }
-                    </script>
 
                     <script id="cy_cmt_num" src="https://changyan.sohu.com/upload/plugins/plugins.list.count.js?clientId=cyt8rNSI2"></script>
                 </div>
