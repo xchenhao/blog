@@ -10,7 +10,7 @@ use yii\helpers\Html;
     <link rel="icon" href="/theme/news/img/news.ico" type="image/x-icon">
     <link rel="stylesheet" type="text/css" href="/theme/news/css/css.css"/>
     <link rel="stylesheet" type="text/css" href="/theme/news/css/style.css"/>
-    <link rel="stylesheet" type="text/css" href="/theme/news//css/ask.css"/>
+    <link rel="stylesheet" type="text/css" href="/theme/news/css/ask.css"/>
     <link rel="stylesheet" type="text/css" href="/theme/news/css/pagination.css"/>
     <script type="text/javascript" src="/theme/news/js/jquery-1.8.3.min.js"></script>
     <script type="text/javascript" src="/theme/news/js/rd.js"></script>

@@ -13,7 +13,7 @@
                     <div class="list_name">
                         <a href="#" style="color: #00a5e8;"><?= $category['name'] ?></a>
                     </div>
-                    <div class="list_abstract">英公布“终极”脱欧方案，首相约翰逊：谈不拢就硬脱欧</div>
+                    <div class="list_abstract"><?= $category['intro'] ?></div>
                 </div>
 
 <!--                <div class="ask_banner">-->
@@ -26,7 +26,7 @@
                             <?php foreach ($articles as $arc):?>
                             <li class="topic">
                                 <div class="ask_user_body">
-                                    <img src="<?= $arc['cover'] ?>" class="cover_pic"/>
+                                    <img src="<?= $arc['cover'] ?>" class="cover_pic" referrerpolicy="no-referrer"/>
                                     <div class="ask_user_bgimg"><a href="/article/<?= $arc['id'] ?>" class="userhome" target="_blank"></a>
                                         <div class="ask_user_abstxt">
                                             <a href="/article/<?= $arc['id'] ?>" target="_blank">

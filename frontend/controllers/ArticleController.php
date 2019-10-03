@@ -14,7 +14,6 @@ use yii\filters\AccessControl;
  */
 class ArticleController extends Controller
 {
-    public $added = 0;
     public $layout = 'article';
 
     /**

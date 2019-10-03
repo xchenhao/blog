@@ -24,8 +24,6 @@
                         <div class="trbstxt">热门</div>
                     </div>
                 </div>
-
-
             </div>
 
             <div class="main_ltad"></div>
@@ -43,7 +41,7 @@
                         <div class="news_li">
                             <div class="news_tu">
                                 <a href="/article/<?= $art['id']?>" class="tiptitleImg" target="_blank">
-                                    <img src="<?= $art['cover'] ?>" alt="<?= $art['title'] ?>">
+                                    <img src="<?= $art['cover'] ?>" alt="<?= $art['title'] ?>" referrerpolicy="no-referrer">
                                 </a>
                             </div>
                             <h2>

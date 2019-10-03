@@ -25,7 +25,7 @@
                 <div class="news_li" id="cont271">
                     <div class="news_tu">
                         <a href="/article/<?= $arc['id'] ?>" class="tiptitleImg" target="_blank">
-                            <img src="<?= $arc['cover'] ?>">
+                            <img src="<?= $arc['cover'] ?>" referrerpolicy="no-referrer">
                         </a>
                     </div>
                     <h2><a href="/article/<?= $arc['id']?>" target="_blank"><?= $arc['title'] ?></a></h2>
