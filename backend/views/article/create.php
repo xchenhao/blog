@@ -3,6 +3,7 @@
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 use common\models\Article;
+use common\models\Category;
 
 /* @var $this yii\web\View */
 /* @var $model common\models\Article */
@@ -29,7 +30,12 @@ $this->params['breadcrumbs'][] = $this->title;
 
         <?= $form->field($model, 'tags')->textInput(['maxlength' => true]) ?>
         <?= $form->field($model, 'author')->textInput(['maxlength' => true]) ?>
-        <?= $form->field($model, 'category_id')->textInput() ?>
+        <?php
+            $categorys = Category::getAllTreeList();
+            $options = array_column($categorys, 'name', 'id');
+        ?>
+        <?= $form->field($model,'category_id')->dropDownList($options, ['prompt'=>'请选择分类', 'required' => true]); ?>
+
         <?= $form->field($model, 'attr')->hiddenInput() ?>
 
         <?php if ($model->isRichTextEditor): ?>
@@ -63,7 +69,7 @@ $this->params['breadcrumbs'][] = $this->title;
         $(function() {
             testEditor = editormd("markdown-box", {
                 width   : "90%",
-                height  : 640,
+                height  : 800,
                 syncScrolling : "single",
                 path    : "/node_modules/editor.md/lib/"
             })

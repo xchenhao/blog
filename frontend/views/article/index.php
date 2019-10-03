@@ -47,7 +47,7 @@
                         }
                         #masonryContent .news_li {
                             position: absolute;
-                            height: 300px;
+                            height: 325px;
                         }
 
                         #masonryContent .news_li:nth-of-type(3n+1) {
