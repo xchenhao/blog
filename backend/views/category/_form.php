@@ -25,6 +25,7 @@ use common\models\Category;
     <?= $form->field($model, 'sort')->textInput(['required' => true, 'type' => 'number']) ?>
 
     <?= $form->field($model, 'status')->dropDownList(Category::$status, ['prompt' => '请选择状态', 'required' => true]) ?>
+    <?= $form->field($model, 'attr')->dropDownList(Category::$attr, ['prompt' => '请选择属性', 'required' => true]) ?>
 
     <div class="form-group">
         <?= Html::submitButton($model->isNewRecord ? '创建' : '更新', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>

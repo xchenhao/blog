@@ -37,12 +37,8 @@ $config = [
             //'suffix' => '.html',
             'rules' => [
                 'article/<id:\d+>' => 'article/view',
-                '<controller:\w+>/<id:\d+>' => '<controller>/detail',
+                'category/<category_id:\d+>' => 'article/list',
                 '<controller:\w+>/<action:\w+>' => '<controller>/<action>',
-                'posts' => 'post/index',
-//                'article' => 'post/article',
-                'cover' => 'post/cover',
-                'list' => 'post/list',
             ],
         ],
     ],

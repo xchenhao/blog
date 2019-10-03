@@ -12,6 +12,7 @@ use Yii;
  * @property integer $parent_id
  * @property integer $sort
  * @property integer $status
+ * @property integer $attr
  * @property integer $create_time
  * @property integer $modified_time
  */
@@ -23,6 +24,14 @@ class Category extends \yii\db\ActiveRecord
     public static $status = [
         self::STATUS_OFFLINE => '下线',
         self::STATUS_ONLINE => '上线',
+    ];
+
+    const ATTR_NORMAL = 0;
+    const ATTR_COVER = 0b01;
+
+    public static $attr = [
+        self::ATTR_NORMAL => '普通',
+        self::ATTR_COVER => '封面',
     ];
 
     /**
@@ -40,7 +49,7 @@ class Category extends \yii\db\ActiveRecord
     {
         return [
             [['name'], 'required'],
-            [['parent_id', 'sort', 'status', 'create_time', 'modified_time'], 'integer'],
+            [['parent_id', 'sort', 'status', 'attr', 'create_time', 'modified_time'], 'integer'],
             [['name'], 'string', 'max' => 32],
         ];
     }
@@ -56,6 +65,7 @@ class Category extends \yii\db\ActiveRecord
             'parent_id' => '父级分类 ID',
             'sort' => '排序',
             'status' => '状态',
+            'attr' => '属性',
             'create_time' => '创建时间',
             'modified_time' => '修改时间',
         ];
