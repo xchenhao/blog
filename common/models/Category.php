@@ -9,6 +9,7 @@ use Yii;
  *
  * @property integer $id
  * @property string $name
+ * @property string $intro
  * @property integer $parent_id
  * @property integer $sort
  * @property integer $status
@@ -54,6 +55,7 @@ class Category extends \yii\db\ActiveRecord
             [['name'], 'required'],
             [['parent_id', 'sort', 'status', 'attr', 'create_time', 'modified_time'], 'integer'],
             [['name'], 'string', 'max' => 32],
+            [['intro'], 'string', 'max' => 255],
         ];
     }
 
@@ -65,6 +67,7 @@ class Category extends \yii\db\ActiveRecord
         return [
             'id' => '主键',
             'name' => '名称',
+            'intro' => '简介',
             'parent_id' => '父级分类 ID',
             'sort' => '排序',
             'status' => '状态',

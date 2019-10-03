@@ -19,7 +19,7 @@ class CategorySearch extends Category
     {
         return [
             [['id', 'parent_id', 'sort', 'status', 'attr', 'create_time', 'modified_time'], 'integer'],
-            [['name'], 'safe'],
+            [['name', 'intro'], 'safe'],
         ];
     }
 
@@ -66,7 +66,9 @@ class CategorySearch extends Category
             'attr' => $this->attr,
             'create_time' => $this->create_time,
             'modified_time' => $this->modified_time,
-        ])->andFilterWhere(['like', 'name', $this->name]);
+        ])
+            ->andFilterWhere(['like', 'name', $this->name])
+            ->andFilterWhere(['like', 'intro', $this->intro]);
 
         return $dataProvider;
     }

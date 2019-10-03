@@ -105,6 +105,7 @@ class ArticleController extends Controller
 
         return $this->render($view_tpl, [
             'articles' => $articles,
+            'category' => $category,
         ]);
     }
 

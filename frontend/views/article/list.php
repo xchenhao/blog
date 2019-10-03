@@ -3,10 +3,9 @@
         <div class="list_head">
             <!--<div class="list_logo"><a href="list_25462"><img src="{{__TEMPLATE__}}/img/61.png" alt="中国政库"></a></div>-->
             <div class="list_name">
-                <a href="#" style="color: #00a5e8;">读书</a>
+                <a href="#" style="color: #00a5e8;"><?= $category['name'] ?></a>
             </div>
-            <div class="list_abstract">&nbsp;</div>
-
+            <div class="list_abstract"><?= $category['intro'] ?></div>
         </div>
 
         <div class="main_ltad">

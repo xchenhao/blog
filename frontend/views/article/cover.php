@@ -7,12 +7,18 @@
                 </div>
             </div>
             <div id="main_lt" class="main_lt">
-                <div class="ask_banner">
-                    <div class="ask_sort clearfix">
 
+                <div class="list_head">
+                    <!--<div class="list_logo"><a href="list_25462"><img src="{{__TEMPLATE__}}/img/61.png" alt="中国政库"></a></div>-->
+                    <div class="list_name">
+                        <a href="#" style="color: #00a5e8;"><?= $category['name'] ?></a>
                     </div>
-
+                    <div class="list_abstract">英公布“终极”脱欧方案，首相约翰逊：谈不拢就硬脱欧</div>
                 </div>
+
+<!--                <div class="ask_banner">-->
+<!--                    <div class="ask_sort clearfix"></div>-->
+<!--                </div>-->
 
                 <div class="askcontent" style="min-height: inherit">
 
