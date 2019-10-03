@@ -56,8 +56,9 @@ class ArticleController extends Controller
     public function actionIndex()
     {
         $this->layout = 'article';
+        $articles = Article::getTopViewArticles();
         return $this->render('index', [
-
+            'articles' => $articles,
         ]);
     }
 

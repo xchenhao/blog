@@ -17,6 +17,8 @@ use yii\data\ActiveDataProvider;
  * @property string $author 作者
  * @property int $status 状态
  * @property int $attr 属性
+ * @property int $refined 加精
+ * @property int $view_count 查看数
  * @property int $category_id 分类 ID
  * @property string $content_md Markdown 格式文本
  * @property int $create_time 创建时间
@@ -40,6 +42,8 @@ class Article extends \yii\db\ActiveRecord
     // 富文本编辑器
     const ATTR_RICHTEXT_EDITOR = 0b01;
 
+    const COUNT_TOP_VIEW_ARTICLE = 9;
+
     /**
      * {@inheritdoc}
      */
@@ -56,7 +60,7 @@ class Article extends \yii\db\ActiveRecord
         return [
             [['title', 'content'], 'required'],
             [['content', 'content_md'], 'string'],
-            [['status', 'attr', 'category_id', 'create_time', 'modified_time'], 'integer'],
+            [['status', 'attr', 'refined', 'view_count', 'category_id', 'create_time', 'modified_time'], 'integer'],
             [['title', 'tags'], 'string', 'max' => 128],
             [['intro', 'cover'], 'string', 'max' => 255],
             [['author'], 'string', 'max' => 32],
@@ -81,6 +85,8 @@ class Article extends \yii\db\ActiveRecord
 
             'status' => '状态',
             'attr' => '属性',
+            'refined' => '加精',
+            'view_count' => '播放量',
 
             'category_id' => '分类 ID',
 
@@ -116,14 +122,43 @@ class Article extends \yii\db\ActiveRecord
         return $attr & self::ATTR_RICHTEXT_EDITOR !== 0;
     }
 
-    public function getIsMarkDownEditor()
+    public function getIsMarkDownEditor(): bool
     {
         return self::isMarkDownEditor($this->attr);
     }
 
-    public function getIsRichTextEditor()
+    public function getIsRichTextEditor(): bool
     {
         return self::isRichTextEditor($this->attr);
+    }
+
+    /**
+     * 获取播放量最高的文章
+     *
+     * @param int $count
+     * @return array
+     */
+    public static function getTopViewArticles(int $count = self::COUNT_TOP_VIEW_ARTICLE): array
+    {
+        if ($count <= 0) {
+            return [];
+        }
+        $list = self::find()
+            ->select('id, category_id, title, intro, cover, create_time')
+            ->where(['status' => self::STATUS_PASS])
+            ->orderBy('view_count DESC')
+            ->limit($count)
+            ->asArray()
+            ->all();
+
+        $category_ids = array_column($list, 'category_id');
+        $category_names = Category::getNames($category_ids);
+
+        return array_map(function ($item) use ($category_names) {
+            $item['category_name'] = $category_names[$item['category_id']] ?? '';
+            $item['create_time'] = date('Y-m-d H:i:s', $item['create_time']);
+            return $item;
+        }, $list);
     }
 
 }

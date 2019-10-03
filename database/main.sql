@@ -529,3 +529,9 @@ CREATE TABLE `category` (
   KEY `IDX_PARENT_ID` (`parent_id`) USING BTREE,
   KEY `IDX_STATUS_SORT` (`status`,`sort`) USING BTREE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='分类表';
+
+ALTER TABLE `blog`.`article`
+ADD COLUMN `refined` int(11) UNSIGNED NOT NULL DEFAULT 0 COMMENT '加精' AFTER `modified_time`,
+ADD COLUMN `view_count` int(11) UNSIGNED NOT NULL DEFAULT 0 COMMENT '查看数' AFTER `refined`,
+ADD INDEX `IDX_REFINED`(`refined`) USING BTREE,
+ADD INDEX `IDX_VIEW_COUNT`(`view_count`) USING BTREE;

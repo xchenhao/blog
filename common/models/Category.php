@@ -188,4 +188,17 @@ class Category extends \yii\db\ActiveRecord
         return $output;
     }
 
+    /**
+     * 获取分类名
+     *
+     * @param array $category_ids
+     * @return array
+     */
+    public static function getNames(array $category_ids): array
+    {
+        return Category::find()->select('name')
+            ->where(['id' => $category_ids])
+            ->indexBy('id')->column();
+    }
+
 }
