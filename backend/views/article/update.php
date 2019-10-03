@@ -32,7 +32,10 @@ $this->params['breadcrumbs'][] = '更新文章';
             $options = array_column($categorys, 'name', 'id');
         ?>
         <?= $form->field($model,'category_id')->dropDownList($options, ['prompt'=>'请选择分类', 'required' => true]); ?>
-        <?= $form->field($model, 'attr')->hiddenInput() ?>
+        <?= $form->field($model, 'attr')->textInput(['maxlength' => true]) ?>
+        <?= $form->field($model, 'status')->textInput(['maxlength' => true]) ?>
+        <?= $form->field($model, 'refined')->textInput(['maxlength' => true]) ?>
+        <?= $form->field($model, 'view_count')->textInput(['maxlength' => true]) ?>
 
         <?php if ($model->isRichTextEditor): ?>
             <textarea name="Article[content]"><?= $model->content ?></textarea>
