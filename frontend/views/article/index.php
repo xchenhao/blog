@@ -1,24 +1,3 @@
-<div id="displayBox"><!--显示框-->
-    <div id="scrollBox"><!--显示框>滚动的箱子-->
-        <img src="http://hdcms.com/attachment/2017/07/27/7721501147561.jpg" referrerpolicy="no-referrer">
-        <img src="https://image1.thepaper.cn/image/32/931/439.jpg" referrerpolicy="no-referrer">
-        <img src="https://image1.thepaper.cn/image/32/976/703.jpg" referrerpolicy="no-referrer">
-        <img src="https://image1.thepaper.cn/image/32/987/20.jpg" referrerpolicy="no-referrer">
-        <img src="https://image.thepaper.cn/image/31/651/500.jpg" referrerpolicy="no-referrer">
-        <img src="http://hdcms.com/attachment/2017/07/27/7721501147561.jpg" referrerpolicy="no-referrer"><!--复制的第一张-->
-    </div>
-
-    <ul id="scrollBtn"><!--显示框>小圆点按钮-->
-        <li class="cur"></li>
-        <li></li>
-        <li></li>
-        <li></li>
-        <li></li>
-    </ul>
-
-    <a href="javascript:" class="arrowBtn left iconfont">&#xe620;</a><!--显示框>左右前后退按钮-->
-    <a href="javascript:" class="arrowBtn right iconfont">&#xe624;</a>
-</div>
 <div class="bdwd main clearfix">
     <div class="pjax-wrapper">
         <div class="pjax-content">
@@ -28,24 +7,38 @@
                 </div>
             </div>
             <div id="main_lt" class="main_lt">
-                <div class="pdtt01">
-                    <div class="pdtt_lt">
-                        <a href="" class="tiptitleImg" target="_blank">
-                            <img src="http://hdcms.com/attachment/2017/07/27/7721501147561.jpg"
-                                 alt="{{$field['title']}}">
-                        </a>
-                    </div>
-                    <div class="pdtt_rt">
-                        <div class="pdtt_rtbd">
-                            <h2><a href="{{$field['url']}}" target="_blank">上海：建设张江综合性国家科学中心，成为世界一流科学城</a></h2>
-                            <p>目前，张江科学城建设规划已完成编制。张江科学城规划面积约９４平方公里，总的定位是科学特征明显、科技要...</p>
+                <div id="displayBox"><!--显示框-->
+                    <div id="scrollBox"><!--显示框>滚动的箱子-->
+                        <?php foreach ($banners as $item): ?>
+                        <div class="pdtt01">
+                            <div class="pdtt_lt">
+                                <a href="" class="tiptitleImg" target="_blank">
+                                    <img src="<?= $item['cover'] ?>" alt="<?= $item['title'] ?>" referrerpolicy="no-referrer">
+                                </a>
+                            </div>
+                            <div class="pdtt_rt">
+                                <div class="pdtt_rtbd">
+                                    <h2><a href="/article/<?= $item['id'] ?>" target="_blank"><?= $item['title'] ?></a></h2>
+                                    <p><?= $item['intro'] ?></p>
+                                </div>
+                                <div class="pdtt_trbs">
+                                    <a href="/category/<?= $item['category_id'] ?>" target="_blank"><?= $item['category_name'] ?></a>
+                                    <span><?= $item['create_time'] ?></span>
+                                    <div class="trbstxt">热门</div>
+                                </div>
+                            </div>
                         </div>
-                        <div class="pdtt_trbs">
-                            <a href="/" target="_blank">科技湃</a>
-                            <span> 2017-07-27 17:26:49</span>
-                            <div class="trbstxt">热门</div>
-                        </div>
+                        <?php endforeach ?>
                     </div>
+
+                    <ul id="scrollBtn"><!--显示框>小圆点按钮-->
+                        <?php foreach ($banners as $item): ?>
+                            <li></li>
+                        <?php endforeach ?>
+                    </ul>
+
+                    <a href="javascript:" class="arrowBtn left iconfont">&#xe620;</a><!--显示框>左右前后退按钮-->
+                    <a href="javascript:" class="arrowBtn right iconfont">&#xe624;</a>
                 </div>
 
                 <div class="main_ltad"></div>
@@ -117,37 +110,49 @@
     }
 
     #displayBox { /*显示框*/
-        width: 1020px;
-        height: 555px;
-        margin: 0 auto;
+        /*width: 1020px;*/
+        width: 940px;
+        height: 360px;
+        /*margin: 0 auto;*/
+        /*margin-bottom: 20px;*/
+        margin: 0 auto 20px;
         position: relative;
         overflow: hidden;
         box-shadow: 0 6px 15px rgba(255, 255, 255, 0.5);
-        border-bottom-left-radius: 20px;
-        border-bottom-right-radius: 20px;
+        /*border-bottom-left-radius: 20px;*/
+        /*border-bottom-right-radius: 20px;*/
     }
 
     #displayBox #scrollBox { /*显示框>滚动的箱子*/
         /*width: 5100px;*/
         /*width: 6220px;*/
-        width: 6250px;
-        height: 555px;
+        /*width: 6250px;*/
+        width: 10000px;  /* FIXME: 最长的宽度，宽度不应写死*/
+        height: 360px;
         position: absolute;
         left: 0;
         top: 0;
     }
 
-    #displayBox #scrollBox img { /*显示框>滚动的箱子>装下的图片*/
-        width: 1020px;
-        height: 555px;
+    #displayBox #scrollBox .pdtt01 { /*显示框>滚动的箱子>装下的图片*/
+        /*width: 1020px;*/
+        /*height: 555px;*/
         float: left;
     }
 
     #displayBox #scrollBtn { /*显示框>小圆点按钮组*/
         position: absolute;
-        bottom: 50px;
+        bottom: 20px;
         left: 50%;
-        margin-left: -68px;
+        /*left: 50%;*/
+        /*margin-left: -68px;*/
+        /*right: 100px;*/
+        /*margin: 100px auto;*/
+        /*margin-left: 100px;*/
+        /*display: block;*/
+        /*margin: 0 auto;*/
+        /*background: pink;*/
+        /*z-index: 1000;*/
     }
 
     #displayBox #scrollBtn li {
@@ -204,22 +209,36 @@
 <script>
     $(function () {
         (function scollBanner() {
+
+            var bannerCount = $('#scrollBox .pdtt01').length
+            if (bannerCount <= 1) {
+                $('#scrollBtn').css('display', 'none')
+                return 0
+            }
+
+            $('#scrollBtn li').eq(0).addClass('cur');
+
+            $('#scrollBox').append(
+                '<div class="pdtt01">' +
+                    $('#scrollBox .pdtt01').eq(0).html() +
+                '</div>'
+            )
             var num = 0;//大总管变量
 
             function fn_scroll() {//滚动函数
                 // num++;
-                if (num >= 6) {
+                if (num >= bannerCount + 1) {
                     $('#scrollBox').css({'left': '0px'});
                     num = 1;
                 }
                 if (num < 0) {
                     $('#scrollBox').css({'left': '-5100px'});
-                    num = 4;
+                    num = bannerCount - 1;
                 }
-                var newLeft = num * -1020 + 'px';
-                $('#scrollBox').stop().animate({'left': newLeft}, 1000);
+                var newLeft = num * -940 + 'px';
+                $('#scrollBox').stop().animate({'left': newLeft}, 2000);
 
-                if (num == 5) {//使小圆点相当变动
+                if (num == bannerCount) {//使小圆点相当变动
                     $('#scrollBtn li').eq(0).addClass('cur').siblings('li').removeClass('cur');
                 } else {
                     $('#scrollBtn li').eq(num).addClass('cur').siblings('li').removeClass('cur');
@@ -232,7 +251,7 @@
                 timer_scroll = setInterval(function () {
                     num++;
                     fn_scroll();
-                }, 2000)
+                }, 4500)
             }
 
             fn_timer();

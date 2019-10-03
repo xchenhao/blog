@@ -52,8 +52,10 @@ class ArticleController extends Controller
     public function actionIndex()
     {
         $articles = Article::getTopViewArticles();
+        $banners = Article::getBanners();
         return $this->render('index', [
             'articles' => $articles,
+            'banners' => $banners,
         ]);
     }
 

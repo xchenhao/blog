@@ -173,7 +173,7 @@ class Article extends \yii\db\ActiveRecord
      * @param int $count
      * @return array
      */
-    public static function getBanners(int $count): array
+    public static function getBanners(int $count = self::BANNER_COUNT): array
     {
         if ($count <= 0) {
             return [];
@@ -181,7 +181,7 @@ class Article extends \yii\db\ActiveRecord
         $list = self::find()
             ->select('id, category_id, title, intro, cover, create_time')
             ->where(['status' => self::STATUS_PASS])
-            ->andWhere('attr & :banner = 1', [':banner' => self::ATTR_BANNER])
+            ->andWhere('attr & :banner <> 0', [':banner' => self::ATTR_BANNER])
             ->orderBy('view_count DESC')
             ->limit($count)
             ->asArray()
