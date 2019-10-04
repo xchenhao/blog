@@ -542,3 +542,17 @@ ADD INDEX `IDX_ATTR`(`attr`) USING BTREE;
 
 ALTER TABLE `category`
 ADD COLUMN `intro` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT '' COMMENT '简介' AFTER `name`;
+
+CREATE TABLE `links` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT COMMENT '主键',
+  `name` varchar(32) NOT NULL COMMENT '名称',
+  `url` varchar(255) NOT NULL COMMENT '链接地址',
+  `attr` int(11) unsigned NOT NULL DEFAULT '0' COMMENT '属性',
+  `sort` int(11) unsigned NOT NULL DEFAULT '0' COMMENT '排序',
+  PRIMARY KEY (`id`),
+  KEY `IDX_ATTR_SORT` (`attr`,`sort`) USING BTREE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+ALTER TABLE `links`
+ADD COLUMN `create_time` int(10) UNSIGNED NOT NULL COMMENT '创建时间' AFTER `sort`,
+ADD COLUMN `modified_time` int(10) UNSIGNED NOT NULL COMMENT '修改时间' AFTER `create_time`;

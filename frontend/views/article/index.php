@@ -12,7 +12,7 @@
                         <?php foreach ($banners as $item): ?>
                         <div class="pdtt01">
                             <div class="pdtt_lt">
-                                <a href="" class="tiptitleImg" target="_blank">
+                                <a href="/article/<?= $item['id'] ?>" class="tiptitleImg" target="_blank">
                                     <img src="<?= $item['cover'] ?>" alt="<?= $item['title'] ?>" referrerpolicy="no-referrer">
                                 </a>
                             </div>
@@ -110,23 +110,15 @@
     }
 
     #displayBox { /*显示框*/
-        /*width: 1020px;*/
         width: 940px;
         height: 360px;
-        /*margin: 0 auto;*/
-        /*margin-bottom: 20px;*/
         margin: 0 auto 20px;
         position: relative;
         overflow: hidden;
         box-shadow: 0 6px 15px rgba(255, 255, 255, 0.5);
-        /*border-bottom-left-radius: 20px;*/
-        /*border-bottom-right-radius: 20px;*/
     }
 
     #displayBox #scrollBox { /*显示框>滚动的箱子*/
-        /*width: 5100px;*/
-        /*width: 6220px;*/
-        /*width: 6250px;*/
         width: 10000px;  /* FIXME: 最长的宽度，宽度不应写死*/
         height: 360px;
         position: absolute;
@@ -135,8 +127,6 @@
     }
 
     #displayBox #scrollBox .pdtt01 { /*显示框>滚动的箱子>装下的图片*/
-        /*width: 1020px;*/
-        /*height: 555px;*/
         float: left;
     }
 
@@ -144,15 +134,6 @@
         position: absolute;
         bottom: 20px;
         left: 50%;
-        /*left: 50%;*/
-        /*margin-left: -68px;*/
-        /*right: 100px;*/
-        /*margin: 100px auto;*/
-        /*margin-left: 100px;*/
-        /*display: block;*/
-        /*margin: 0 auto;*/
-        /*background: pink;*/
-        /*z-index: 1000;*/
     }
 
     #displayBox #scrollBtn li {
@@ -181,7 +162,7 @@
         height: 60px;
         background: rgba(255, 255, 255, 0.3);
         position: absolute;
-        top: 50%;
+        top: 60%;
         margin-top: -60px;
         font-size: 30px;
         color: #fff;
@@ -192,12 +173,10 @@
     }
 
     #displayBox .arrowBtn.left {
-        /*left: 0;*/
         left: -36px;
     }
 
     #displayBox .arrowBtn.right {
-        /*right: 0;*/
         right: -36px;
     }
 
@@ -226,7 +205,6 @@
             var num = 0;//大总管变量
 
             function fn_scroll() {//滚动函数
-                // num++;
                 if (num >= bannerCount + 1) {
                     $('#scrollBox').css({'left': '0px'});
                     num = 1;
