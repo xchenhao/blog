@@ -75,6 +75,8 @@ class ArticleController extends Controller
     {
         $model = Article::find()->where(['id' => $id])->one();
         $category = Category::getAllTree(0, 2);
+
+        $this->view->title = $model->title;
         return $this->render('view', [
             'model' => $model,
             'category' => $category,

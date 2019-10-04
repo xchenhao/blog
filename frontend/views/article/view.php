@@ -70,7 +70,7 @@
             <script charset="utf-8" type="text/javascript" src="http://changyan.sohu.com/upload/changyan.js" ></script>
             <script type="text/javascript">
                 window.changyan.api.config({
-                    appid: 'cyt8rNSI2',
+                    appid: 'cyut7Btpp',
                     conf: 'prod_90e87bc6f74b46bcdf9234cd3ab6fa0f'
                 });
             </script>
