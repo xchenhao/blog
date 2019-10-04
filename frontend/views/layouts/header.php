@@ -80,6 +80,10 @@ use yii\helpers\Html;
         .pagination-box .pagination li.disabled span {
           color: grey;
         }
+        /* views/article/cover.php 封面高度 */
+        .askcontent {
+            min-height: unset !important;
+        }
     </style>
     <?php $this->head() ?>
 </head>

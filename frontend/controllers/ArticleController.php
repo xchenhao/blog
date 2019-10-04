@@ -85,30 +85,51 @@ class ArticleController extends Controller
      * 文章列表
      *
      * @param int $category_id
+     * @param integer $page
+     * @param integer $page_size
+     * @param integer $list 文章显示方式（0 卡片，1 列表）
      * @return string
      */
-    public function actionList(int $category_id)
+    public function actionList(int $category_id, int $page = 1, $page_size = Article::HOMEPAGE_COUNT_TOP_VIEW_ARTICLE, $list = 0)
     {
         $category = Category::findOne(['id' => $category_id]);
-        $view_tpl = $category->isCoverAttr ? 'cover' : 'list';
+        $view_tpl = 'list';
+        if ($category->isCoverAttr) {
+            $view_tpl = 'cover';
+            $page_size = 6;
+        }
 
         $cats = Category::getAllTreeList($category_id);
         $cat_ids = array_column($cats, 'id');
         $cat_ids = array_map('intval', $cat_ids);
         $cat_ids[] = $category_id;
 
-        $articles = Article::find()
+        $query = Article::find()
             ->where(['category_id' => $cat_ids])
-            ->orderBy('view_count DESC')
+            ->orderBy('view_count DESC');
+        $items = $query
+            ->offset($page_size * ($page - 1))
+            ->limit($page_size)
             ->asArray()->all();
         $category_names = array_column($cats, 'name', 'id');
         $category_names[$category_id] = $category->name;
-        $articles = array_map(function ($item) use ($category_names) {
+        $items = array_map(function ($item) use ($category_names) {
             $item['category_name'] = $category_names[$item['category_id']] ?? '';
             $item['create_time'] = date('Y-m-d H:i:s', $item['create_time']);
 
             return $item;
-        }, $articles);
+        }, $items);
+
+        $articles = [
+            'items' => $items,
+            'pagination' => new Pagination([
+                'totalCount' => $query->count(),
+                'pageSize' => $page_size,
+                'pageParam' => 'page',
+                'pageSizeParam' => 'page_size',
+                'params' => array_merge($_GET, ['list' => $list]),
+            ]),
+        ];
 
         return $this->render($view_tpl, [
             'articles' => $articles,

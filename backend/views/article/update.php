@@ -29,7 +29,7 @@ $this->params['breadcrumbs'][] = '更新文章';
         <?= $form->field($model, 'author')->textInput(['maxlength' => true]) ?>
         <?php
             $categorys = Category::getAllTreeList();
-            $options = array_column($categorys, 'name', 'id');
+            $options = array_column($categorys, '_name', 'id');
         ?>
         <?= $form->field($model,'category_id')->dropDownList($options, ['prompt'=>'请选择分类', 'required' => true]); ?>
         <?= $form->field($model, 'attr')->textInput(['maxlength' => true]) ?>

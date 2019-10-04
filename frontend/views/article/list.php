@@ -21,7 +21,7 @@
 
         <div id="mainContent">
             <div class="newsbox" id="masonryContent">
-                <?php foreach ($articles as $arc): ?>
+                <?php foreach ($articles['items'] as $arc): ?>
                 <div class="news_li" id="cont271">
                     <div class="news_tu">
                         <a href="/article/<?= $arc['id'] ?>" class="tiptitleImg" target="_blank">
@@ -39,7 +39,14 @@
 
 <!--                <div class="news_li hidden" id="last1" lasttime="1500531475" pageindex="1" style="display: none !important; position: absolute; left: 0px; top: 1996px;"></div>-->
             </div>
-            {{$arcModel->links()}}
+            <div class="pagination-box">
+                <?= \yii\widgets\LinkPager::widget([
+                    'pagination' => $articles['pagination'],
+                    'prevPageLabel' => false,
+                    'firstPageLabel' => '首页',
+                    'lastPageLabel' => '尾页',
+                ]) ?>
+            </div>
         </div>
 
         <script id="cy_cmt_num" src="https://changyan.sohu.com/upload/plugins/plugins.list.count.js?clientId=cyt8rNSI2"></script>

@@ -23,7 +23,7 @@
                 <div class="askcontent" style="min-height: inherit">
 
                     <ul class="ask_user_area clearfix" id="ask_ulist">
-                            <?php foreach ($articles as $arc):?>
+                            <?php foreach ($articles['items'] as $arc):?>
                             <li class="topic">
                                 <div class="ask_user_body">
                                     <img src="<?= $arc['cover'] ?>" class="cover_pic" referrerpolicy="no-referrer"/>
@@ -59,7 +59,14 @@
                     <!--</div>-->
 
                 </div>
-                {{$arcModel->links()}}
+                <div class="pagination-box">
+                    <?= \yii\widgets\LinkPager::widget([
+                        'pagination' => $articles['pagination'],
+                        'prevPageLabel' => false,
+                        'firstPageLabel' => '首页',
+                        'lastPageLabel' => '尾页',
+                    ]) ?>
+                </div>
                 <div class="ask_banner" id="ask_banner">
                     <div class="ask_sort clearfix">
 
