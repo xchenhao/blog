@@ -13,11 +13,28 @@ use common\models\Links;
     width: 70%;
   }
   .about a {
+      white-space: nowrap;
     /*background: pink;*/
+  }
+  .blank-box {
+    margin-top: 200px;
+  }
+  footer {
+      position: fixed;
+      bottom: 0;
+      width: 100%;
+      z-index: 300;
+      /*transition: opacity 3s;*/
+  }
+  .item-hide {
+    /*display: none;*/
+      opacity: 0;
+      /*height: 0;*/
   }
 </style>
 
-<!--<footer style="position: fixed; bottom: 0;">-->
+<div class="blank-box"></div>
+<footer id="myfooter">
     <div class="about">
         <div class="links">
             <?php
@@ -40,4 +57,26 @@ use common\models\Links;
         </a>
     </div>
     <div id="bg_overlay" style="display:none;"></div>
-<!--</footer>-->
+</footer>
+<script>
+  $(function () {
+      // 一加载进来首页判断 footer 高度是否需要隐藏
+      // FIXME: 换成 css 方式来判断
+       checkFooterVisible()
+      $(window).scroll(function(){
+          checkFooterVisible()
+      });
+      function checkFooterVisible() {
+          var scrollTop = $(this).scrollTop();
+          var scrollHeight = $(document).height();
+          var windowHeight = $(this).height();
+          if(scrollTop + windowHeight >= scrollHeight - 160){
+              //alert("已经到最底部了！");
+              $('#myfooter').removeClass('item-hide')
+          } else {
+              $('#myfooter').addClass('item-hide')
+          }
+      }
+  })
+
+</script>

@@ -19,7 +19,7 @@
 <!--body-->
 <?php $this->beginBody() ?>
 <?= $content ?>
-<div id="toTop" class="back-top" onclick="window.scrollTo(0,0);return false;"></div>
+<div id="toTop" class="back-top" style="bottom: 170px" onclick="window.scrollTo(0,0);return false;"></div>
 <?php $this->endBody() ?>
 <!--body-->
 
