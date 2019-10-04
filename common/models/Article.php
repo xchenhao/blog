@@ -148,8 +148,9 @@ class Article extends \yii\db\ActiveRecord
             ->where(['status' => self::STATUS_PASS])
             ->orderBy(['refined' => SORT_DESC])
             ->limit(1)
-            ->asArray()->one();
+            ->asArray()->one() ?: [];
     }
+
     public static function getTopHot(int $count = 5): array
     {
         return self::find()
@@ -165,7 +166,7 @@ class Article extends \yii\db\ActiveRecord
             ->where(['status' => self::STATUS_PASS])
             ->orderBy(['view_count' => SORT_DESC])
             ->limit(1)
-            ->asArray()->one();
+            ->asArray()->one() ?: [];
     }
 
     public static function getTopView(int $count = 10): array
