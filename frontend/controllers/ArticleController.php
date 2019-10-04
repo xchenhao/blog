@@ -59,6 +59,8 @@ class ArticleController extends Controller
         $articles = Article::getArticles($page, $page_size);
         $articles['pagination']->params = array_merge($_GET, ['list' => $list]);
         $banners = Article::getBanners();
+
+        $this->view->title = '不可思议的博客';
         return $this->render('index', [
             'articles' => $articles,
             'banners' => $banners,
