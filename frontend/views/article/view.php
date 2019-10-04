@@ -66,7 +66,7 @@
             <!-- UY END -->
             <!--高速版-->
 
-            <div id="SOHUCS" sid="{{Request::get('aid')}}"></div>
+            <div id="SOHUCS" sid="<?= $_GET['id'] ?>"></div>
             <script charset="utf-8" type="text/javascript" src="http://changyan.sohu.com/upload/changyan.js" ></script>
             <script type="text/javascript">
                 window.changyan.api.config({
