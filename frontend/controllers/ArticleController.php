@@ -5,6 +5,7 @@ namespace frontend\controllers;
 use common\models\Article;
 use common\models\Category;
 use Yii;
+use yii\data\Pagination;
 use yii\web\Controller;
 use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
@@ -47,11 +48,14 @@ class ArticleController extends Controller
     /**
      * 首页
      *
+     * @param integer $page
+     * @param integer $page_size
      * @return string
+     * @throws \Exception
      */
-    public function actionIndex()
+    public function actionIndex(int $page = 1, $page_size = Article::HOMEPAGE_COUNT_TOP_VIEW_ARTICLE)
     {
-        $articles = Article::getTopViewArticles();
+        $articles = Article::getTopViewArticles($page, $page_size);
         $banners = Article::getBanners();
         return $this->render('index', [
             'articles' => $articles,

@@ -52,7 +52,7 @@
 
                 <div id="mainContent">
                     <div class="newsbox" id="masonryContent">
-                        <?php foreach ($articles as $art): ?>
+                        <?php foreach ($articles['items'] as $art): ?>
                             <div class="news_li">
                                 <div class="news_tu">
                                     <a href="/article/<?= $art['id'] ?>" class="tiptitleImg" target="_blank">
@@ -80,6 +80,7 @@
                         <script id="cy_cmt_num"
                                 src="https://changyan.sohu.com/upload/plugins/plugins.list.count.js?clientId=cyt8rNSI2"></script>
                     </div>
+                    <?= \yii\widgets\LinkPager::widget(['pagination' => $articles['pagination']]) ?>
                 </div>
 
             </div>

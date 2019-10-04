@@ -4,6 +4,7 @@ namespace common\models;
 
 use Yii;
 use yii\data\ActiveDataProvider;
+use yii\data\Pagination;
 
 /**
  * This is the model class for table "article".
@@ -140,31 +141,47 @@ class Article extends \yii\db\ActiveRecord
     /**
      * 获取播放量最高的文章
      *
-     * @param int $count
+     * @param int $page
+     * @param int $page_size
      * @return array
+     * @throws \Exception
      */
-    public static function getTopViewArticles(int $count = self::HOMEPAGE_COUNT_TOP_VIEW_ARTICLE): array
+    public static function getTopViewArticles(int $page = 1, int $page_size = self::HOMEPAGE_COUNT_TOP_VIEW_ARTICLE): array
     {
-        if ($count <= 0) {
-            return [];
+        if ($page_size < 0) {
+            throw new \Exception('参数错误');
         }
-        $list = self::find()
+
+        $query = self::find()
             ->select('id, category_id, title, intro, cover, create_time')
             ->where(['status' => self::STATUS_PASS])
             ->andWhere('attr & :banner = 0', [':banner' => self::ATTR_BANNER])
-            ->orderBy('view_count DESC')
-            ->limit($count)
+            ->orderBy('view_count DESC');
+        $items = $query
+            ->offset($page_size * ($page - 1))
+            ->limit($page_size)
             ->asArray()
             ->all();
+        $all_count = $query->count();
 
-        $category_ids = array_column($list, 'category_id');
+        $category_ids = array_column($items, 'category_id');
         $category_names = Category::getNames($category_ids);
 
-        return array_map(function ($item) use ($category_names) {
+        $items = array_map(function ($item) use ($category_names) {
             $item['category_name'] = $category_names[$item['category_id']] ?? '';
             $item['create_time'] = date('Y-m-d H:i:s', $item['create_time']);
             return $item;
-        }, $list);
+        }, $items);
+
+        return [
+            'items' => $items,
+            'pagination' => new Pagination([
+                'totalCount' => $all_count,
+                'pageSize' => $page_size,
+                'pageParam' => 'page',
+                'pageSizeParam' => 'page_size',
+            ]),
+        ];
     }
 
     /**

@@ -2,7 +2,6 @@
 
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
-use common\models\Article;
 use common\models\Category;
 
 /* @var $this yii\web\View */

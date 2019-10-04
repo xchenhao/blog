@@ -45,7 +45,7 @@ use yii\helpers\Html;
         #masonryContent {
             position: relative;
             width: 939px;
-            height: 1600px;
+            /*height: 1200px;*/
             /*height: 740px;*/
             /*overflow: hidden;*/
         }
