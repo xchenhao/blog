@@ -21,11 +21,6 @@ use yii\helpers\Html;
 <!--    <script type="text/javascript" src="/theme/news/js/main-3.0.js"></script>-->
     <script>
         $(function () {
-            for (var i = 0; i < $('.news_li').length; i++) {
-                var t = parseInt(i / 3);
-                $('.news_li').eq(i).css('top', t * 384 + 'px');
-            }
-
             $('#news_list').click(function () {
                 $('#mainContent .newsbox').addClass('listview').prop('id', 'listContent')
                 $("#newsslidebd").addClass("newslist");
@@ -34,10 +29,6 @@ use yii\helpers\Html;
             $('#news_masonry').click(function () {
                 $('#mainContent .newsbox').removeClass('listview').prop('id', 'masonryContent')
                 $("#newsslidebd").removeClass("newslist");
-                for (var i = 0; i < $('.news_li').length; i++) {
-                    var t = parseInt(i / 3);
-                    $('.news_li').eq(i).css('top', t * 384 + 'px');
-                }
             })
         })
     </script>
@@ -45,29 +36,26 @@ use yii\helpers\Html;
         #masonryContent {
             position: relative;
             width: 939px;
-            /*height: 1200px;*/
-            /*height: 740px;*/
-            /*overflow: hidden;*/
+            display: flex;
+            flex-wrap: wrap;
+        }
+        .newsbox {
+            padding-bottom: 0;
+            min-height: unset !important;
         }
         #masonryContent .news_li {
-            position: absolute;
-            height: 325px;
+            border: 2px solid #f0f0f0;
+            position: relative;
+            width: 33.33%;
+            box-sizing: border-box;
+            height: 420px;
         }
-
-        #masonryContent .news_li:nth-of-type(3n+1) {
-            left: 0;
+        .pagination-box {
+            text-align: center;
+            margin-top: -10px;
         }
-
-        #masonryContent .news_li:nth-of-type(3n+2) {
-            left: 313px;
-        }
-
-        #masonryContent .news_li:nth-of-type(3n+3) {
-            left: 626px;
-        }
-
-        #masonryContent .news_li:nth-of-type(3n+3) {
-            left: 626px;
+        .pagination-box .pagination {
+            overflow: hidden;
         }
     </style>
     <?php $this->head() ?>

@@ -76,13 +76,12 @@
                             </div>
                         <?php endforeach ?>
 
-
-                        <script id="cy_cmt_num"
-                                src="https://changyan.sohu.com/upload/plugins/plugins.list.count.js?clientId=cyt8rNSI2"></script>
+                        <script id="cy_cmt_num" src="https://changyan.sohu.com/upload/plugins/plugins.list.count.js?clientId=cyt8rNSI2"></script>
                     </div>
-                    <?= \yii\widgets\LinkPager::widget(['pagination' => $articles['pagination']]) ?>
+                    <div class="pagination-box">
+                        <?= \yii\widgets\LinkPager::widget(['pagination' => $articles['pagination']]) ?>
+                    </div>
                 </div>
-
             </div>
         </div>
     </div>
