@@ -142,6 +142,90 @@ class Article extends \yii\db\ActiveRecord
         return self::isRichTextEditor($this->attr);
     }
 
+    public static function getTopOneRefinedArticle(): array
+    {
+        return self::find()
+            ->where(['status' => self::STATUS_PASS])
+            ->orderBy(['refined' => SORT_DESC])
+            ->limit(1)
+            ->asArray()->one();
+    }
+    public static function getTopHot(int $count = 5): array
+    {
+        return self::find()
+            ->where(['status' => self::STATUS_PASS])
+            ->orderBy(['view_count' => SORT_DESC])
+            ->limit($count)
+            ->asArray()->all();
+    }
+
+    public static function getTopOneViewArticle(): array
+    {
+        return self::find()
+            ->where(['status' => self::STATUS_PASS])
+            ->orderBy(['view_count' => SORT_DESC])
+            ->limit(1)
+            ->asArray()->one();
+    }
+
+    public static function getTopView(int $count = 10): array
+    {
+        return self::find()
+            ->where(['status' => self::STATUS_PASS])
+            ->orderBy(['view_count' => SORT_DESC])
+            ->limit($count)
+            ->asArray()->all();
+    }
+
+    public static function getNewestArticles(int $category_id, int $count = 5): array
+    {
+        $cats = Category::getAllTreeList($category_id);
+        $cat_ids = array_column($cats, 'id');
+        $cat_ids = array_map('intval', $cat_ids);
+        $cat_ids[] = $category_id;
+
+        return self::find()
+            ->select('id, title, intro, cover, create_time')
+            ->where(['status' => self::STATUS_PASS, 'category_id' => $cat_ids])
+            ->andWhere('attr & :banner = 0', [':banner' => self::ATTR_BANNER])
+            ->orderBy(['id' => SORT_DESC])
+            ->limit($count)
+            ->asArray()->all();
+    }
+
+    public static function getTopViewArticles(int $category_id, int $count = 5): array
+    {
+        $cats = Category::getAllTreeList($category_id);
+        $cat_ids = array_column($cats, 'id');
+        $cat_ids = array_map('intval', $cat_ids);
+        $cat_ids[] = $category_id;
+
+        return self::find()
+            ->select('id, title, intro, cover, create_time')
+            ->where(['status' => self::STATUS_PASS, 'category_id' => $cat_ids])
+            ->andWhere('attr & :banner = 0', [':banner' => self::ATTR_BANNER])
+            ->orderBy(['view_count' => SORT_DESC])
+            ->limit($count)
+            ->asArray()->all();
+    }
+
+    public static function getRefinedArticles(int $category_id, int $count = 5): array
+    {
+        $cats = Category::getAllTreeList($category_id);
+        $cat_ids = array_column($cats, 'id');
+        $cat_ids = array_map('intval', $cat_ids);
+        $cat_ids[] = $category_id;
+
+        return self::find()
+            ->select('id, title, intro, cover, create_time')
+            ->where(['status' => self::STATUS_PASS, 'category_id' => $cat_ids])
+            ->andWhere('refined & 1 <> 0')
+            ->andWhere('attr & :banner = 0', [':banner' => self::ATTR_BANNER])
+            ->orderBy(['refined' => SORT_DESC])
+            ->limit($count)
+            ->asArray()->all();
+    }
+
     /**
      * 获取文章
      *

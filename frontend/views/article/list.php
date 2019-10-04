@@ -57,5 +57,7 @@
         <!--</div>-->
     </div>
 
-    <?= $this->render('_right_bar_list') ?>
+    <?= $this->render('_right_bar_list', [
+            'category_id' => $category['id'],
+    ]) ?>
 </div>
