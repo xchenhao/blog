@@ -45,8 +45,9 @@ class Article extends \yii\db\ActiveRecord
     // 版头图
     const ATTR_BANNER = 0b10;
 
-    // 首页播放量最高的文章数量
-    const HOMEPAGE_COUNT_TOP_VIEW_ARTICLE = 9;
+    // 首页文章数量
+    const HOMEPAGE_ARTICLE_COUNT = 9;
+
     // 版头图数量
     const BANNER_COUNT = 3;
 
@@ -139,14 +140,15 @@ class Article extends \yii\db\ActiveRecord
     }
 
     /**
-     * 获取播放量最高的文章
+     * 获取文章
      *
      * @param int $page
      * @param int $page_size
+     * @param string $order_by 例：id, create_time, view_count
      * @return array
      * @throws \Exception
      */
-    public static function getTopViewArticles(int $page = 1, int $page_size = self::HOMEPAGE_COUNT_TOP_VIEW_ARTICLE): array
+    public static function getArticles(int $page = 1, int $page_size = self::HOMEPAGE_ARTICLE_COUNT, string $order_by = 'id'): array
     {
         if ($page_size < 0) {
             throw new \Exception('参数错误');
@@ -156,7 +158,7 @@ class Article extends \yii\db\ActiveRecord
             ->select('id, category_id, title, intro, cover, create_time')
             ->where(['status' => self::STATUS_PASS])
             ->andWhere('attr & :banner = 0', [':banner' => self::ATTR_BANNER])
-            ->orderBy('view_count DESC');
+            ->orderBy([$order_by => SORT_DESC]);
         $items = $query
             ->offset($page_size * ($page - 1))
             ->limit($page_size)

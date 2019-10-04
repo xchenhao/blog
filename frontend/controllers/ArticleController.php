@@ -54,9 +54,9 @@ class ArticleController extends Controller
      * @return string
      * @throws \Exception
      */
-    public function actionIndex(int $page = 1, $page_size = Article::HOMEPAGE_COUNT_TOP_VIEW_ARTICLE, $list = 0)
+    public function actionIndex(int $page = 1, $page_size = Article::HOMEPAGE_ARTICLE_COUNT, $list = 0)
     {
-        $articles = Article::getTopViewArticles($page, $page_size);
+        $articles = Article::getArticles($page, $page_size);
         $articles['pagination']->params = array_merge($_GET, ['list' => $list]);
         $banners = Article::getBanners();
         return $this->render('index', [
@@ -90,7 +90,7 @@ class ArticleController extends Controller
      * @param integer $list 文章显示方式（0 卡片，1 列表）
      * @return string
      */
-    public function actionList(int $category_id, int $page = 1, $page_size = Article::HOMEPAGE_COUNT_TOP_VIEW_ARTICLE, $list = 0)
+    public function actionList(int $category_id, int $page = 1, $page_size = Article::HOMEPAGE_ARTICLE_COUNT, $list = 0)
     {
         $category = Category::findOne(['id' => $category_id]);
         $view_tpl = 'list';
