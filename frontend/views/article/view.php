@@ -87,7 +87,7 @@
     </div>
 
     <?= $this->render('_right_bar_view', [
-            'category_id' => $model->category_id,
+            'category_id' => (int)$model->category_id,
     ]) ?>
 
 </div>

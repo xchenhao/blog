@@ -82,6 +82,6 @@
         </div>
     </div>
     <?= $this->render('_right_bar_cover', [
-            'category_id' => $category['id'],
+            'category_id' => (int)$category['id'],
     ]) ?>
 </div>
