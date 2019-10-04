@@ -24,5 +24,14 @@ cp vendor/bower-assert vendor/bower
 # 测试用户名：weixi 密码：123456
 ```
 
+```conf
+# Nginx 伪静态
+location / {
+	if (!-e $request_filename){
+		rewrite  ^(.*)$  /index.php?s=$1  last;   break;
+	}
+}
+```
+
 ### 参考
 - Forked from: `https://github.com/michaelweixi/blogdemo2`
