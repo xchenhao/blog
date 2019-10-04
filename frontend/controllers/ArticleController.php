@@ -50,12 +50,14 @@ class ArticleController extends Controller
      *
      * @param integer $page
      * @param integer $page_size
+     * @param integer $list 文章显示方式（0 卡片，1 列表）
      * @return string
      * @throws \Exception
      */
-    public function actionIndex(int $page = 1, $page_size = Article::HOMEPAGE_COUNT_TOP_VIEW_ARTICLE)
+    public function actionIndex(int $page = 1, $page_size = Article::HOMEPAGE_COUNT_TOP_VIEW_ARTICLE, $list = 0)
     {
         $articles = Article::getTopViewArticles($page, $page_size);
+        $articles['pagination']->params = array_merge($_GET, ['list' => $list]);
         $banners = Article::getBanners();
         return $this->render('index', [
             'articles' => $articles,

@@ -21,14 +21,34 @@ use yii\helpers\Html;
 <!--    <script type="text/javascript" src="/theme/news/js/main-3.0.js"></script>-->
     <script>
         $(function () {
-            $('#news_list').click(function () {
-                $('#mainContent .newsbox').addClass('listview').prop('id', 'listContent')
-                $("#newsslidebd").addClass("newslist");
-                $('.news_li').css('top', '0px');
-            })
+            function setArticleListStyle(list) {
+                // 设置文章显示样式
+                if (list === 0) {
+                    // 卡片样式
+                    $('#mainContent .newsbox').removeClass('listview').prop('id', 'masonryContent')
+                    $("#newsslidebd").removeClass("newslist")
+                } else {
+                    // 列表样式
+                    $('#mainContent .newsbox').addClass('listview').prop('id', 'listContent')
+                    $("#newsslidebd").addClass("newslist")
+                    $('.news_li').css('top', '0px')
+                }
+                // 设置分页参数
+                var pageItems = $('.pagination-box li a')
+                for (var i = 0; i < pageItems.length; i++) {
+                    pageItems.eq(i).prop('href', pageItems.eq(i).prop('href').replace('list=' + (1 - list), 'list=' + list))
+                }
+            }
+
+            // 分页时记住上次的文章显示样式
+            var list = <?= (int)($_GET['list'] ?? 0) ?>;
+            setArticleListStyle(list)
+
             $('#news_masonry').click(function () {
-                $('#mainContent .newsbox').removeClass('listview').prop('id', 'masonryContent')
-                $("#newsslidebd").removeClass("newslist");
+                setArticleListStyle(0)
+            })
+            $('#news_list').click(function () {
+                setArticleListStyle(1)
             })
         })
     </script>
@@ -56,6 +76,9 @@ use yii\helpers\Html;
         }
         .pagination-box .pagination {
             overflow: hidden;
+        }
+        .pagination-box .pagination li.disabled span {
+          color: grey;
         }
     </style>
     <?php $this->head() ?>

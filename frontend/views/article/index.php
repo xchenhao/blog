@@ -79,7 +79,12 @@
                         <script id="cy_cmt_num" src="https://changyan.sohu.com/upload/plugins/plugins.list.count.js?clientId=cyt8rNSI2"></script>
                     </div>
                     <div class="pagination-box">
-                        <?= \yii\widgets\LinkPager::widget(['pagination' => $articles['pagination']]) ?>
+                        <?= \yii\widgets\LinkPager::widget([
+                            'pagination' => $articles['pagination'],
+                            'prevPageLabel' => false,
+                            'firstPageLabel' => '首页',
+                            'lastPageLabel' => '尾页',
+                        ]) ?>
                     </div>
                 </div>
             </div>
