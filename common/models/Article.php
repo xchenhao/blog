@@ -51,6 +51,9 @@ class Article extends \yii\db\ActiveRecord
     // 版头图数量
     const BANNER_COUNT = 3;
 
+    // 继续阅读数量
+    const COUNT_MORE = 3;
+
     /**
      * {@inheritdoc}
      */
@@ -214,6 +217,43 @@ class Article extends \yii\db\ActiveRecord
             $item['create_time'] = date('Y-m-d H:i:s', $item['create_time']);
             return $item;
         }, $list);
+    }
+
+    /**
+     * 文章详情页继续阅读
+     *
+     * @param int $count
+     * @return array
+     */
+    public function getMore(int $count = self::COUNT_MORE): array
+    {
+        $cats = Category::getAllTreeList($this->category_id);
+        $cat_ids = array_column($cats, 'id');
+        $cat_ids = array_map('intval', $cat_ids);
+        $cat_ids[] = $this->category_id;
+
+        $items = Article::find()
+            ->where(['category_id' => $cat_ids])
+            ->andWhere('id <> :id', [':id' => $this->id])
+            ->orderBy('view_count DESC')
+            ->limit($count)
+            ->asArray()->all();
+        if (($real_count = count($items)) < $count) {
+            $sup = Article::find()
+                ->where('id <> :id', [':id' => $this->id])
+                ->orderBy('id DESC')
+                ->limit($count - $real_count)
+                ->asArray()->all();
+            $items = array_merge($items, $sup);
+        }
+
+        $items = array_map(function ($item) {
+            $item['create_time'] = date('Y-m-d H:i:s', $item['create_time']);
+
+            return $item;
+        }, $items);
+
+        return $items;
     }
 
 }

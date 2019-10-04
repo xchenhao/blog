@@ -47,29 +47,13 @@
             <div class="news_tit2"><u>继续阅读</u></div>
             <div class="ctread_bd">
                 <?php
-                $more = [
-                    [
-                        'id' => 8,
-                        'title' => '谢其章︱字小如蚁的《新民声半月刊》',
-                        'thumb' => 'http://hdcms.com/attachment/2017/07/25/86411500917256.jpg',
-                    ],
-                    [
-                        'id' => 3,
-                        'title' => '翻译弥尔顿的《失乐园》，过去30年里比之前300年还频繁',
-                        'thumb' => 'http://hdcms.com/attachment/2017/07/26/39711501069470.jpg',
-                    ],
-                    [
-                        'id' => 19,
-                        'title' => '每一朵花的绽放，都在演绎延续数亿年的生命传奇',
-                        'thumb' => 'http://hdcms.com/attachment/2017/07/31/9241501503150.jpg',
-                    ],
-                ];
+                $more = $model->getMore();
                 ?>
 
                 <div id='tag83cd3c0839acfe579f0c4c6beba139df'>
                     <?php foreach ($more as $item): ?>
                         <div class="ctread_li">
-                            <div class="ctread_img"><a href="/article/<?= $item['id'] ?>"><img src="<?= $item['thumb'] ?>" alt=""></a></div>
+                            <div class="ctread_img"><a href="/article/<?= $item['id'] ?>"><img src="<?= $item['cover'] ?>" alt=""></a></div>
                             <div class="ctread_name"><a href="/article/<?= $item['id'] ?>"><?= $item['title'] ?></a></div>
                         </div>
                     <?php endforeach ?>
