@@ -12,7 +12,7 @@ use yii\filters\AccessControl;
 use yii\web\HttpException;
 
 /**
- * PostController implements the CRUD actions for Post model.
+ * ArticleController implements the CRUD actions for Post model.
  */
 class ArticleController extends Controller
 {
@@ -82,7 +82,7 @@ class ArticleController extends Controller
             ->where(['id' => $model->category_id])
             ->scalar();
 
-        $this->view->title = $model->title;
+        $this->view->title = $model->title . ' - 不可思议的博客';
         return $this->render('view', [
             'model' => $model,
             'category_name' => $category_name,
@@ -139,6 +139,7 @@ class ArticleController extends Controller
             ]),
         ];
 
+        $this->view->title = $category->name . ' - 不可思议的博客';
         return $this->render($view_tpl, [
             'articles' => $articles,
             'category' => $category,
@@ -188,6 +189,8 @@ class ArticleController extends Controller
                 'pageSizeParam' => 'page_size',
             ]),
         ];
+
+        $this->view->title = '搜索页 - 不可思议的博客';
         return $this->render('search', [
             'articles' => $articles,
             's' => $s,
