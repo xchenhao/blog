@@ -6,6 +6,6 @@
 
 console/runtime/*
 
-common/config/env.php
+common/config/constants.php
 common/config/main-local.php
 common/config/db.php
