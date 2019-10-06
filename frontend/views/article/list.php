@@ -31,8 +31,10 @@
                     <h2><a href="/article/<?= $arc['id']?>" target="_blank"><?= $arc['title'] ?></a></h2>
                     <p><?= $arc['title'] ?></p>
                     <div class="pdtt_trbs">
-                        <a href="/category/<?= $arc['category_id'] ?>" target="_blank"><?= $arc['category_name'] ?></a><span><?= $arc['create_time'] ?></span>
-                        <span class="trbszan"><span id = "sourceId::<?= $arc['id'] ?>" class = "cy_cmt_count" ><?= $arc['comment_num'] ?? 0 ?></span></span>
+                        <a href="/category/<?= $arc['category_id'] ?>" target="_blank"><?= $arc['category_name'] ?></a>
+                        <span><?= $arc['create_time'] ?></span>
+                        <span class="trbszan"><?= $art['comment_num'] ?? 0 ?></span>
+                        <div class="trbstxt">推荐</div>
                     </div>
                 </div>
                     <?php endforeach ?>

@@ -49,6 +49,8 @@
                                 <div class="ask_user_trbs2">
                                     <a href="javascript:;" class="u_sname">作者：<?= $arc['author'] ?></a>
                                     <span><?= $arc['create_time'] ?></span>
+                                    <span class="trbszan"><?= $art['comment_num'] ?? 0 ?></span>
+                                    <div class="trbstxt">推荐</div>
                                 </div>
                             </li>
                             <?php endforeach ?>
