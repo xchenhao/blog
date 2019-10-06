@@ -137,9 +137,9 @@
         position: absolute;
         bottom: 20px;
         left: 50%;
-        background: rgba(0, 0, 0, 0.2);
-        padding: 6px;
+        padding: 3px 6px;
         border-radius: 20px;
+        box-shadow: 0px 0px 15px 2px #b4b4b4;
     }
 
     #displayBox #scrollBtn li {
