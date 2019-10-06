@@ -12,6 +12,7 @@ composer install
 # 创建数据库
 cp common/config/main-local-bac.php common/config/main-local.php
 cp common/config/db_bac.php common/config/db.php
+cp common/config/env_bac.php common/config/env.php
 # 调整 common/config/db.php 中的数据库配置（主机/库名/用户名及密码）
 # 执行 database/main.sql 中 SQL 语句
 
