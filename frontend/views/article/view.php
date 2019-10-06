@@ -11,7 +11,9 @@
 <div class="bdwd main clearfix">
     <div class="main_lt">
         <div class="newscontent">
-            <div class="news_path"><a href='/'>主页</a> > <a href='/category/98'>读书</a> > </div>
+            <div class="news_path">
+                <a href='/'>主页</a> > <a href='/category/<?= $model->category_id ?>'><?= $category_name ?></a> >
+            </div>
             <h1 class="news_title"><?= $model->title ?></h1>
 
             <div class="news_about">

@@ -76,12 +76,15 @@ class ArticleController extends Controller
     public function actionView(int $id)
     {
         $model = Article::find()->where(['id' => $id])->one();
-        $category = Category::getAllTree(0, 2);
+        $category_name = Category::find()
+            ->select('name')
+            ->where(['id' => $model->category_id])
+            ->scalar();
 
         $this->view->title = $model->title;
         return $this->render('view', [
             'model' => $model,
-            'category' => $category,
+            'category_name' => $category_name,
         ]);
     }
 
