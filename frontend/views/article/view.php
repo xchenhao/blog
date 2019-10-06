@@ -18,23 +18,23 @@
 
             <div class="news_about">
                 <p>作者：<?= $model->author ?>  时间：<?= date('Y-m-d H:i:s', $model->create_time) ?></p>
-                <div class="font_size">
-                    <span>字号</span>
-                    <ul class="size_level" style="display:none;">
-                        <li id="super">超大</li>
-                        <li id="large">大</li>
-                        <li class="on" id="standard">标准</li>
-                        <li id="small">小</li>
-                    </ul>
-                </div>
+<!--                <div class="font_size">-->
+<!--                    <span>字号</span>-->
+<!--                    <ul class="size_level" style="display:none;">-->
+<!--                        <li id="super">超大</li>-->
+<!--                        <li id="large">大</li>-->
+<!--                        <li class="on" id="standard">标准</li>-->
+<!--                        <li id="small">小</li>-->
+<!--                    </ul>-->
+<!--                </div>-->
             </div>
 
             <div class="news_txt" data-size="standard">
                 <?= $model->content ?>
             </div>
 
-            <div class="news_editor">责任编辑：admin<span>新闻报料：400-888-8888 &nbsp; 本站原创，未经授权不得转载</span></div>
-            <div class="news_keyword">关键词 >> 花朵</div>
+<!--            <div class="news_editor">责任编辑：admin<span>新闻报料：400-888-8888 &nbsp; 本站原创，未经授权不得转载</span></div>-->
+            <div class="news_keyword">关键词 >> <?= $model->tags ?></div>
 
 
             <div class="news_imgad">

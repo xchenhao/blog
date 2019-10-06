@@ -47,7 +47,7 @@
                                     </div>
                                 </div>
                                 <div class="ask_user_trbs2">
-                                    <a href="/author/1" target="_blank" class="u_sname">作者：<?= $arc['author'] ?></a>
+                                    <a href="javascript:;" class="u_sname">作者：<?= $arc['author'] ?></a>
                                     <span><?= $arc['create_time'] ?></span>
                                 </div>
                             </li>
@@ -68,9 +68,7 @@
                     ]) ?>
                 </div>
                 <div class="ask_banner" id="ask_banner">
-                    <div class="ask_sort clearfix">
-
-                    </div>
+                    <div class="ask_sort clearfix"></div>
                 </div>
 
             </div>

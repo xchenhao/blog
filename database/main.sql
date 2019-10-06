@@ -515,7 +515,7 @@ CREATE TABLE `article` (
   KEY `IDX_STATUS` (`status`) USING BTREE,
   KEY `IDX_CATEGORY_ID` (`category_id`) USING BTREE,
   KEY `IDX_ATTR` (`attr`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='文章表';
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='文章表';
 
 CREATE TABLE `category` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT COMMENT '主键',
