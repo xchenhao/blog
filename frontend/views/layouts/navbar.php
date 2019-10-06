@@ -25,12 +25,10 @@
         <div class="head_rt"><span class="verticalAlign"></span>
             <div class="head_info clearfix">
                 <div class="hdif_s clearfix">
-                    <form action="{{__ROOT__}}" method="get">
-                        <input type="hidden" name="m" value="search"/>
-                        <input type="hidden" name="a" value="controller/entry/search"/>
+                    <form action="/article/search" method="get">
                         <input type="submit" value="" class="hds_bt" id="search_key"/>
                         <input type="text" class="hds_inp" maxlength="20" required id="hds_inp" style="height: 26px"
-                               name="keyword" value="{{$_GET['keyword']}}"/>
+                               name="s" value="<?= $_GET['s'] ?? null ?>"/>
                     </form>
                     <div class="hdifani" id="hdshowsearch"></div>
                 </div>

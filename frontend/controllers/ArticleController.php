@@ -31,12 +31,12 @@ class ArticleController extends Controller
                 'class' => AccessControl::class,
                 'rules' => [
                     [
-                        'actions' => ['index', 'article', 'cover', 'list', 'view'],
+                        'actions' => ['index', 'list', 'view', 'search'],
                         'allow' => true,
                         'roles' => ['?'],
                     ],
                     [
-                        'actions' => ['index', 'article', 'cover', 'list', 'view'],
+                        'actions' => ['index', 'list', 'view', 'search'],
                         'allow' => true,
                         'roles' => ['@'],
                     ],
@@ -138,6 +138,18 @@ class ArticleController extends Controller
         return $this->render($view_tpl, [
             'articles' => $articles,
             'category' => $category,
+        ]);
+    }
+
+    /**
+     * 文章搜索
+     * @param string $s
+     * @return string
+     */
+    public function actionSearch(string $s = '')
+    {
+        return $this->render('search', [
+
         ]);
     }
 
