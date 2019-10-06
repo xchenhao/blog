@@ -9,6 +9,7 @@ use yii\data\Pagination;
 use yii\web\Controller;
 use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
+use yii\web\HttpException;
 
 /**
  * PostController implements the CRUD actions for Post model.
@@ -146,13 +147,50 @@ class ArticleController extends Controller
 
     /**
      * 文章搜索
+     *
      * @param string $s
+     * @param int $page
+     * @param int $page_size
      * @return string
+     * @throws HttpException
      */
-    public function actionSearch(string $s = '')
+    public function actionSearch(string $s = '', int $page = 1, int $page_size = 10)
     {
-        return $this->render('search', [
+        if ($s === '') {
+            throw new HttpException(400, '参数错误');
+        }
+        $query = Article::find()
+            ->andFilterWhere(['like', 'title', $s])
+            ->andFilterWhere(['like', 'content', $s])
+            ->andFilterWhere(['like', 'intro', $s]);
 
+        $items = $query
+            ->orderBy('id DESC')
+            ->offset(($page - 1) * $page_size)
+            ->limit($page_size)
+            ->asArray()->all();
+
+        $category_ids = array_column($items, 'category_id');
+        $category_names = Category::getNames($category_ids);
+
+        $items = array_map(function ($item) use ($category_names) {
+            $item['category_name'] = $category_names[$item['category_id']] ?? '';
+            $item['create_time'] = date('Y-m-d H:i:s', $item['create_time']);
+            return $item;
+        }, $items);
+
+        $articles = [
+            'items' => $items,
+            'pagination' => new Pagination([
+                'totalCount' => $query->count(),
+                'pageSize' => $page_size,
+                'pageParam' => 'page',
+                'pageSizeParam' => 'page_size',
+            ]),
+        ];
+        return $this->render('search', [
+            'articles' => $articles,
+            's' => $s,
         ]);
     }
 

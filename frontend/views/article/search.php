@@ -99,7 +99,14 @@
 
     .search_pph_panel {
         min-height: unset;
+        /*padding-top: 10px;*/
         padding-bottom: 0;
+    }
+    .search_tips {
+        /*padding-bottom: 10px;*/
+    }
+    #mainContent {
+        padding-top: 10px;
     }
 </style>
 
@@ -118,86 +125,72 @@
     <div class="main_lt search_pph">
         <div class="search_pph_panel">
             <div class="search_input clearfix">
-                <form action="searchResult.jsp" id="searchResultForm">
+                <form action="/article/search" id="searchResultForm">
                     <span class="search_source">正在搜索</span>
-                    <input type="text" value="长" id="hds_inp" class="sc_inp" name="inpsearch" maxlength="20">
-                    <input type="hidden" value="all_0:" id="searchPre" name="searchPre">
-                    <input type="hidden" value="3" id="orderType" name="orderType">
-                    <input type="hidden" value="1" id="userType" name="userType">
+                    <input type="text" value="<?= $s ?>" id="hds_inp" class="sc_inp" name="s" maxlength="20">
+<!--                    <input type="hidden" value="all_0:" id="searchPre" name="searchPre">-->
+<!--                    <input type="hidden" value="3" id="orderType" name="orderType">-->
+<!--                    <input type="hidden" value="1" id="userType" name="userType">-->
                     <input type="submit" value="" id="search_key" class="sc_bt">
                 </form>
             </div>
             <!-- 非问吧 -->
-            <div class="searchMenu" id="searchMenuId">
-                <ul>
-                    <li><a href="javascript:void(0);">新闻</a></li>
-                    <li><a href="javascript:void(0);">标题</a></li>
-                    <li><a href="javascript:void(0);">正文</a></li>
-                    <li><a href="javascript:void(0);">问吧</a></li>
-                    <li><a href="javascript:void(0);">澎湃号</a></li>
-                    <li><a href="javascript:void(0);">用户</a></li>
-                </ul>
-            </div>
+<!--            <div class="searchMenu" id="searchMenuId">-->
+<!--                <ul>-->
+<!--                    <li><a href="javascript:void(0);">新闻</a></li>-->
+<!--                    <li><a href="javascript:void(0);">标题</a></li>-->
+<!--                    <li><a href="javascript:void(0);">正文</a></li>-->
+<!--                    <li><a href="javascript:void(0);">问吧</a></li>-->
+<!--                    <li><a href="javascript:void(0);">澎湃号</a></li>-->
+<!--                    <li><a href="javascript:void(0);">用户</a></li>-->
+<!--                </ul>-->
+<!--            </div>-->
 
-            <div class="search_tips">找到约<span>78985</span>个结果<img src="/theme/news/img/search_arrow.png"/>
+            <div class="search_tips">找到约<span><?= $articles['pagination']->totalCount ?></span>个结果<img src="/theme/news/img/search_arrow.png"/>
             </div>
-            <div style="height:auto;" id="searchSelectDiv">
-                <div style="width:60px;font-size:12px;float:right;font-size:12px;text-align:right;" id="selectByScore"
-                     class="selectedOrder">按相关度
-                </div>
-                <div class="has_children" style="width:80px;float:right;margin-right:15px;height::56px;"
-                     id="selectTimeDiv">
-                    <div style="cursor:pointer;text-align:right;" id="selectByTime">按时间&nbsp;<span class="timeOrderBg"
-                                                                                                   style="width:13px;">&nbsp;&nbsp;</span>
-                    </div>
-                    <div id="selectTimeOrder" style="display:none;">
-                        <dl>
-                            <dt style="cursor:pointer;text-align:center;" id="timeDescId">从新到旧</dt>
-                            <dt style="cursor:pointer;text-align:center;" id="timeAscId">从旧到新</dt>
-                        </dl>
-                    </div>
-                </div>
-            </div>
+<!--            <div style="height:auto;" id="searchSelectDiv">-->
+<!--                <div style="width:60px;font-size:12px;float:right;font-size:12px;text-align:right;" id="selectByScore"-->
+<!--                     class="selectedOrder">按相关度-->
+<!--                </div>-->
+<!--                <div class="has_children" style="width:80px;float:right;margin-right:15px;height::56px;"-->
+<!--                     id="selectTimeDiv">-->
+<!--                    <div style="cursor:pointer;text-align:right;" id="selectByTime">按时间&nbsp;<span class="timeOrderBg"-->
+<!--                                                                                                   style="width:13px;">&nbsp;&nbsp;</span>-->
+<!--                    </div>-->
+<!--                    <div id="selectTimeOrder" style="display:none;">-->
+<!--                        <dl>-->
+<!--                            <dt style="cursor:pointer;text-align:center;" id="timeDescId">从新到旧</dt>-->
+<!--                            <dt style="cursor:pointer;text-align:center;" id="timeAscId">从旧到新</dt>-->
+<!--                        </dl>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--            </div>-->
 
             <div id="mainContent" class="s_p_r_list">
+                <?php foreach ($articles['items'] as $arc): ?>
                 <div class="search_res">
                     <h2>
-                        <a href="newsDetail_forward_4609816" target="_blank"><span class="highlight">长</span>三角铁路今迎国庆假期返程客流高峰，增开旅客列车274列</a>
+                        <a href="/article/<?= $arc['id'] ?>" target="_blank">
+                            <?= str_replace($s, sprintf('<span class="highlight">%s</span>', $s), $arc['title']) ?>
+                        </a>
                     </h2>
-                    <p>…<span class="highlight">长</span>三角铁路迎来返程客流高峰。 段利雷 图今年国庆假期，<span class="highlight">长</span>三角铁路旅游流、探亲流等多流交织叠加，呈现火爆之势。
-                        澎湃新闻（www.thepaper.cn）记者从中国铁路…</p>
+                    <p><?= str_replace($s, sprintf('<span class="highlight">%s</span>', $s), $arc['intro']) ?></p>
                     <div class="search_trbs">
                         <span class="trbszan" style="user-select: auto;">65</span>
-                        <span>1小时前</span>
-                        <a href="list_25422" target="_blank">浦江头条</a>
+                        <span><?= $arc['create_time'] ?></span>
+                        <a href="/category/<?= $arc['category_id'] ?>" target="_blank"><?= $arc['category_name'] ?></a>
                     </div>
                 </div>
-                <div class="search_res">
-                    <h2>
-                        <a href="newsDetail_forward_4609816" target="_blank"><span class="highlight">长</span>三角铁路今迎国庆假期返程客流高峰，增开旅客列车274列</a>
-                    </h2>
-                    <p>…<span class="highlight">长</span>三角铁路迎来返程客流高峰。 段利雷 图今年国庆假期，<span class="highlight">长</span>三角铁路旅游流、探亲流等多流交织叠加，呈现火爆之势。
-                        澎湃新闻（www.thepaper.cn）记者从中国铁路…</p>
-                    <div class="search_trbs">
-                        <span class="trbszan" style="user-select: auto;">65</span>
-                        <span>1小时前</span>
-                        <a href="list_25422" target="_blank">浦江头条</a>
-                    </div>
-                </div>
-                <div class="search_res">
-                    <h2>
-                        <a href="newsDetail_forward_4609816" target="_blank"><span class="highlight">长</span>三角铁路今迎国庆假期返程客流高峰，增开旅客列车274列</a>
-                    </h2>
-                    <p>…<span class="highlight">长</span>三角铁路迎来返程客流高峰。 段利雷 图今年国庆假期，<span class="highlight">长</span>三角铁路旅游流、探亲流等多流交织叠加，呈现火爆之势。
-                        澎湃新闻（www.thepaper.cn）记者从中国铁路…</p>
-                    <div class="search_trbs">
-                        <span class="trbszan" style="user-select: auto;">65</span>
-                        <span>1小时前</span>
-                        <a href="list_25422" target="_blank">浦江头条</a>
-                    </div>
+                <?php endforeach ?>
+                <div class="pagination-box">
+                    <?= \yii\widgets\LinkPager::widget([
+                        'pagination' => $articles['pagination'],
+                        'prevPageLabel' => false,
+                        'firstPageLabel' => '首页',
+                        'lastPageLabel' => '尾页',
+                    ]) ?>
                 </div>
             </div>
-
         </div>
     </div>
 </div>
