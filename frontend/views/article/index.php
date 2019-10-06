@@ -68,10 +68,8 @@
                                     <a href="/category/<?= $art['category_id'] ?>"
                                        target="_blank"><?= $art['category_name'] ?? '' ?></a>
                                     <span><?= $art['create_time'] ?></span>
-                                    <span class="trbszan">
-                                    <span id="sourceId::<?= $art['id'] ?>"
-                                          class="cy_cmt_count"><?= $art['comment_num'] ?? 0 ?></span>
-                                </span>
+                                    <span class="trbszan"><?= $art['comment_num'] ?? 0 ?></span>
+                                    <div class="trbstxt">推荐</div>
                                 </div>
                             </div>
                         <?php endforeach ?>
