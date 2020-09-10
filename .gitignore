@@ -5,6 +5,7 @@
 /backend/web/node_modules
 
 console/runtime/*
+deployment/mysql-data-dir/
 
 common/config/constants.php
 common/config/main-local.php

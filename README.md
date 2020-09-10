@@ -6,7 +6,11 @@ xchenhao/blog
 
 ```sh
 git clone https://github.com/xchenhao/blog.git
-cd blog
+cd deployment
+docker-compose up
+
+# 下载依赖
+cd ../
 composer install
 
 # 创建数据库
