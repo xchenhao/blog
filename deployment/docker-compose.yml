@@ -31,6 +31,7 @@ services:
     ports:
       # external port: internal port
       - 9977:80
+      - 9988:8088
     privileged: true
     volumes:
       - $PWD/nginx-conf-dir/nginx.conf:/etc/nginx/nginx.conf
@@ -60,12 +61,12 @@ services:
 
   php:
     container_name: php
-    image: php-dev
+    image: php-dev:1.2
     build:
       context: .
       args:
         - proxy=http://proxy.maoer.co:8123
-      dockerfile: Dockerfile-php
+      dockerfile: Dockerfile
     privileged: true
     volumes:
       - $PWD/php-conf-dir/logs:/usr/local/var/log
