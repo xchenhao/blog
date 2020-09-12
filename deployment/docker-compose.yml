@@ -1,7 +1,10 @@
+# https://github.com/docker/compose/releases
+# https://docs.docker.com/compose/compose-file/
 # Use root/example as user/password credentials
 version: '3.1'
 
 # https://stackoverflow.com/questions/41334488/error-in-file-docker-compose-yml-volume-must-be-a-mapping-not-a-string
+# In Windows System, Docker Desktop should add current project directory to "Fire Sharing", else directory mounting will fail
 volumes:
   data-dir:
     driver: local
@@ -46,7 +49,8 @@ services:
     command: --default-authentication-plugin=mysql_native_password
     restart: always
     ports:
-      - 3306:3306
+    # external port: internal port
+      - 3307:3306
     environment:
       MYSQL_ROOT_PASSWORD: 123456
     volumes:
@@ -56,13 +60,19 @@ services:
 
   php:
     container_name: php
-    image: php-dev:1.0.0
+    image: php-dev
+    build:
+      context: .
+      args:
+        - proxy=http://proxy.maoer.co:8123
+      dockerfile: Dockerfile-php
     privileged: true
     volumes:
       - $PWD/php-conf-dir/logs:/usr/local/var/log
       - $PWD/php-conf-dir/php.ini:/usr/local/etc/php/php.ini
       - $PWD/php-conf-dir/www.conf:/usr/local/etc/php-fpm.d/www.conf # max_children
       - code-dir:/usr/share/nginx/html/mybook
+    #entrypoint: /entrypoint.sh
     restart: always
     networks:
       - lnmp-net

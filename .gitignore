@@ -3,6 +3,8 @@
 /vendor
 !/vendor/.gitkeep
 /backend/web/node_modules
+composer-setup.php
+composer.phar
 
 console/runtime/*
 
