@@ -7,10 +7,15 @@ xchenhao/blog
 ```sh
 git clone https://github.com/xchenhao/blog.git
 cd deployment
+curl -fsSL https://get.docker.com | bash -s docker --mirror Aliyun
+# https://github.com/docker/compose/releases
+curl -L https://github.com/docker/compose/releases/download/1.24.0/docker-compose-`uname -s`-`uname -m` -o /usr/local/bin/docker-compose
+chmod +x /usr/local/bin/docker-compose
 docker-compose up
 
 # 下载依赖
-cd ../
+docker-compose exec php /bin/sh
+cd /usr/share/nginx/html/mybook
 composer install
 
 # 创建数据库
