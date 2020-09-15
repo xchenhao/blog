@@ -117,7 +117,7 @@
             <div class="head_logo">
                 <span class="verticalAlign"></span>
                 <a href="/" title="不可思议的博客">
-                    <img src="http://hdcms.com/attachment/2017/07/31/88081501493706.jpg">
+                    <img src="/theme/news/img/logo.jpg">
                 </a>
             </div>
             <div class="head_banner">

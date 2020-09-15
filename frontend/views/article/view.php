@@ -52,7 +52,7 @@
                 $more = $model->getMore();
                 ?>
 
-                <div id='tag83cd3c0839acfe579f0c4c6beba139df'>
+                <div>
                     <?php foreach ($more as $item): ?>
                         <div class="ctread_li">
                             <div class="ctread_img"><a href="/article/<?= $item['id'] ?>"><img src="<?= $item['cover'] ?>" alt=""></a></div>

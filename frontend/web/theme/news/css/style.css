@@ -75,7 +75,11 @@
 .pdtt01{width:940px;height:360px;margin:0 0 5px;background-color: #ffffff;}
 .pdtt01:hover{background-color: #f7f8fd;}
 .pdtt_lt{width:624px;height:360px;float:left;position: relative; overflow:hidden;}
-.pdtt_lt img{width:624px;height:360px; transition: all 1s ease 0s;}
+.pdtt_lt img{
+    width:624px;
+    /*height:360px;*/
+    transition: all 1s ease 0s;
+}
 .pdtt01:hover .pdtt_lt img{-webkit-transform:scale(1.1);transform:scale(1.1)}
 .pdtt_rt{width:315px;height:358px;float:right;border:1px solid #dfdfdf;border-left:0;position: relative;}
 .pdtt_rtbd{width:268px;height:294px;margin:20px auto 0;overflow:hidden;color:#4b4b4b;}

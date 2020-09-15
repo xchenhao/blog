@@ -1,0 +1,36 @@
+Array
+(
+    [0] => Array
+        (
+            [id] => 1
+            [category_id] => 1
+            [title] => 人生算法 用概率思维做好决策 
+            [intro] => 《人生算法》作者喻颖正花了10年时间，去探索实现财富与幸福，所应掌握的“通用底层能力”，总结出一套完整的“人生算法”操作系统。其中“9段心法”和“18关挑战”两大核心板块覆盖我们人生历程中常见的那些场景和主题，让你在智力和情感的探险游戏中，学会利用概率思维做好决策，跨越出身和运气，实现富足与自由。
+            [cover] => https://img1.doubanio.com/view/subject/l/public/s33696258.jpg
+            [create_time] => 2020-09-13 01:29:26
+            [category_name] => 人文
+        )
+
+    [1] => Array
+        (
+            [id] => 2
+            [category_id] => 2
+            [title] => 奇妙的化学
+            [intro] => 融知识性、故事性、趣味性为一体，在观察与实验中，激发无限科学想象力。
+            [cover] => https://img14.360buyimg.com/n1/jfs/t1/84848/40/15891/78647/5e7814cdEe02189cb/91d26ad96928bf7b.jpg
+            [create_time] => 2020-09-15 14:52:58
+            [category_name] => 自然科学
+        )
+
+    [2] => Array
+        (
+            [id] => 3
+            [category_id] => 2
+            [title] => 数学之书
+            [intro] => 数学史上250个里程碑式的发现，带你发现数学之美。荣获科技部2016年全国优秀科普作品奖！
+            [cover] => http://img14.360buyimg.com/n1/jfs/t2041/83/360306636/71788/57759203/56022a9dNb7388667.jpg
+            [create_time] => 2020-09-15 15:05:41
+            [category_name] => 自然科学
+        )
+
+)
