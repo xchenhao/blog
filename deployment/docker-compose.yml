@@ -68,7 +68,7 @@ services:
     build:
       context: .
       args:
-        - proxy=http://proxy.maoer.co:8123
+        - proxy=http://127.0.0.1:10809
       dockerfile: Dockerfile
     privileged: true
     volumes:
