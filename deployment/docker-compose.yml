@@ -80,13 +80,3 @@ services:
     restart: always
     networks:
       - lnmp-net
-
-  dbui:
-    image: adminer  # web ui for MySQL
-    restart: always
-    depends_on:
-      - db
-    ports:
-      - 8080:8080
-    networks:
-      - lnmp-net
